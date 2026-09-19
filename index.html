@@ -1,0 +1,2723 @@
+<!DOCTYPE html>
+<html lang="ml" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VEYRA — Virtual Market | Seminar Presentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Gayathri:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#F0F6FE',
+              100: '#EAF3FF',
+              200: '#C7DDFF',
+              500: '#146EF5',
+              600: '#0B57C4',
+              700: '#084093',
+              navy: '#0B1F44',
+              dark: '#101828',
+              gray: '#667085',
+              card: '#FFFFFF',
+              surface: '#F8FAFC'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '"Manrope"', 'sans-serif'],
+            malayalam: ['"Manrope"', '"Gayathri"', 'sans-serif'],
+            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace']
+          },
+          boxShadow: {
+            'glow': '0 10px 30px -10px rgba(20, 110, 245, 0.25)',
+            'card-hover': '0 20px 35px -15px rgba(11, 31, 68, 0.12)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      overflow: hidden;
+      background-color: #060E1E;
+      color: #101828;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    /* Custom scrollbar for inner scrollable panels */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(234, 243, 255, 0.5);
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #C7DDFF;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #146EF5;
+    }
+    /* Presentation screen container & slide transitions */
+    .slide-viewport {
+      perspective: 1000px;
+    }
+    .slide-card {
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .slide-card.active {
+      opacity: 1;
+      transform: scale(1) translateX(0);
+      pointer-events: auto;
+      z-index: 20;
+    }
+    .slide-card.prev {
+      opacity: 0;
+      transform: scale(0.96) translateX(-40px);
+      pointer-events: none;
+      z-index: 10;
+    }
+    .slide-card.next {
+      opacity: 0;
+      transform: scale(0.96) translateX(40px);
+      pointer-events: none;
+      z-index: 10;
+    }
+    /* Subtle pulse & glow keyframes */
+    @keyframes pulse-subtle {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.02); }
+    }
+    .animate-pulse-subtle {
+      animation: pulse-subtle 3s infinite ease-in-out;
+    }
+    /* Grid background effect */
+    .bg-grid-pattern {
+      background-size: 36px 36px;
+      background-image: 
+        linear-gradient(to right, rgba(20, 110, 245, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(20, 110, 245, 0.05) 1px, transparent 1px);
+    }
+  </style>
+</head>
+<body class="h-full flex flex-col select-none bg-[#081225] text-slate-900">
+
+  <header class="h-16 px-4 md:px-6 bg-[#0B1F44]/95 backdrop-blur border-b border-blue-900/60 flex items-center justify-between z-50 text-white shrink-0">
+    <!-- Brand & Logo -->
+    <div class="flex items-center space-x-3 cursor-pointer" onclick="goToSlide(0)">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-brand-500 flex items-center justify-center shadow-lg shadow-brand-500/30 ring-2 ring-white/20">
+        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Stylized V with shopping bag handle -->
+          <path d="M6 3v3a6 6 0 0 0 12 0V3"></path>
+          <path d="M4 8l8 13 8-13"></path>
+        </svg>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-xl font-black tracking-wider text-white">VEYRA</span>
+          <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-400/30">Virtual Market</span>
+        </div>
+        <p class="text-[11px] text-blue-200/70 font-medium tracking-tight">Everything. One Place.</p>
+      </div>
+    </div>
+
+    <!-- Active Speaker & Topic Indicator Badge -->
+    <div id="speakerBadge" class="hidden sm:flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-blue-500/30 shadow-inner">
+      <div id="speakerAvatar" class="w-6 h-6 rounded-full bg-brand-500 text-white font-bold text-xs flex items-center justify-center">1</div>
+      <div class="text-left">
+        <span id="speakerRole" class="text-xs font-bold text-blue-300 block leading-tight">MEMBER 1 • Founder & CEO</span>
+        <span id="speakerTopic" class="text-[11px] text-slate-300 block leading-tight">Business Strategy</span>
+      </div>
+      <div class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></div>
+    </div>
+
+    <!-- Right Controls: Timer, Quick Jumps, Notes, Fullscreen -->
+    <div class="flex items-center space-x-2 md:space-x-3">
+      <!-- 20-min Seminar Timer -->
+      <div class="flex items-center bg-slate-900/70 border border-slate-700/80 rounded-lg px-2.5 py-1 text-xs font-mono text-blue-200">
+        <svg class="w-3.5 h-3.5 mr-1.5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <span id="seminarTimer">00:00</span>
+        <button onclick="toggleTimer()" title="Start / Pause Timer" class="ml-1.5 hover:text-white text-slate-400">
+          <svg id="timerIcon" class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M6 4l10 6-10 6V4z"/></svg>
+        </button>
+      </div>
+
+      <!-- Presenter Notes Trigger Button -->
+      <button onclick="toggleSpeakerNotes()" class="px-2.5 py-1.5 rounded-lg bg-blue-950/70 hover:bg-blue-900 border border-blue-500/40 text-blue-200 text-xs font-medium flex items-center gap-1.5 transition" title="Show Malayalam Presenter Speech Script">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+        <span class="hidden md:inline">സ്ക്രിപ്റ്റ്</span>
+      </button>
+
+      <!-- Slides Grid Modal Trigger -->
+      <button onclick="toggleSlideGrid()" class="p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition" title="Slide Overview Grid">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+      </button>
+
+      <!-- Fullscreen Toggle -->
+      <button onclick="toggleFullscreen()" class="p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition" title="Toggle Fullscreen Mode (F)">
+        <svg id="fsIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-5h-4m4 0v4m0-4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="flex-1 relative overflow-hidden bg-gradient-to-b from-[#0B1F44] via-[#08152E] to-[#050C1B] flex items-center justify-center p-2 sm:p-4 md:p-6">
+    <!-- 16:9 Presentation Frame Container -->
+    <div id="presentationStage" class="relative w-full max-w-7xl h-full max-h-[860px] aspect-[16/9] bg-white rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden border border-slate-800/20 flex flex-col slide-viewport">
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 01: WELCOME & THE FICTIONAL STARTUP STORY (MEMBER 1) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card active absolute inset-0 w-full h-full bg-gradient-to-br from-white via-brand-50 to-blue-100 p-8 md:p-14 flex flex-col justify-between" data-speaker="1" data-speaker-name="MEMBER 01" data-speaker-title="Founder & CEO" data-speaker-sub="Business Strategy">
+        <!-- Top status bar -->
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2 text-brand-600 font-semibold text-xs tracking-wider uppercase bg-white/80 px-3.5 py-1.5 rounded-full shadow-sm border border-brand-200">
+            <span class="w-2 h-2 rounded-full bg-brand-500 animate-ping"></span>
+            Seminar Presentation • 20 Minutes
+          </div>
+          <span class="text-xs font-semibold px-3 py-1 rounded-full bg-amber-100 text-amber-800 border border-amber-300">
+            Fictional Educational Project
+          </span>
+        </div>
+
+        <!-- Main Hero content -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center my-auto">
+          <div class="lg:col-span-7 space-y-5">
+            <div class="inline-flex items-center gap-3">
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-brand-600 to-brand-500 flex items-center justify-center shadow-xl shadow-brand-500/40 text-white">
+                <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 3v3a6 6 0 0 0 12 0V3"></path>
+                  <path d="M4 8l8 13 8-13"></path>
+                </svg>
+              </div>
+              <div>
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-brand-navy font-sans">
+                  VEYRA
+                </h1>
+                <p class="text-brand-500 font-bold text-lg tracking-wide uppercase">Everything. One Place.</p>
+              </div>
+            </div>
+
+            <h2 class="text-2xl md:text-4xl font-black text-slate-900 leading-tight">
+              “നമ്മൾ ഇന്ന് വെറുമൊരു പ്രസന്റേഷൻ നടത്തുകയല്ല, ഒരു <span class="text-brand-500 underline decoration-blue-300 underline-offset-8">Virtual Market</span> തുടങ്ങുകയാണ്.”
+            </h2>
+
+            <p class="text-slate-600 text-base md:text-lg leading-relaxed max-w-xl">
+              Electronics, Fashion, Grocery, Books, Home decor തുടങ്ങി ഏത് ഉൽപ്പന്നവും ഒരൊറ്റ പ്ലാറ്റ്‌ഫോമിൽ നിന്ന് കണ്ടെത്താനും വാങ്ങാനും സാധിക്കുന്ന ഒരു ആധുനിക ഇ-കൊമേഴ്‌സ് വിർച്വൽ മാർക്കറ്റ് പ്ലേസ്.
+            </p>
+
+            <div class="flex flex-wrap gap-3 pt-2">
+              <span class="px-3.5 py-1.5 rounded-xl bg-white border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm flex items-center gap-1.5">
+                <span class="text-blue-500">🛍️</span> Flipkart / Amazon മോഡൽ
+              </span>
+              <span class="px-3.5 py-1.5 rounded-xl bg-white border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm flex items-center gap-1.5">
+                <span class="text-emerald-500">👥</span> 4 ഫൗണ്ടിംഗ് ടീം മെമ്പേഴ്സ്
+              </span>
+              <span class="px-3.5 py-1.5 rounded-xl bg-white border border-slate-200 text-xs font-semibold text-slate-700 shadow-sm flex items-center gap-1.5">
+                <span class="text-indigo-500">⚡</span> 0 മുതൽ Delivery വരെയുള്ള യാത്ര
+              </span>
+            </div>
+          </div>
+
+          <!-- Hero Graphic Card: 4 Presenters Team preview -->
+          <div class="lg:col-span-5 bg-white/90 backdrop-blur rounded-3xl p-6 shadow-xl border border-blue-100 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400">The 4-Member Founding Team</span>
+              <span class="text-xs font-mono text-brand-600 font-bold">20:00 Total Time</span>
+            </div>
+            
+            <div class="space-y-3 text-sm">
+              <div class="flex items-center gap-3 p-2.5 rounded-xl bg-brand-50 border border-brand-200">
+                <div class="w-8 h-8 rounded-lg bg-brand-500 text-white font-bold flex items-center justify-center text-xs">M1</div>
+                <div class="flex-1">
+                  <div class="font-bold text-brand-navy">Founder & CEO</div>
+                  <div class="text-[11px] text-slate-600">Business Idea, Model & Startup Formation</div>
+                </div>
+                <span class="text-xs font-bold text-brand-600 bg-white px-2 py-0.5 rounded-md shadow-xs">~5m</span>
+              </div>
+
+              <div class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-lg bg-indigo-600 text-white font-bold flex items-center justify-center text-xs">M2</div>
+                <div class="flex-1">
+                  <div class="font-bold text-slate-800">CTO & Digital Marketing Head</div>
+                  <div class="text-[11px] text-slate-500">Platform Tech, DPDP Privacy & Marketing</div>
+                </div>
+                <span class="text-xs font-medium text-slate-500">~5m</span>
+              </div>
+
+              <div class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-lg bg-cyan-600 text-white font-bold flex items-center justify-center text-xs">M3</div>
+                <div class="flex-1">
+                  <div class="font-bold text-slate-800">COO / Finance & Operations</div>
+                  <div class="text-[11px] text-slate-500">Payment Gateway, GST Tax Invoice & Refunds</div>
+                </div>
+                <span class="text-xs font-medium text-slate-500">~5m</span>
+              </div>
+
+              <div class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-slate-50 border border-slate-100">
+                <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white font-bold flex items-center justify-center text-xs">M4</div>
+                <div class="flex-1">
+                  <div class="font-bold text-slate-800">Logistics & Customer Experience</div>
+                  <div class="text-[11px] text-slate-500">Hub Delivery Network, Gig Partners & Support</div>
+                </div>
+                <span class="text-xs font-medium text-slate-500">~5m</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer tagline -->
+        <div class="flex items-center justify-between text-xs text-slate-500 pt-3 border-t border-slate-200/80">
+          <span>College Seminar Presentation 2026</span>
+          <span class="font-medium text-brand-600">Slide 01 / 31 • Press Space or → to advance</span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 02: THE PROBLEM (MEMBER 1) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-brand-surface p-8 md:p-12 flex flex-col justify-between" data-speaker="1" data-speaker-name="MEMBER 01" data-speaker-title="Founder & CEO" data-speaker-sub="The Market Problem">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100 text-red-700 text-xs font-bold uppercase tracking-wider mb-3">
+            <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> Traditional Shopping Problem
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-navy">
+            പരമ്പരാഗത ഷോപ്പിംഗിലെ പരിമിതികൾ എന്തൊക്കെയാണ്?
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base mt-1">
+            ഒരു സാധാരണ ഉപഭോക്താവ് കടകളിൽ പോയി സാധനങ്ങൾ വാങ്ങുമ്പോൾ നേരിടുന്ന പ്രധാന പ്രശ്നങ്ങൾ:
+          </p>
+        </div>
+
+        <!-- 4 Problem Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 my-auto">
+          <!-- Card 1 -->
+          <div class="bg-white p-6 rounded-2xl border border-red-100 shadow-sm hover:shadow-md transition">
+            <div class="w-12 h-12 rounded-xl bg-red-50 text-red-600 flex items-center justify-center text-2xl mb-4">
+              🏪
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2">കടകൾ തോറും കയറിയിറങ്ങണം</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              ഒരു സാധനം വാങ്ങാൻ പല കടകൾ സന്ദർശിക്കണം. യാത്രയ്ക്കും പാർക്കിംഗിനും വളരെയധികം സമയവും ഇന്ധനവും നഷ്ടപ്പെടുന്നു.
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-white p-6 rounded-2xl border border-red-100 shadow-sm hover:shadow-md transition">
+            <div class="w-12 h-12 rounded-xl bg-red-50 text-red-600 flex items-center justify-center text-2xl mb-4">
+              ⚖️
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2">വില താരതമ്യം ബുദ്ധിമുട്ട്</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              ഓരോ കടയിലും ഏത് വിലയ്ക്കാണ് നൽകുന്നതെന്ന് നേരിട്ടറിയാതെ ഉപഭോക്താക്കൾ കൂടുതൽ പണം നൽകേണ്ടി വരുന്നു (No easy price comparison).
+            </p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-white p-6 rounded-2xl border border-red-100 shadow-sm hover:shadow-md transition">
+            <div class="w-12 h-12 rounded-xl bg-red-50 text-red-600 flex items-center justify-center text-2xl mb-4">
+              📦
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2">പരിമിതമായ സ്റ്റോക്ക് (Stock)</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              ഒരു കടയിലെ ഷെൽഫിൽ ഒതുങ്ങുന്ന സാധനങ്ങൾ മാത്രമേ അവിടെ ഉണ്ടാകൂ. ഉദ്ദേശിച്ച മോഡലോ സൈസോ പലപ്പോഴും സ്റ്റോക്കിലുണ്ടാകില്ല.
+            </p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="bg-white p-6 rounded-2xl border border-red-100 shadow-sm hover:shadow-md transition">
+            <div class="w-12 h-12 rounded-xl bg-red-50 text-red-600 flex items-center justify-center text-2xl mb-4">
+              🗺️
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2">വ്യാപാര പരിധി കുറവ്</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              ചെറുകിട വ്യാപാരികൾക്ക് അവരുടെ തെരുവിലെ ആളുകളിലേക്ക് മാത്രമേ സാധനങ്ങൾ വിൽക്കാൻ കഴിയുന്നുള്ളൂ.
+            </p>
+          </div>
+        </div>
+
+        <!-- Problem-to-Solution Bridge Callout -->
+        <div class="bg-brand-50 border border-brand-200 rounded-2xl p-4 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">💡</span>
+            <div>
+              <span class="font-bold text-brand-navy text-sm block">ഇതിനൊരു ഡിജിറ്റൽ പരിഹാരം സാധ്യമാണോ?</span>
+              <span class="text-xs text-slate-600">എല്ലാത്തരം വ്യാപാരികളെയും ഉപഭോക്താക്കളെയും ഒരുമിപ്പിക്കുന്ന ഒരൊറ്റ ഓൺലൈൻ വേദി — അതാണ് <strong>VEYRA</strong>.</span>
+            </div>
+          </div>
+          <span class="hidden sm:inline-block px-3 py-1 bg-brand-500 text-white text-xs font-bold rounded-lg shadow-sm">
+            The Solution Next →
+          </span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 03: WHAT IS A VIRTUAL MARKET? (MEMBER 1) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-white p-8 md:p-12 flex flex-col justify-between" data-speaker="1" data-speaker-name="MEMBER 01" data-speaker-title="Founder & CEO" data-speaker-sub="What is a Virtual Market?">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-brand-700 text-xs font-bold uppercase tracking-wider mb-2">
+            Core Concept
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-navy">
+            എന്താണ് ഒരു Virtual Market?
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base mt-1">
+            "ഉപഭോക്താക്കൾക്കും വ്യാപാരികൾക്കും ഒരു വെബ്‌സൈറ്റ് അല്ലെങ്കിൽ മൊബൈൽ ആപ്പ് വഴി പരസ്പരം ഇടപാട് നടത്താൻ സഹായിക്കുന്ന ഡിജിറ്റൽ പ്ലാറ്റ്‌ഫോം."
+          </p>
+        </div>
+
+        <!-- The Platform Orchestrator Flowchart -->
+        <div class="my-auto py-4">
+          <div class="text-center mb-4">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">VEYRA എന്ന പ്ലാറ്റ്‌ഫോം എങ്ങനെ ബന്ധിപ്പിക്കുന്നു?</span>
+          </div>
+
+          <div class="flex flex-col md:flex-row items-center justify-between gap-3 relative">
+            <!-- Node 1: Customer -->
+            <div class="flex-1 w-full bg-slate-50 border-2 border-slate-200 rounded-2xl p-4 text-center hover:border-brand-500 transition">
+              <div class="w-12 h-12 mx-auto rounded-xl bg-blue-100 text-brand-600 flex items-center justify-center text-xl mb-2">
+                👤
+              </div>
+              <h4 class="font-bold text-slate-900 text-sm">CUSTOMER</h4>
+              <p class="text-[11px] text-slate-500 mt-1">ആപ്പിലൂടെ സാധനം തിരയുന്നു & ഓർഡർ ചെയ്യുന്നു</p>
+            </div>
+
+            <div class="hidden md:block text-brand-500 text-xl font-bold animate-pulse">➔</div>
+
+            <!-- Node 2: VEYRA Platform Center -->
+            <div class="flex-1.2 w-full bg-gradient-to-b from-brand-600 to-brand-navy rounded-2xl p-5 text-center text-white shadow-xl shadow-brand-500/20 ring-4 ring-blue-100">
+              <div class="w-12 h-12 mx-auto rounded-xl bg-white/20 text-white flex items-center justify-center text-xl mb-2 font-black">
+                V
+              </div>
+              <h4 class="font-black text-white text-base">VEYRA PLATFORM</h4>
+              <p class="text-[11px] text-blue-200 mt-1">വിശ്വാസ്യത, കാറ്റലോഗ്, ഓർഡർ ഏകോപനം & സുരക്ഷ</p>
+              <span class="inline-block mt-2 px-2.5 py-0.5 rounded-full bg-blue-400/30 text-[10px] text-blue-100 font-semibold border border-blue-300/30">Digital Orchestrator</span>
+            </div>
+
+            <div class="hidden md:block text-brand-500 text-xl font-bold animate-pulse">➔</div>
+
+            <!-- Node 3: Sellers / Products -->
+            <div class="flex-1 w-full bg-slate-50 border-2 border-slate-200 rounded-2xl p-4 text-center hover:border-brand-500 transition">
+              <div class="w-12 h-12 mx-auto rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl mb-2">
+                🏪
+              </div>
+              <h4 class="font-bold text-slate-900 text-sm">SELLERS / PRODUCTS</h4>
+              <p class="text-[11px] text-slate-500 mt-1">വിവിധ വ്യാപാരികൾ സാധനങ്ങൾ ലിസ്റ്റ് ചെയ്യുന്നു</p>
+            </div>
+
+            <div class="hidden md:block text-brand-500 text-xl font-bold animate-pulse">➔</div>
+
+            <!-- Node 4: Delivery & Payment -->
+            <div class="flex-1 w-full bg-slate-50 border-2 border-slate-200 rounded-2xl p-4 text-center hover:border-brand-500 transition">
+              <div class="w-12 h-12 mx-auto rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl mb-2">
+                🛵
+              </div>
+              <h4 class="font-bold text-slate-900 text-sm">PAYMENT & DELIVERY</h4>
+              <p class="text-[11px] text-slate-500 mt-1">സുരക്ഷിത പേയ്മെന്റും വേഗത്തിലുള്ള ഡെലിവറിയും</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Crucial Clarification Banner -->
+        <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 flex items-center gap-3">
+          <span class="text-2xl">⚠️</span>
+          <div class="text-xs text-amber-900">
+            <strong>പ്രധാന കാര്യം:</strong> VEYRA സ്വന്തമായി എല്ലാ സാധനങ്ങളും നിർമ്മിക്കുന്ന കമ്പനിയല്ല. പകരം, യഥാർത്ഥ വ്യാപാരികളെയും ഉപഭോക്താക്കളെയും ഡിജിറ്റലായി ബന്ധിപ്പിക്കുന്ന ഒരു <strong>Marketplace Platform</strong> ആണ്.
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 04: TRADITIONAL VS VIRTUAL MARKET (MEMBER 1) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-brand-surface p-8 md:p-12 flex flex-col justify-between" data-speaker="1" data-speaker-name="MEMBER 01" data-speaker-title="Founder & CEO" data-speaker-sub="Traditional vs Virtual">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-200 text-slate-700 text-xs font-bold uppercase tracking-wider mb-2">
+            Direct Comparison
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-navy">
+            Traditional Market vs Virtual Market
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base mt-1">
+            സാധാരണ അങ്ങാടിയും ഓൺലൈൻ മാർക്കറ്റ് പ്ലേസും തമ്മിലുള്ള പ്രധാന വ്യത്യാസങ്ങൾ ഒറ്റനോട്ടത്തിൽ:
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-auto">
+          <!-- Traditional Side -->
+          <div class="bg-white rounded-2xl p-6 border-2 border-slate-200 shadow-sm relative overflow-hidden">
+            <div class="absolute top-0 right-0 px-4 py-1 bg-slate-200 text-slate-700 text-xs font-bold rounded-bl-xl">
+              പരമ്പരാഗത രീതി
+            </div>
+            <div class="flex items-center gap-3 mb-4">
+              <span class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-xl">🏬</span>
+              <h3 class="text-lg font-bold text-slate-800">Traditional Market Flow</h3>
+            </div>
+            
+            <!-- Step Flow -->
+            <div class="space-y-3 font-medium text-sm">
+              <div class="flex items-center gap-3 p-2 rounded-lg bg-slate-50 text-slate-700">
+                <span class="w-6 h-6 rounded-full bg-slate-300 text-slate-800 text-xs flex items-center justify-center font-bold">1</span>
+                <span>കടകളിലേക്ക് നേരിട്ട് യാത്ര ചെയ്യുന്നു (Physical Shop)</span>
+              </div>
+              <div class="flex items-center gap-3 p-2 rounded-lg bg-slate-50 text-slate-700">
+                <span class="w-6 h-6 rounded-full bg-slate-300 text-slate-800 text-xs flex items-center justify-center font-bold">2</span>
+                <span>ഷെൽഫിലുള്ള സാധനങ്ങൾ മാത്രം കാണുന്നു (Limited Stock)</span>
+              </div>
+              <div class="flex items-center gap-3 p-2 rounded-lg bg-slate-50 text-slate-700">
+                <span class="w-6 h-6 rounded-full bg-slate-300 text-slate-800 text-xs flex items-center justify-center font-bold">3</span>
+                <span>വിലപേശലും നേരിട്ടുള്ള പണമിടപാടും (Manual / Cash)</span>
+              </div>
+              <div class="flex items-center gap-3 p-2 rounded-lg bg-slate-50 text-slate-700">
+                <span class="w-6 h-6 rounded-full bg-slate-300 text-slate-800 text-xs flex items-center justify-center font-bold">4</span>
+                <span>ഉപഭോക്താവ് തന്നെ സാധനം ചുമന്നു കൊണ്ടുപോകുന്നു</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Virtual Market Side -->
+          <div class="bg-gradient-to-br from-white to-blue-50/50 rounded-2xl p-6 border-2 border-brand-500 shadow-glow relative overflow-hidden">
+            <div class="absolute top-0 right-0 px-4 py-1 bg-brand-500 text-white text-xs font-bold rounded-bl-xl shadow-sm">
+              VEYRA വിർച്വൽ മാർക്കറ്റ്
+            </div>
+            <div class="flex items-center gap-3 mb-4">
+              <span class="w-10 h-10 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center text-xl">📱</span>
+              <h3 class="text-lg font-bold text-brand-navy">VEYRA Virtual Flow</h3>
+            </div>
+            
+            <!-- Step Flow -->
+            <div class="space-y-3 font-medium text-sm">
+              <div class="flex items-center gap-3 p-2 rounded-lg bg-white border border-blue-100 text-slate-800 shadow-xs">
+                <span class="w-6 h-6 rounded-full bg-brand-500 text-white text-xs flex items-center justify-center font-bold">1</span>
+                <span>Search & Filters വഴി ആയിരക്കണക്കിന് പ്രൊഡക്റ്റുകൾ കണ്ടെത്തുന്നു</span>
+              </div>
+              <div class="flex items-center gap-3 p-2 rounded-lg bg-white border border-blue-100 text-slate-800 shadow-xs">
+                <span class="w-6 h-6 rounded-full bg-brand-500 text-white text-xs flex items-center justify-center font-bold">2</span>
+                <span>വിലയും ഉപഭോക്തൃ റിവ്യൂകളും (Reviews) താരതമ്യം ചെയ്യുന്നു</span>
+              </div>
+              <div class="flex items-center gap-3 p-2 rounded-lg bg-white border border-blue-100 text-slate-800 shadow-xs">
+                <span class="w-6 h-6 rounded-full bg-brand-500 text-white text-xs flex items-center justify-center font-bold">3</span>
+                <span>UPI, Card വഴി 100% സുരക്ഷിത ഡിജിറ്റൽ പേയ്മെന്റ്</span>
+              </div>
+              <div class="flex items-center gap-3 p-2 rounded-lg bg-white border border-blue-100 text-slate-800 shadow-xs">
+                <span class="w-6 h-6 rounded-full bg-brand-500 text-white text-xs flex items-center justify-center font-bold">4</span>
+                <span>Doorstep Delivery & Live Tracking നിങ്ങളുടെ വീട്ടുപടിക്കൽ!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center text-xs text-slate-500 font-medium">
+          താരതമ്യം വ്യക്തമാണ്: <strong>സൗകര്യം (Convenience) + കൂടുതൽ ചോയ്‌സ് (Choice) + സുരക്ഷിതത്വം (Safety).</strong>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 05: BUSINESS MODEL & MONEY FLOW (MEMBER 1) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-white p-8 md:p-12 flex flex-col justify-between" data-speaker="1" data-speaker-name="MEMBER 01" data-speaker-title="Founder & CEO" data-speaker-sub="Business Model & Revenue">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-2">
+            Revenue Mechanics
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-navy">
+            VEYRA എങ്ങനെ പണം സമ്പാദിക്കുന്നു?
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base mt-1">
+            "പ്ലാറ്റ്‌ഫോം ബിസിനസ്സ് മോഡലും വരുമാന സ്രോതസ്സുകളും — <strong class="text-emerald-700">Revenue ≠ Profit</strong>"
+          </p>
+        </div>
+
+        <!-- Revenue Sources Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 my-auto">
+          <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+            <span class="text-xl block mb-1">🏷️</span>
+            <h4 class="font-bold text-xs text-slate-900">Seller Commission</h4>
+            <p class="text-[11px] text-slate-500 mt-1">ഓരോ വിൽപനയ്ക്കും സെല്ലറിൽ നിന്ന് ചെറിയൊരു കമ്മീഷൻ (5-15%).</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+            <span class="text-xl block mb-1">🚚</span>
+            <h4 class="font-bold text-xs text-slate-900">Delivery / Logistics Fee</h4>
+            <p class="text-[11px] text-slate-500 mt-1">സാധനം വേഗത്തിൽ ഉപഭോക്താവിൽ എത്തിക്കുന്നതിനുള്ള ഫീസ്.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+            <span class="text-xl block mb-1">📢</span>
+            <h4 class="font-bold text-xs text-slate-900">Seller Ads & Promotions</h4>
+            <p class="text-[11px] text-slate-500 mt-1">സെല്ലർമാർ തങ്ങളുടെ ഉൽപ്പന്നങ്ങൾ മുന്നിൽ കാണിക്കാൻ നൽകുന്ന ഫീസ്.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+            <span class="text-xl block mb-1">👑</span>
+            <h4 class="font-bold text-xs text-slate-900">Subscriptions (VEYRA Plus)</h4>
+            <p class="text-[11px] text-slate-500 mt-1">ഫ്രീ ഡെലിവറിക്കും ഓഫറുകൾക്കുമായി ഉപഭോക്താക്കൾ എടുക്കുന്ന സബ്‌സ്‌ക്രിപ്ഷൻ.</p>
+          </div>
+        </div>
+
+        <!-- Interactive Illustrative Money Flow Diagram for ₹1,000 Order -->
+        <div class="bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-50 rounded-2xl p-5 border border-blue-200">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-navy">ഉദാഹരണം: ₹1,000 രൂപയുടെ ഒരു ഓർഡർ നടക്കുമ്പോൾ പണം എങ്ങനെ വിഭജിക്കപ്പെടുന്നു?</span>
+            <span class="text-[11px] bg-white px-2 py-0.5 rounded border border-blue-200 font-mono text-slate-600">Illustrative Breakdown</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-3 text-center">
+            <div class="bg-white p-3 rounded-xl border border-blue-200">
+              <span class="text-xs text-slate-500">Customer നൽകുന്നത്</span>
+              <div class="text-lg font-black text-brand-500 mt-0.5">₹1,000</div>
+              <span class="text-[10px] text-slate-400">Total Paid</span>
+            </div>
+
+            <div class="bg-white p-3 rounded-xl border border-slate-200">
+              <span class="text-xs text-slate-500">Payment Gateway Fee</span>
+              <div class="text-lg font-bold text-slate-700 mt-0.5">~₹20</div>
+              <span class="text-[10px] text-slate-400">2% PG ചാർജ്</span>
+            </div>
+
+            <div class="bg-white p-3 rounded-xl border border-slate-200">
+              <span class="text-xs text-slate-500">Delivery Partner ഷെയർ</span>
+              <div class="text-lg font-bold text-slate-700 mt-0.5">~₹60</div>
+              <span class="text-[10px] text-slate-400">റൈഡർക്കുള്ള വേതനം</span>
+            </div>
+
+            <div class="bg-white p-3 rounded-xl border border-emerald-200 bg-emerald-50/40">
+              <span class="text-xs text-slate-500">Seller-ക്ക് ലഭിക്കുന്നത്</span>
+              <div class="text-lg font-bold text-emerald-700 mt-0.5">~₹820</div>
+              <span class="text-[10px] text-emerald-600">Product Value</span>
+            </div>
+
+            <div class="bg-brand-navy text-white p-3 rounded-xl shadow-sm">
+              <span class="text-xs text-blue-200">VEYRA Platform ഷെയർ</span>
+              <div class="text-lg font-black text-blue-300 mt-0.5">~₹100</div>
+              <span class="text-[10px] text-blue-200/80">Gross Commission</span>
+            </div>
+          </div>
+          
+          <p class="text-[11px] text-slate-500 mt-3 text-center">
+            *ശ്രദ്ധിക്കുക: VEYRA-യുടെ ₹100 രൂപ കമ്മീഷൻ മുഴുവൻ ലാഭമല്ല (Profit). അതിൽ നിന്നാണ് സർവർ ചിലവ്, ഓഫീസ്, കസ്റ്റമർ സപ്പോർട്ട്, ടാക്സ് എന്നിവ നിർവ്വഹിക്കുന്നത്.
+          </p>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 06: STARTING THE COMPANY & LEGAL ENTITY (MEMBER 1) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-brand-surface p-8 md:p-12 flex flex-col justify-between" data-speaker="1" data-speaker-name="MEMBER 01" data-speaker-title="Founder & CEO" data-speaker-sub="Starting the Company">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 text-xs font-bold uppercase tracking-wider mb-2">
+            Startup Formation & Legal Steps
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-navy">
+            ഒരു സ്റ്റാർട്ടപ്പ് എങ്ങനെ രജിസ്റ്റർ ചെയ്യുന്നു?
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base mt-1">
+            ഒരു ആശയം വെറുമൊരു സ്വപ്നത്തിൽ നിന്ന് നിയമപരമായ ഒരു കമ്പനിയായി മാറുന്ന ഘട്ടങ്ങൾ:
+          </p>
+        </div>
+
+        <!-- 4 Legal Structures in India -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 my-auto">
+          <!-- Structure 1 -->
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="text-xs font-bold text-slate-400 uppercase">ലളിതമായ രൂപം</div>
+            <h4 class="text-base font-bold text-slate-900 mt-1">Sole Proprietorship</h4>
+            <p class="text-xs text-slate-600 mt-2">ഒരാൾ മാത്രം നടത്തുന്ന സ്ഥാപനം. രജിസ്ട്രേഷൻ ലളിതമാണ്, എന്നാൽ ബാധ്യതകൾ (Liability) പരിധിയില്ലാത്തതാണ്.</p>
+          </div>
+
+          <!-- Structure 2 -->
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="text-xs font-bold text-slate-400 uppercase">പങ്കാളിത്തം</div>
+            <h4 class="text-base font-bold text-slate-900 mt-1">Partnership Firm</h4>
+            <p class="text-xs text-slate-600 mt-2">രണ്ടോ അതിലധികമോ ആളുകൾ പാർട്ണർഷിപ്പ് ഡീഡ് വഴി ആരംഭിക്കുന്നു. ഫണ്ടിംഗ് സ്വരൂപിക്കാൻ പരിമിതിയുണ്ട്.</p>
+          </div>
+
+          <!-- Structure 3 -->
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="text-xs font-bold text-slate-400 uppercase">ലിമിറ്റഡ് ലയബിലിറ്റി</div>
+            <h4 class="text-base font-bold text-slate-900 mt-1">LLP (Limited Liability)</h4>
+            <p class="text-xs text-slate-600 mt-2">പങ്കാളികളുടെ സ്വകാര്യ സ്വത്തുക്കൾ സുരക്ഷിതമായിരിക്കും. സർവീസ് സ്ഥാപനങ്ങൾക്ക് ഏറെ അനുയോജ്യമാണ്.</p>
+          </div>
+
+          <!-- Structure 4 (Recommended) -->
+          <div class="bg-blue-50/80 p-4 rounded-2xl border-2 border-brand-500 shadow-sm relative">
+            <span class="absolute top-2 right-2 px-2 py-0.5 bg-brand-500 text-white rounded text-[10px] font-bold">Recommended</span>
+            <div class="text-xs font-bold text-brand-600 uppercase">സ്റ്റാർട്ടപ്പുകൾക്ക് പ്രിയപ്പെട്ടത്</div>
+            <h4 class="text-base font-bold text-brand-navy mt-1">Private Limited (Pvt Ltd)</h4>
+            <p class="text-xs text-slate-600 mt-2">ഇൻവെസ്റ്റർമാരിൽ നിന്ന് ഫണ്ട് സ്വീകരിക്കാനും ഓഹരികൾ (Shares) വീതിക്കാനും ഏറ്റവും അനുയോജ്യമായ ഘടന.</p>
+          </div>
+        </div>
+
+        <!-- DPIIT & Startup India Clarification -->
+        <div class="bg-white rounded-2xl p-4 border border-blue-200 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center font-black text-lg shrink-0">
+              🇮🇳
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-900 text-sm">DPIIT & Startup India Recognition എന്താണ്?</h4>
+              <p class="text-xs text-slate-600">
+                കേന്ദ്ര സർക്കാരിന്റെ DPIIT (Department for Promotion of Industry and Internal Trade) നൽകുന്ന സ്റ്റാർട്ടപ്പ് അംഗീകാരം വഴി ടാക്സ് ഇളവുകൾ, ഫാസ്റ്റ്-ട്രാക്ക് പേറ്റന്റുകൾ, ഗവൺമെന്റ് ടെൻഡർ മുൻഗണനകൾ എന്നിവ ലഭിക്കുന്നു.
+              </p>
+            </div>
+          </div>
+          <span class="text-[11px] text-slate-500 shrink-0 bg-slate-100 px-3 py-1.5 rounded-lg border">
+            Company Registration ≠ Startup Recognition
+          </span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 07: MEMBER 1 TO MEMBER 2 TRANSITION -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-gradient-to-br from-brand-navy via-slate-900 to-[#071329] p-8 md:p-14 flex flex-col justify-between text-white" data-speaker="1" data-speaker-name="MEMBER 01" data-speaker-title="Founder & CEO" data-speaker-sub="Passing the Mic">
+        <div class="flex items-center justify-between">
+          <span class="px-3.5 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-bold border border-blue-400/30">
+            Presenter Transition
+          </span>
+          <span class="text-xs font-mono text-slate-400">Time check: ~05:00</span>
+        </div>
+
+        <!-- Central Malayalam Spoken Transition Quote -->
+        <div class="max-w-3xl mx-auto text-center space-y-6">
+          <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-tr from-brand-500 to-indigo-500 flex items-center justify-center shadow-xl shadow-brand-500/30 text-2xl">
+            🎙️
+          </div>
+          <h3 class="text-xl md:text-3xl font-bold leading-relaxed text-blue-100">
+            “ഇപ്പോൾ business idea-യും company setup-ഉം തയ്യാറായി. പക്ഷേ ഈ marketplace customer-ന്റെ mobile-ലേക്ക് എങ്ങനെ എത്തും? നമ്മുടെ website, app, technology, marketing എന്നിവ എങ്ങനെ പ്രവർത്തിക്കും എന്ന് ഇനി നമ്മുടെ <span class="text-brand-500 font-extrabold underline decoration-blue-400">Technology & Marketing Head</span> വിശദീകരിക്കും.”
+          </h3>
+          <p class="text-xs text-slate-400">
+            Handing over the session to Member 2
+          </p>
+        </div>
+
+        <!-- Next Speaker Teaser Card -->
+        <div class="bg-white/10 backdrop-blur border border-white/10 rounded-2xl p-4 max-w-xl mx-auto w-full flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white font-black flex items-center justify-center">M2</div>
+            <div>
+              <div class="text-xs font-bold text-blue-300 uppercase">Coming Up Next</div>
+              <div class="font-bold text-white text-sm">CTO & Digital Marketing Head</div>
+            </div>
+          </div>
+          <span class="text-xs font-semibold text-slate-300 bg-white/10 px-3 py-1 rounded-lg">Tech + DPDP + Ads</span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 08: MEMBER 2 INTRO - TECH & DIGITAL MARKETING (MEMBER 2) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-gradient-to-br from-indigo-900 via-slate-900 to-brand-navy p-8 md:p-14 flex flex-col justify-between text-white" data-speaker="2" data-speaker-name="MEMBER 02" data-speaker-title="CTO & Digital Marketing Head" data-speaker-sub="Technology & Customer Acquisition">
+        <div class="flex items-center justify-between">
+          <span class="px-3.5 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-bold border border-indigo-400/30">
+            Speaker 02 Introduction
+          </span>
+          <span class="text-xs font-mono text-indigo-200">Segment: 05:00 - 10:00</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center my-auto">
+          <div class="md:col-span-8 space-y-4">
+            <div class="text-indigo-400 font-extrabold text-sm uppercase tracking-wider">Presenting: Member 02</div>
+            <h2 class="text-4xl md:text-5xl font-black tracking-tight text-white">
+              CTO & Digital Marketing Head
+            </h2>
+            <p class="text-indigo-200 text-lg leading-relaxed">
+              "ഒരു വിർച്വൽ മാർക്കറ്റ് പ്ലേസിന്റെ ഹൃദയം അതിന്റെ സാങ്കേതികവിദ്യയും (Technology), പുതിയ ആളുകളിലേക്ക് എത്തിച്ചേരാനുള്ള മാർക്കറ്റിംഗുമാണ് (Marketing)."
+            </p>
+            <div class="flex flex-wrap gap-3 pt-2">
+              <span class="px-3 py-1.5 rounded-xl bg-indigo-800/60 border border-indigo-500/30 text-xs font-medium">💻 Cloud Architecture</span>
+              <span class="px-3 py-1.5 rounded-xl bg-indigo-800/60 border border-indigo-500/30 text-xs font-medium">🛡️ DPDP Act 2023 & Security</span>
+              <span class="px-3 py-1.5 rounded-xl bg-indigo-800/60 border border-indigo-500/30 text-xs font-medium">📊 CPC & CAC Metrics</span>
+            </div>
+          </div>
+
+          <div class="md:col-span-4 bg-white/5 border border-indigo-500/30 rounded-3xl p-6 text-center space-y-3 backdrop-blur">
+            <div class="w-20 h-20 mx-auto rounded-2xl bg-indigo-600 flex items-center justify-center text-3xl font-black text-white shadow-lg shadow-indigo-600/40">
+              M2
+            </div>
+            <h4 class="font-bold text-white text-lg">Technology & Growth</h4>
+            <p class="text-xs text-indigo-200">അടുത്ത 5 മിനിറ്റിൽ ആപ്പ് നിർമ്മാണം, ഡാറ്റ സംരക്ഷണം, കസ്റ്റമർ ഏറ്റെടുക്കൽ എന്നിവ പഠിക്കാം.</p>
+          </div>
+        </div>
+
+        <div class="text-xs text-indigo-300/80 border-t border-indigo-800/50 pt-3 flex justify-between">
+          <span>VEYRA Educational Framework</span>
+          <span>Slide 08 / 31</span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 09: VEYRA TECHNOLOGY ARCHITECTURE (MEMBER 2) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-white p-8 md:p-12 flex flex-col justify-between" data-speaker="2" data-speaker-name="MEMBER 02" data-speaker-title="CTO & Digital Marketing Head" data-speaker-sub="Technology Architecture">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-brand-700 text-xs font-bold uppercase tracking-wider mb-2">
+            System Architecture
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-navy">
+            VEYRA ടെക്നോളജി എങ്ങനെയാണ് പ്രവർത്തിക്കുന്നത്?
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base mt-1">
+            "ആയിരക്കണക്കിന് ഓർഡറുകൾ ഒരേസമയം തടസ്സമില്ലാതെ കൈകാര്യം ചെയ്യുന്ന ക്ലൗഡ് ആർക്കിടെക്ചർ."
+          </p>
+        </div>
+
+        <!-- Modern Architectural Diagram -->
+        <div class="my-auto">
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-3 relative">
+            <!-- Tier 1: Front-end -->
+            <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-4 text-center">
+              <div class="w-10 h-10 mx-auto rounded-xl bg-blue-100 text-brand-600 flex items-center justify-center font-bold mb-2">
+                📱
+              </div>
+              <h4 class="font-bold text-xs text-slate-900">User Frontend</h4>
+              <p class="text-[11px] text-slate-500 mt-1">React / Mobile Apps</p>
+              <div class="mt-2 text-[10px] bg-white py-1 px-2 rounded border text-slate-600">Customer & Seller UI</div>
+            </div>
+
+            <!-- Arrow -->
+            <div class="hidden md:flex items-center justify-center text-brand-500 font-bold">➔</div>
+
+            <!-- Tier 2: Backend API -->
+            <div class="bg-blue-50 border-2 border-brand-300 rounded-2xl p-4 text-center">
+              <div class="w-10 h-10 mx-auto rounded-xl bg-brand-500 text-white flex items-center justify-center font-bold mb-2">
+                ⚙️
+              </div>
+              <h4 class="font-bold text-xs text-brand-navy">Backend Engine</h4>
+              <p class="text-[11px] text-slate-600 mt-1">Node.js / Python API</p>
+              <div class="mt-2 text-[10px] bg-white py-1 px-2 rounded border border-blue-200 text-slate-700 font-medium">Business Logic</div>
+            </div>
+
+            <!-- Arrow -->
+            <div class="hidden md:flex items-center justify-center text-brand-500 font-bold">➔</div>
+
+            <!-- Tier 3: Database & Integrations -->
+            <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-4 text-center">
+              <div class="w-10 h-10 mx-auto rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold mb-2">
+                🗄️
+              </div>
+              <h4 class="font-bold text-xs text-slate-900">Database & Cloud</h4>
+              <p class="text-[11px] text-slate-500 mt-1">PostgreSQL & Redis</p>
+              <div class="mt-2 text-[10px] bg-white py-1 px-2 rounded border text-slate-600">Secure Data Store</div>
+            </div>
+          </div>
+
+          <!-- Bottom Microservices Integration Badges -->
+          <div class="mt-5 grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-center">
+              <span class="text-xs font-bold text-slate-800">🔐 Auth & 2FA Service</span>
+              <span class="text-[10px] block text-slate-500">ലോഗിൻ വെരിഫിക്കേഷൻ</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-center">
+              <span class="text-xs font-bold text-slate-800">💳 Payment Gateway API</span>
+              <span class="text-[10px] block text-slate-500">UPI / കാർഡ് ഇടപാടുകൾ</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-center">
+              <span class="text-xs font-bold text-slate-800">📍 Maps & Geocoding</span>
+              <span class="text-[10px] block text-slate-500">ലൈവ് ലൊക്കേഷൻ ട്രാക്കിംഗ്</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-center">
+              <span class="text-xs font-bold text-slate-800">🔔 Push Notifications</span>
+              <span class="text-[10px] block text-slate-500">ഓർഡർ സ്റ്റാറ്റസ് SMS/WhatsApp</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-xs text-slate-500 bg-slate-50 p-3 rounded-xl border">
+          💡 <strong>ലളിതമായി പറഞ്ഞാൽ:</strong> ഉപഭോക്താവ് കാണുന്ന ആപ്പും (Frontend), വിവരങ്ങൾ വിശകലനം ചെയ്യുന്ന സെർവറും (Backend), ബാങ്ക്/ഡെലിവറി കമ്പനികളുടെ സംവിധാനങ്ങളും പരസ്പരം തടസ്സമില്ലാതെ സംസാരിക്കുന്നു.
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 10: CUSTOMER JOURNEY (MEMBER 2) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-brand-surface p-8 md:p-12 flex flex-col justify-between" data-speaker="2" data-speaker-name="MEMBER 02" data-speaker-title="CTO & Digital Marketing Head" data-speaker-sub="Customer Experience Journey">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-brand-700 text-xs font-bold uppercase tracking-wider mb-2">
+            User Flow
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-navy">
+            ഉപഭോക്താവിന്റെ ഡിജിറ്റൽ യാത്ര (Customer Journey)
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base mt-1">
+            ആപ്പ് തുറക്കുന്നത് മുതൽ സാധനം കയ്യിൽ കിട്ടി റിവ്യൂ നൽകുന്നത് വരെയുള്ള ഘട്ടങ്ങൾ:
+          </p>
+        </div>
+
+        <!-- Horizontal Interactive Journey Pipeline -->
+        <div class="my-auto py-2">
+          <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-2">
+            <!-- Step 1 -->
+            <div class="bg-white p-3 rounded-xl border border-slate-200 text-center hover:border-brand-500 transition shadow-xs">
+              <div class="w-8 h-8 mx-auto rounded-full bg-blue-50 text-brand-600 flex items-center justify-center text-sm font-bold mb-1">🏠</div>
+              <span class="text-xs font-bold text-slate-800 block">1. Home</span>
+              <span class="text-[10px] text-slate-500">ബ്രൗസിംഗ്</span>
+            </div>
+            <!-- Step 2 -->
+            <div class="bg-white p-3 rounded-xl border border-slate-200 text-center hover:border-brand-500 transition shadow-xs">
+              <div class="w-8 h-8 mx-auto rounded-full bg-blue-50 text-brand-600 flex items-center justify-center text-sm font-bold mb-1">🔍</div>
+              <span class="text-xs font-bold text-slate-800 block">2. Search</span>
+              <span class="text-[10px] text-slate-500">ഫിൽറ്ററിംഗ്</span>
+            </div>
+            <!-- Step 3 -->
+            <div class="bg-white p-3 rounded-xl border border-slate-200 text-center hover:border-brand-500 transition shadow-xs">
+              <div class="w-8 h-8 mx-auto rounded-full bg-blue-50 text-brand-600 flex items-center justify-center text-sm font-bold mb-1">📄</div>
+              <span class="text-xs font-bold text-slate-800 block">3. Details</span>
+              <span class="text-[10px] text-slate-500">വില & റിവ്യൂ</span>
+            </div>
+            <!-- Step 4 -->
+            <div class="bg-white p-3 rounded-xl border border-slate-200 text-center hover:border-brand-500 transition shadow-xs">
+              <div class="w-8 h-8 mx-auto rounded-full bg-blue-50 text-brand-600 flex items-center justify-center text-sm font-bold mb-1">🛒</div>
+              <span class="text-xs font-bold text-slate-800 block">4. Cart</span>
+              <span class="text-[10px] text-slate-500">Add to Cart</span>
+            </div>
+            <!-- Step 5 -->
+            <div class="bg-white p-3 rounded-xl border border-slate-200 text-center hover:border-brand-500 transition shadow-xs">
+              <div class="w-8 h-8 mx-auto rounded-full bg-blue-50 text-brand-600 flex items-center justify-center text-sm font-bold mb-1">💳</div>
+              <span class="text-xs font-bold text-slate-800 block">5. Payment</span>
+              <span class="text-[10px] text-slate-500">UPI / Cards</span>
+            </div>
+            <!-- Step 6 -->
+            <div class="bg-white p-3 rounded-xl border border-slate-200 text-center hover:border-brand-500 transition shadow-xs">
+              <div class="w-8 h-8 mx-auto rounded-full bg-blue-50 text-brand-600 flex items-center justify-center text-sm font-bold mb-1">✅</div>
+              <span class="text-xs font-bold text-slate-800 block">6. Confirmed</span>
+              <span class="text-[10px] text-slate-500">Order ID</span>
+            </div>
+            <!-- Step 7 -->
+            <div class="bg-white p-3 rounded-xl border border-slate-200 text-center hover:border-brand-500 transition shadow-xs">
+              <div class="w-8 h-8 mx-auto rounded-full bg-blue-50 text-brand-600 flex items-center justify-center text-sm font-bold mb-1">📍</div>
+              <span class="text-xs font-bold text-slate-800 block">7. Track</span>
+              <span class="text-[10px] text-slate-500">Live GPS</span>
+            </div>
+            <!-- Step 8 -->
+            <div class="bg-brand-50 border-2 border-brand-500 p-3 rounded-xl text-center shadow-sm">
+              <div class="w-8 h-8 mx-auto rounded-full bg-brand-500 text-white flex items-center justify-center text-sm font-bold mb-1">⭐</div>
+              <span class="text-xs font-bold text-brand-navy block">8. Review</span>
+              <span class="text-[10px] text-brand-600 font-semibold">ഫീഡ്ബാക്ക്</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 flex items-center justify-between">
+          <div class="text-xs text-slate-600">
+            ലക്ഷ്യം: ഈ 8 ഘട്ടങ്ങളും ഉപഭോക്താവിന് <strong>Zero Confusion, Fast Loading, Single-Click Checkout</strong> എന്നിവയോടെ നൽകുക.
+          </div>
+          <span class="text-xs font-bold text-brand-600 bg-brand-50 px-3 py-1 rounded-lg border border-brand-200">
+            Frictionless UX
+          </span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 11: SELLER & ADMIN DASHBOARD MOCKUPS (MEMBER 2) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-white p-8 md:p-12 flex flex-col justify-between" data-speaker="2" data-speaker-name="MEMBER 02" data-speaker-title="CTO & Digital Marketing Head" data-speaker-sub="Seller & Admin Dashboards">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 text-purple-800 text-xs font-bold uppercase tracking-wider mb-2">
+            Platform Interfaces
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-navy">
+            സെല്ലർമാർക്കും അഡ്മിനും ഉള്ള ഡാഷ്‌ബോർഡുകൾ
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base mt-1">
+            വ്യാപാരികൾക്കും മാനേജ്‌മെന്റിനും ബിസിനസ്സ് പൂർണ്ണമായും നിയന്ത്രിക്കാൻ പ്രത്യേക പോർട്ടലുകൾ നൽകുന്നു:
+          </p>
+        </div>
+
+        <!-- Side by Side Mockups -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-auto">
+          <!-- Seller Portal Mockup -->
+          <div class="bg-slate-900 text-white rounded-2xl p-5 shadow-lg border border-slate-800">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                <span class="text-xs font-mono text-slate-400 ml-2">seller.veyra.com</span>
+              </div>
+              <span class="text-[10px] bg-indigo-500/30 text-indigo-300 px-2 py-0.5 rounded">Seller Hub</span>
+            </div>
+
+            <div class="space-y-3">
+              <div class="grid grid-cols-3 gap-2">
+                <div class="bg-slate-800/80 p-2 rounded-xl text-center">
+                  <span class="text-[10px] text-slate-400">ഇന്നത്തെ ഓർഡറുകൾ</span>
+                  <div class="text-base font-bold text-blue-400">42</div>
+                </div>
+                <div class="bg-slate-800/80 p-2 rounded-xl text-center">
+                  <span class="text-[10px] text-slate-400">സെറ്റിൽമെന്റ്</span>
+                  <div class="text-base font-bold text-emerald-400">₹34,800</div>
+                </div>
+                <div class="bg-slate-800/80 p-2 rounded-xl text-center">
+                  <span class="text-[10px] text-slate-400">സ്റ്റോക്ക് അലേർട്ട്</span>
+                  <div class="text-base font-bold text-amber-400">3 Items</div>
+                </div>
+              </div>
+
+              <div class="text-xs text-slate-300 space-y-1 pt-1">
+                <div class="flex justify-between p-1.5 rounded bg-slate-800/50">
+                  <span>+ Add New Product (Price & Image)</span>
+                  <span class="text-emerald-400 text-[11px]">Instant Live</span>
+                </div>
+                <div class="flex justify-between p-1.5 rounded bg-slate-800/50">
+                  <span>Auto GST Invoice Generation</span>
+                  <span class="text-blue-400 text-[11px]">Enabled</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Admin Portal Mockup -->
+          <div class="bg-slate-50 text-slate-900 rounded-2xl p-5 shadow-sm border border-slate-200">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-200 mb-3">
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-xs text-brand-navy">VEYRA SuperAdmin</span>
+              </div>
+              <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold">Live Metrics</span>
+            </div>
+
+            <div class="space-y-3">
+              <div class="grid grid-cols-3 gap-2">
+                <div class="bg-white p-2 rounded-xl border text-center">
+                  <span class="text-[10px] text-slate-500">Total GMV</span>
+                  <div class="text-base font-bold text-brand-navy">₹4.2L</div>
+                </div>
+                <div class="bg-white p-2 rounded-xl border text-center">
+                  <span class="text-[10px] text-slate-500">Active Sellers</span>
+                  <div class="text-base font-bold text-slate-800">128</div>
+                </div>
+                <div class="bg-white p-2 rounded-xl border text-center">
+                  <span class="text-[10px] text-slate-500">Return Rate</span>
+                  <div class="text-base font-bold text-slate-800">1.8%</div>
+                </div>
+              </div>
+
+              <div class="text-xs text-slate-600 space-y-1 pt-1">
+                <div class="flex justify-between p-1.5 rounded bg-white border">
+                  <span>Fraud Monitoring & Seller KYC</span>
+                  <span class="text-emerald-600 font-bold text-[11px]">99.4% Verified</span>
+                </div>
+                <div class="flex justify-between p-1.5 rounded bg-white border">
+                  <span>Pending Customer Tickets</span>
+                  <span class="text-brand-600 font-bold text-[11px]">4 Active</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-xs text-slate-500 text-center">
+          സെല്ലർമാർക്ക് അവരുടെ സ്വന്തം കട എളുപ്പത്തിൽ കൈകാര്യം ചെയ്യാനും അഡ്മിന് സുതാര്യമായ മേൽനോട്ടത്തിനും ഇത് സഹായിക്കുന്നു.
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 12: DATA PRIVACY & DPDP ACT 2023 (MEMBER 2) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-brand-surface p-8 md:p-12 flex flex-col justify-between" data-speaker="2" data-speaker-name="MEMBER 02" data-speaker-title="CTO & Digital Marketing Head" data-speaker-sub="Data Protection & DPDP Act">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-brand-700 text-xs font-bold uppercase tracking-wider mb-2">
+            Compliance & User Privacy
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-navy">
+            ഉപഭോക്തൃ ഡാറ്റയും സ്വകാര്യതയും (Data & Privacy)
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base mt-1">
+            "ഇന്ത്യയിലെ <strong>Digital Personal Data Protection (DPDP) Act</strong> പ്രകാരം ഒരു മാർക്കറ്റ് പ്ലേസിന്റെ ഉത്തരവാദിത്തങ്ങൾ:"
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-auto">
+          <!-- Left: What & Why we collect -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+            <h4 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+              <span>📋</span> എന്തൊക്കെ വിവരങ്ങളാണ് ശേഖരിക്കുന്നത്? എന്തിന്?
+            </h4>
+            <div class="text-xs text-slate-600 space-y-2">
+              <div class="flex items-start gap-2">
+                <span class="text-blue-500 font-bold">•</span>
+                <span><strong>പേര്, ഫോൺ നമ്പർ:</strong> അക്കൗണ്ട് ലോഗിൻ ചെയ്യാനും ഓർഡർ അറിയിപ്പുകൾക്കും.</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="text-blue-500 font-bold">•</span>
+                <span><strong>ഡെലിവറി വിലാസം:</strong> സാധനം കൃത്യമായി വീട്ടിലെത്തിക്കാൻ (Doorstep delivery).</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="text-blue-500 font-bold">•</span>
+                <span><strong>ഓർഡർ ഹിസ്റ്ററി:</strong> വാറന്റി, റിട്ടേൺ, കസ്റ്റമർ സപ്പോർട്ട് എന്നിവയ്ക്ക്.</span>
+              </div>
+            </div>
+            <div class="text-[11px] text-slate-500 bg-slate-50 p-2.5 rounded-xl border">
+              ആവശ്യമില്ലാത്ത സ്വകാര്യ വിവരങ്ങൾ ഒരിക്കലും ശേഖരിക്കരുത് (Data Minimization).
+            </div>
+          </div>
+
+          <!-- Right: DPDP Principles -->
+          <div class="bg-white p-5 rounded-2xl border border-brand-200 shadow-sm space-y-3">
+            <h4 class="font-bold text-sm text-brand-navy flex items-center gap-2">
+              <span>⚖️</span> DPDP Act നൽകുന്ന പ്രധാന തത്വങ്ങൾ
+            </h4>
+            <div class="text-xs text-slate-600 space-y-2">
+              <div class="flex items-start gap-2">
+                <span class="text-emerald-500 font-bold">✓</span>
+                <span><strong>സമ്മതം (Consent):</strong> ഉപഭോക്താവിന്റെ വ്യക്തമായ അനുമതിയോടെ മാത്രം ഡാറ്റ ശേഖരിക്കുക.</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="text-emerald-500 font-bold">✓</span>
+                <span><strong>ഉദ്ദേശ്യ പരിധി (Purpose Limitation):</strong> വാങ്ങിയ ഉദ്ദേശ്യത്തിന് മാത്രമേ ഉപയോഗിക്കാവൂ; ഡാറ്റ വിൽക്കാൻ പാടില്ല.</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="text-emerald-500 font-bold">✓</span>
+                <span><strong>ഡാറ്റ ഡിലീഷൻ (Right to Erasure):</strong> ഉപഭോക്താവ് അക്കൗണ്ട് ഒഴിവാക്കാൻ ആവശ്യപ്പെട്ടാൽ ഡാറ്റ നീക്കം ചെയ്യുക.</span>
+              </div>
+            </div>
+            <div class="text-[11px] text-brand-700 bg-blue-50 p-2.5 rounded-xl border border-blue-200">
+              സുരക്ഷിതമായ എൻക്രിപ്ഷൻ (Encryption) ഉപയോഗിച്ചാണ് പാസ്‌വേർഡുകളും വിവരങ്ങളും സൂക്ഷിക്കുന്നത്.
+            </div>
+          </div>
+        </div>
+
+        <div class="text-xs text-slate-500 text-center">
+          "ഡിജിറ്റൽ ബിസിനസിൽ ഏറ്റവും വലിയ മൂലധനം ഉപഭോക്താവിന്റെ വിശ്വാസമാണ് (Trust)."
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 13: CYBERSECURITY & TRUST SHIELD (MEMBER 2) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-white p-8 md:p-12 flex flex-col justify-between" data-speaker="2" data-speaker-name="MEMBER 02" data-speaker-title="CTO & Digital Marketing Head" data-speaker-sub="Cybersecurity & Trust">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-2">
+            Platform Defense
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-navy">
+            സൈബർ സുരക്ഷയും വിശ്വാസ്യതയും (Cybersecurity & Trust)
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base mt-1">
+            ഓൺലൈൻ തട്ടിപ്പുകളിൽ നിന്ന് ഉപഭോക്താക്കളെയും വ്യാപാരികളെയും സംരക്ഷിക്കുന്ന സുരക്ഷാ കവചം:
+          </p>
+        </div>
+
+        <!-- 8 Shield Interactive Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3.5 my-auto">
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-500 transition">
+            <span class="text-2xl block mb-1">🔐</span>
+            <h4 class="font-bold text-xs text-slate-900">Secure HTTPS</h4>
+            <p class="text-[11px] text-slate-500 mt-1">SSL/TLS വഴി എല്ലാ ആശയവിനിമയങ്ങളും എൻക്രിപ്റ്റ് ചെയ്തിരിക്കുന്നു.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-500 transition">
+            <span class="text-2xl block mb-1">💳</span>
+            <h4 class="font-bold text-xs text-slate-900">Tokenized Payment</h4>
+            <p class="text-[11px] text-slate-500 mt-1">കാർഡ് നമ്പറുകൾ ഞങ്ങളുടെ സെർവറിൽ സേവ് ചെയ്യുന്നില്ല (PCI-DSS standard).</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-500 transition">
+            <span class="text-2xl block mb-1">🛡️</span>
+            <h4 class="font-bold text-xs text-slate-900">Fraud Monitoring</h4>
+            <p class="text-[11px] text-slate-500 mt-1">സംശയാസ്പദമായ ഇടപാടുകൾ AI വഴി തത്സമയം കണ്ടെത്തുന്നു.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-500 transition">
+            <span class="text-2xl block mb-1">✅</span>
+            <h4 class="font-bold text-xs text-slate-900">Seller KYC</h4>
+            <p class="text-[11px] text-slate-500 mt-1">GSTIN, പാൻ കാർഡ് പരിശോധിച്ച വ്യാപാരികളെ മാത്രം അനുവദിക്കുന്നു.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-500 transition">
+            <span class="text-2xl block mb-1">🔑</span>
+            <h4 class="font-bold text-xs text-slate-900">Two-Factor Auth</h4>
+            <p class="text-[11px] text-slate-500 mt-1">OTP അധിഷ്ഠിത ലോഗിൻ സുരക്ഷ നൽകുന്നു.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-500 transition">
+            <span class="text-2xl block mb-1">👥</span>
+            <h4 class="font-bold text-xs text-slate-900">Role-Based Access</h4>
+            <p class="text-[11px] text-slate-500 mt-1">അർഹതപ്പെട്ട ജീവനക്കാർക്ക് മാത്രം ഡാറ്റ കാണാനുള്ള അനുമതി.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-500 transition">
+            <span class="text-2xl block mb-1">📜</span>
+            <h4 class="font-bold text-xs text-slate-900">Clear Privacy Policy</h4>
+            <p class="text-[11px] text-slate-500 mt-1">വ്യക്തവും സുതാര്യവുമായ നിബന്ധനകൾ.</p>
+          </div>
+          <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-brand-500 transition">
+            <span class="text-2xl block mb-1">🔄</span>
+            <h4 class="font-bold text-xs text-slate-900">Auto Backups</h4>
+            <p class="text-[11px] text-slate-500 mt-1">ഡാറ്റ നഷ്ടപ്പെടാതിരിക്കാൻ ഓട്ടോമാറ്റിക് ക്ലൗഡ് ബാക്കപ്പ്.</p>
+          </div>
+        </div>
+
+        <div class="text-xs text-slate-500 bg-emerald-50 text-emerald-800 p-3 rounded-xl border border-emerald-200 text-center font-medium">
+          ബാങ്കിംഗ് നിലവാരത്തിലുള്ള സുരക്ഷയാണ് VEYRA ഓരോ ഇടപാടിലും ഉറപ്പുവരുത്തുന്നത്.
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 14: DIGITAL MARKETING, CPC & CAC (MEMBER 2) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-brand-surface p-8 md:p-12 flex flex-col justify-between" data-speaker="2" data-speaker-name="MEMBER 02" data-speaker-title="CTO & Digital Marketing Head" data-speaker-sub="CPC & CAC Metrics">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 text-orange-800 text-xs font-bold uppercase tracking-wider mb-2">
+            Growth Metrics
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-navy">
+            ഡിജിറ്റൽ മാർക്കറ്റിംഗ്: CPC & CAC കണക്കുകൂട്ടലുകൾ
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base mt-1">
+            "എങ്ങനെയാണ് ആദ്യ കസ്റ്റമറെ നേടുന്നത്? പരസ്യ ചിലവ് എങ്ങനെ ലാഭകരമാക്കാം?"
+          </p>
+        </div>
+
+        <!-- CPC & CAC Interactive Comparison Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-auto">
+          <!-- CPC Card -->
+          <div class="bg-white p-6 rounded-2xl border-2 border-blue-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold px-2.5 py-1 rounded bg-blue-100 text-brand-700">Cost Per Click (CPC)</span>
+              <span class="text-xs text-slate-400 font-mono">പരസ്യ ക്ലിക്ക് ചിലവ്</span>
+            </div>
+            <h3 class="text-2xl font-black text-brand-navy">CPC = പരസ്യ ചിലവ് ÷ ക്ലിക്കുകൾ</h3>
+            
+            <div class="bg-blue-50/70 p-4 rounded-xl space-y-1 text-xs text-slate-700 font-mono">
+              <div>പരസ്യ ചിലവ് = <strong>₹1,000</strong></div>
+              <div>ലഭിച്ച ആകെ ക്ലിക്കുകൾ = <strong>200 Clicks</strong></div>
+              <div class="pt-2 border-t border-blue-200 text-brand-600 font-bold text-sm">
+                CPC = ₹1,000 / 200 = <strong>₹5 per click</strong>
+              </div>
+            </div>
+            <p class="text-xs text-slate-500">
+              ഒരു വ്യക്തി നമ്മുടെ പരസ്യത്തിൽ ക്ലിക്ക് ചെയ്ത് വെബ്‌സൈറ്റിൽ വരാൻ ചെലവായ ശരാശരി തുക.
+            </p>
+          </div>
+
+          <!-- CAC Card -->
+          <div class="bg-white p-6 rounded-2xl border-2 border-emerald-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold px-2.5 py-1 rounded bg-emerald-100 text-emerald-800">Customer Acquisition Cost (CAC)</span>
+              <span class="text-xs text-slate-400 font-mono">ഉപഭോക്താവിനെ നേടാനുള്ള ചിലവ്</span>
+            </div>
+            <h3 class="text-2xl font-black text-slate-900">CAC = ആകെ മാർക്കറ്റിംഗ് ÷ പുതിയ ഉപഭോക്താക്കൾ</h3>
+            
+            <div class="bg-emerald-50/70 p-4 rounded-xl space-y-1 text-xs text-slate-700 font-mono">
+              <div>ആകെ പരസ്യ ബജറ്റ് = <strong>₹10,000</strong></div>
+              <div>സാധനം വാങ്ങിയ പുതിയ ആളുകൾ = <strong>200 പേർ</strong></div>
+              <div class="pt-2 border-t border-emerald-200 text-emerald-700 font-bold text-sm">
+                CAC = ₹10,000 / 200 = <strong>₹50 per Customer</strong>
+              </div>
+            </div>
+            <p class="text-xs text-slate-500">
+              വെറുതെ ക്ലിക്ക് ചെയ്തവരല്ല, യഥാർത്ഥത്തിൽ ഓർഡർ ചെയ്ത ഒരു കസ്റ്റമറെ ലഭിക്കാൻ ചിലവായ ശരാശരി തുക.
+            </p>
+          </div>
+        </div>
+
+        <!-- Vital Startup Insight -->
+        <div class="bg-slate-900 text-white p-3.5 rounded-2xl text-xs flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="text-amber-400 text-base">💡</span>
+            <span><strong>സുവർണ്ണ നിയമം:</strong> ഉപഭോക്താവ് നൽകുന്ന ലാഭം (LTV) അവരെ നേടാനുള്ള ചിലവിനേക്കാൾ (CAC) കൂടുതലായിരിക്കണം!</span>
+          </div>
+          <span class="hidden sm:inline-block font-mono text-emerald-400 font-bold">LTV &gt; CAC</span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 15: MARKETING CHANNELS & TRANSITION TO MEMBER 3 -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-gradient-to-br from-brand-navy via-slate-900 to-[#071329] p-8 md:p-14 flex flex-col justify-between text-white" data-speaker="2" data-speaker-name="MEMBER 02" data-speaker-title="CTO & Digital Marketing Head" data-speaker-sub="Passing the Mic">
+        <div>
+          <div class="flex items-center justify-between">
+            <span class="px-3.5 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-bold border border-indigo-400/30">
+              Channels & Speaker Handover
+            </span>
+            <span class="text-xs font-mono text-slate-400">Time check: ~10:00</span>
+          </div>
+
+          <!-- Channel Icons Row -->
+          <div class="mt-4 flex flex-wrap gap-2 justify-center">
+            <span class="px-3 py-1 bg-white/10 rounded-full text-xs border border-white/10">📸 Instagram Reels</span>
+            <span class="px-3 py-1 bg-white/10 rounded-full text-xs border border-white/10">🔍 Google Search Ads</span>
+            <span class="px-3 py-1 bg-white/10 rounded-full text-xs border border-white/10">📺 YouTube Reviews</span>
+            <span class="px-3 py-1 bg-white/10 rounded-full text-xs border border-white/10">💬 WhatsApp Business</span>
+            <span class="px-3 py-1 bg-white/10 rounded-full text-xs border border-white/10">🤝 Micro-Influencers</span>
+          </div>
+        </div>
+
+        <!-- Transition Spoken Quote -->
+        <div class="max-w-3xl mx-auto text-center space-y-6 my-auto">
+          <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-tr from-indigo-500 to-cyan-500 flex items-center justify-center shadow-xl shadow-cyan-500/30 text-2xl">
+            📦
+          </div>
+          <h3 class="text-xl md:text-3xl font-bold leading-relaxed text-blue-100">
+            “Customer നമ്മുടെ platform കണ്ടെത്തി, product select ചെയ്ത് order ചെയ്യാൻ തയ്യാറായി. ഇനി ആ order-ന്റെ പിന്നിൽ നടക്കുന്ന payment, order processing, GST invoice എന്നിവ എങ്ങനെ നടക്കുന്നു എന്ന് <span class="text-cyan-400 font-extrabold underline decoration-cyan-300">Finance & Operations Head</span> വിശദീകരിക്കും.”
+          </h3>
+          <p class="text-xs text-slate-400">
+            Handing over the session to Member 3
+          </p>
+        </div>
+
+        <!-- Next Speaker Card -->
+        <div class="bg-white/10 backdrop-blur border border-white/10 rounded-2xl p-4 max-w-xl mx-auto w-full flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-cyan-600 text-white font-black flex items-center justify-center">M3</div>
+            <div>
+              <div class="text-xs font-bold text-cyan-300 uppercase">Coming Up Next</div>
+              <div class="font-bold text-white text-sm">COO / Finance & Operations Head</div>
+            </div>
+          </div>
+          <span class="text-xs font-semibold text-slate-300 bg-white/10 px-3 py-1 rounded-lg">Payments + GST + Invoice</span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 16: MEMBER 3 INTRO - FINANCE & OPERATIONS (MEMBER 3) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-gradient-to-br from-[#063248] via-slate-900 to-brand-navy p-8 md:p-14 flex flex-col justify-between text-white" data-speaker="3" data-speaker-name="MEMBER 03" data-speaker-title="COO / Finance & Operations" data-speaker-sub="Orders, Payments & GST">
+        <div class="flex items-center justify-between">
+          <span class="px-3.5 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-bold border border-cyan-400/30">
+            Speaker 03 Introduction
+          </span>
+          <span class="text-xs font-mono text-cyan-200">Segment: 10:00 - 15:00</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center my-auto">
+          <div class="md:col-span-8 space-y-4">
+            <div class="text-cyan-400 font-extrabold text-sm uppercase tracking-wider">Presenting: Member 03</div>
+            <h2 class="text-4xl md:text-5xl font-black tracking-tight text-white">
+              COO / Finance & Operations Head
+            </h2>
+            <p class="text-cyan-100 text-lg leading-relaxed">
+              "കസ്റ്റമർ 'Buy Now' ബട്ടൺ അമർത്തുന്ന നിമിഷം മുതൽ ബാങ്കിംഗ് ശൃംഖലകളും, GST നികുതി രസീതുകളും, ഓർഡർ പ്രോസസ്സിംഗും കൃത്യതയോടെ പ്രവർത്തിക്കുന്നു."
+            </p>
+            <div class="flex flex-wrap gap-3 pt-2">
+              <span class="px-3 py-1.5 rounded-xl bg-cyan-900/60 border border-cyan-500/30 text-xs font-medium">⚡ Real-time Order Engine</span>
+              <span class="px-3 py-1.5 rounded-xl bg-cyan-900/60 border border-cyan-500/30 text-xs font-medium">💳 Payment Gateway & 3 States</span>
+              <span class="px-3 py-1.5 rounded-xl bg-cyan-900/60 border border-cyan-500/30 text-xs font-medium">🧾 GST Tax Invoice & Refunds</span>
+            </div>
+          </div>
+
+          <div class="md:col-span-4 bg-white/5 border border-cyan-500/30 rounded-3xl p-6 text-center space-y-3 backdrop-blur">
+            <div class="w-20 h-20 mx-auto rounded-2xl bg-cyan-600 flex items-center justify-center text-3xl font-black text-white shadow-lg shadow-cyan-600/40">
+              M3
+            </div>
+            <h4 class="font-bold text-white text-lg">Orders, Money & Tax</h4>
+            <p class="text-xs text-cyan-200">ഓർഡറുകൾ എങ്ങനെ സ്വീകരിക്കുന്നു, പേയ്‌മെന്റുകൾ എങ്ങനെ സുരക്ഷിതമാക്കുന്നു എന്ന് അടുത്ത 5 മിനിറ്റിൽ അറിയാം.</p>
+          </div>
+        </div>
+
+        <div class="text-xs text-cyan-300/80 border-t border-cyan-800/50 pt-3 flex justify-between">
+          <span>VEYRA Operations Architecture</span>
+          <span>Slide 16 / 31</span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 17: WHAT HAPPENS AFTER "BUY NOW"? (MEMBER 3) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-white p-8 md:p-12 flex flex-col justify-between" data-speaker="3" data-speaker-name="MEMBER 03" data-speaker-title="COO / Finance & Operations" data-speaker-sub="After Buy Now Timeline">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-brand-700 text-xs font-bold uppercase tracking-wider mb-2">
+            Order Lifecycle Timeline
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-navy">
+            “Buy Now” ക്ലിക്ക് ചെയ്താൽ തൊട്ടടുത്ത നിമിഷങ്ങളിൽ എന്ത് സംഭവിക്കും?
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base mt-1">
+            "ഒരു ഉദാഹരണ ടൈംലൈൻ (Illustrative Sequence) — സിസ്റ്റം ഓർഡർ പൂർത്തിയാക്കുന്ന വിധം:"
+          </p>
+        </div>
+
+        <!-- Vertical/Horizontal Timeline Component -->
+        <div class="my-auto py-2">
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
+            <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl relative">
+              <span class="text-xs font-mono font-bold text-brand-600">00:00</span>
+              <h4 class="font-bold text-xs text-slate-900 mt-1">Place Order</h4>
+              <p class="text-[11px] text-slate-500 mt-1">കസ്റ്റമർ ബട്ടൺ ക്ലിക്ക് ചെയ്യുന്നു; തനത് Order ID ക്രിയേറ്റ് ആകുന്നു.</p>
+            </div>
+
+            <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl relative">
+              <span class="text-xs font-mono font-bold text-brand-600">00:02</span>
+              <h4 class="font-bold text-xs text-slate-900 mt-1">Payment Verified</h4>
+              <p class="text-[11px] text-slate-500 mt-1">ബാങ്ക് അപ്രൂവൽ ലഭിക്കുന്നു; തുക Escrow അക്കൗണ്ടിൽ സുരക്ഷിതം.</p>
+            </div>
+
+            <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl relative">
+              <span class="text-xs font-mono font-bold text-brand-600">00:05</span>
+              <h4 class="font-bold text-xs text-slate-900 mt-1">Seller Notified</h4>
+              <p class="text-[11px] text-slate-500 mt-1">സെല്ലറുടെ മൊബൈലിൽ അലർട്ട് എത്തുന്നു; ഇൻവെന്ററി ലോക്ക് ചെയ്യുന്നു.</p>
+            </div>
+
+            <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl relative">
+              <span class="text-xs font-mono font-bold text-brand-600">00:30</span>
+              <h4 class="font-bold text-xs text-slate-900 mt-1">Packed & Manifest</h4>
+              <p class="text-[11px] text-slate-500 mt-1">സാധനം പാക്ക് ചെയ്ത് ഇൻവോയ്സും ബാർകോഡും പതിപ്പിക്കുന്നു.</p>
+            </div>
+
+            <div class="bg-emerald-50 border border-emerald-300 p-3.5 rounded-2xl relative">
+              <span class="text-xs font-mono font-bold text-emerald-700">Dispatch</span>
+              <h4 class="font-bold text-xs text-emerald-900 mt-1">Rider Assigned</h4>
+              <p class="text-[11px] text-emerald-800 mt-1">ഡെലിവറി പാർട്ണർ പിക്കപ്പ് ചെയ്യുന്നു; ലൈവ് ട്രാക്കിംഗ് ലിങ്ക് അയക്കുന്നു.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-slate-100 p-3 rounded-xl border text-xs text-slate-600 flex items-center justify-between">
+          <span>ℹ️ ഈ സമയക്രമം പ്രക്രിയ മനസ്സിലാക്കാനുള്ള ഉദാഹരണമാണ്; ഉൽപ്പന്നത്തിനും ദൂരത്തിനുമനുസരിച്ച് സമയം വ്യത്യാസപ്പെടാം.</span>
+          <span class="font-bold text-brand-navy">Automated Order State Machine</span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 18: PAYMENT GATEWAY & 3 PAYMENT STATES (MEMBER 3) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-brand-surface p-8 md:p-12 flex flex-col justify-between" data-speaker="3" data-speaker-name="MEMBER 03" data-speaker-title="COO / Finance & Operations" data-speaker-sub="Payment Gateway & 3 States">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-brand-700 text-xs font-bold uppercase tracking-wider mb-2">
+            Payment Infrastructure
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-navy">
+            എന്താണ് പേയ്‌മെന്റ് ഗേറ്റ്‌വേ? (Payment Gateway)
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base mt-1">
+            "ഉപഭോക്താവിന്റെ ബാങ്കിൽ നിന്നും പ്ലാറ്റ്‌ഫോമിലേക്ക് പണം സുരക്ഷിതമായി കൈമാറുന്ന ഡിജിറ്റൽ പാലം."
+          </p>
+        </div>
+
+        <!-- 3 Payment States Interactive Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 my-auto">
+          <!-- State 1: Success -->
+          <div class="bg-white p-5 rounded-2xl border-2 border-emerald-400 shadow-sm space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-base">🟢</span>
+              <span class="text-xs font-bold uppercase text-emerald-700">Successful</span>
+            </div>
+            <h4 class="text-base font-bold text-slate-900">പേയ്മെന്റ് വിജയകരം</h4>
+            <p class="text-xs text-slate-600">
+              ബാങ്കിൽ നിന്ന് തുക കുറയുകയും VEYRA-യ്ക്ക് കൺഫർമേഷൻ ലഭിക്കുകയും ചെയ്യുന്നു. ഓർഡർ ഉടൻ തന്നെ സെല്ലറിലേക്ക് പോകുന്നു.
+            </p>
+          </div>
+
+          <!-- State 2: Pending -->
+          <div class="bg-white p-5 rounded-2xl border-2 border-amber-400 shadow-sm space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="w-8 h-8 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-base">🟡</span>
+              <span class="text-xs font-bold uppercase text-amber-700">Pending</span>
+            </div>
+            <h4 class="text-base font-bold text-slate-900">തീരുമാനമാകാത്ത അവസ്ഥ</h4>
+            <p class="text-xs text-slate-600">
+              നെറ്റ്‌വർക്ക് തകരാർ കാരണം ബാങ്കിൽ നിന്ന് വിവരങ്ങൾ എത്താൻ വൈകുന്നു. പണം ഓട്ടോമാറ്റിക് ആയി റിവേഴ്സ് ചെയ്യപ്പെടുകയോ കൺഫേം ആകുകയോ ചെയ്യും.
+            </p>
+          </div>
+
+          <!-- State 3: Failed -->
+          <div class="bg-white p-5 rounded-2xl border-2 border-red-400 shadow-sm space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold text-base">🔴</span>
+              <span class="text-xs font-bold uppercase text-red-700">Failed</span>
+            </div>
+            <h4 class="text-base font-bold text-slate-900">പേയ്മെന്റ് പരാജയം</h4>
+            <p class="text-xs text-slate-600">
+              തെറ്റായ PIN, അക്കൗണ്ടിൽ പണമില്ലായ്മ അല്ലെങ്കിൽ ബാങ്ക് തകരാർ. അക്കൗണ്ടിൽ നിന്ന് പണം പോയിട്ടുണ്ടെങ്കിൽ ഓട്ടോ റീഫണ്ട് (3-5 ദിവസത്തിനകം) തിരികെ ലഭിക്കും.
+            </p>
+          </div>
+        </div>
+
+        <!-- Payment Modes Supported -->
+        <div class="bg-white p-3.5 rounded-2xl border border-slate-200 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <span class="font-bold text-slate-700">പിന്തുണയ്ക്കുന്ന രീതികൾ:</span>
+          <span class="px-2.5 py-1 bg-slate-100 rounded-md font-semibold text-slate-700">📱 UPI (GPay / PhonePe / Paytm)</span>
+          <span class="px-2.5 py-1 bg-slate-100 rounded-md font-semibold text-slate-700">💳 Debit / Credit Cards (RuPay / Visa / MC)</span>
+          <span class="px-2.5 py-1 bg-slate-100 rounded-md font-semibold text-slate-700">🏦 Net Banking (SBI, HDFC, ICICI...)</span>
+          <span class="px-2.5 py-1 bg-slate-100 rounded-md font-semibold text-slate-700">💵 Cash on Delivery (COD)</span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 19: UNDERSTANDING GST IN SIMPLE MALAYALAM (MEMBER 3) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-white p-8 md:p-12 flex flex-col justify-between" data-speaker="3" data-speaker-name="MEMBER 03" data-speaker-title="COO / Finance & Operations" data-speaker-sub="Understanding GST">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 text-xs font-bold uppercase tracking-wider mb-2">
+            Taxation in E-Commerce
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-navy">
+            എന്താണ് GST? (Goods and Services Tax)
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base mt-1">
+            "ഇന്ത്യയിൽ സാധനങ്ങളും സേവനങ്ങളും വിൽക്കുമ്പോൾ ബാധകമാകുന്ന ഏകീകൃത പരോക്ഷ നികുതി."
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-auto">
+          <!-- Left: CGST/SGST vs IGST -->
+          <div class="space-y-3">
+            <div class="bg-blue-50 border border-blue-200 p-4 rounded-2xl">
+              <span class="text-xs font-bold text-brand-600 uppercase">സംസ്ഥാനത്തിനുള്ളിൽ (Intra-State)</span>
+              <h4 class="text-base font-bold text-brand-navy mt-1">CGST + SGST</h4>
+              <p class="text-xs text-slate-600 mt-1">
+                കേരളത്തിലെ സെല്ലർ കേരളത്തിലെ കസ്റ്റമർക്ക് വിൽക്കുമ്പോൾ നികുതി തുല്യമായി കേന്ദ്രത്തിനും (CGST) സംസ്ഥാനത്തിനും (SGST) പങ്കിടുന്നു.
+              </p>
+            </div>
+
+            <div class="bg-purple-50 border border-purple-200 p-4 rounded-2xl">
+              <span class="text-xs font-bold text-purple-700 uppercase">മറ്റ് സംസ്ഥാനങ്ങളിലേക്ക് (Inter-State)</span>
+              <h4 class="text-base font-bold text-purple-900 mt-1">IGST (Integrated GST)</h4>
+              <p class="text-xs text-slate-600 mt-1">
+                മറ്റ് സംസ്ഥാനത്തെ സെല്ലറിൽ നിന്ന് കേരളത്തിലേക്ക് അയക്കുമ്പോൾ IGST ഈടാക്കുന്നു.
+              </p>
+            </div>
+          </div>
+
+          <!-- Right: Numerical Calculation (Illustrative) -->
+          <div class="bg-slate-900 text-white p-5 rounded-2xl space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+              <span class="text-xs font-bold text-slate-300">ലളിതമായ കണക്കുകൂട്ടൽ</span>
+              <span class="text-[10px] bg-slate-800 text-amber-300 px-2 py-0.5 rounded font-mono">Illustrative 18% Rate</span>
+            </div>
+
+            <div class="space-y-2 text-xs font-mono">
+              <div class="flex justify-between">
+                <span class="text-slate-400">Base Price (ഉൽപ്പന്ന വില):</span>
+                <span class="text-white font-bold">₹1,000.00</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-400">CGST (9%):</span>
+                <span class="text-blue-300 font-bold">+ ₹90.00</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-400">SGST (9%):</span>
+                <span class="text-blue-300 font-bold">+ ₹90.00</span>
+              </div>
+              <div class="pt-2 border-t border-slate-800 flex justify-between text-sm">
+                <span class="text-emerald-400 font-bold">കസ്റ്റമർ നൽകുന്ന ആകെ തുക:</span>
+                <span class="text-emerald-400 font-black">₹1,180.00</span>
+              </div>
+            </div>
+
+            <p class="text-[10px] text-slate-400 leading-normal pt-1">
+              *ശ്രദ്ധിക്കുക: GST സ്ലാബുകൾ (5%, 12%, 18%, 28%) ഉൽപ്പന്നങ്ങളുടെ കാറ്റഗറിക്ക് അനുസരിച്ച് സർക്കാരിന്റെ നിലവിലെ നിയമപ്രകാരം വ്യത്യാസപ്പെടും.
+            </p>
+          </div>
+        </div>
+
+        <div class="text-xs text-slate-500 bg-slate-50 p-2.5 rounded-xl border text-center">
+          ഓരോ ഓർഡറിനും സുതാര്യമായ <strong>GST Tax Invoice</strong> ജനറേറ്റ് ചെയ്യേണ്ടത് നിയമപരമായ ബാധ്യതയാണ്.
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 20: REALISTIC VEYRA TAX INVOICE MOCKUP (MEMBER 3) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-brand-surface p-6 md:p-10 flex flex-col justify-between" data-speaker="3" data-speaker-name="MEMBER 03" data-speaker-title="COO / Finance & Operations" data-speaker-sub="GST Tax Invoice Mockup">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-1">
+            Official Document Sample
+          </div>
+          <h2 class="text-2xl md:text-3xl font-extrabold text-brand-navy">
+            യഥാർത്ഥ VEYRA ടാക്സ് ഇൻവോയ്സ് മാതൃക (GST Invoice)
+          </h2>
+        </div>
+
+        <!-- Realistic E-commerce Invoice UI -->
+        <div class="my-auto bg-white rounded-2xl p-4 md:p-6 shadow-md border border-slate-200 max-w-4xl mx-auto w-full font-sans text-xs">
+          <!-- Header -->
+          <div class="flex justify-between border-b pb-3 mb-3">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-xl font-black text-brand-500">VEYRA</span>
+                <span class="text-[10px] uppercase font-bold text-slate-500 border px-1.5 py-0.5 rounded">Tax Invoice</span>
+              </div>
+              <p class="text-[10px] text-slate-400 mt-0.5">Invoice No: VEY-2026-89421 • Date: 19-Sep-2026</p>
+            </div>
+            <div class="text-right">
+              <span class="font-bold text-slate-800">VEYRA Marketplace Ltd. (Fictional)</span>
+              <p class="text-[10px] text-slate-500">GSTIN: 32AABCV1234F1Z9 (Kerala)</p>
+            </div>
+          </div>
+
+          <!-- Seller & Buyer Addresses -->
+          <div class="grid grid-cols-2 gap-4 pb-3 border-b text-[11px]">
+            <div>
+              <span class="font-bold text-slate-500 block uppercase text-[9px]">Sold By:</span>
+              <span class="font-bold text-slate-800">Apex Gadgets Kerala LLP</span>
+              <p class="text-slate-500">Kaloor, Kochi, Kerala - 682017</p>
+              <p class="text-slate-500">Seller GSTIN: 32AAXPA9988D1Z2</p>
+            </div>
+            <div class="text-right">
+              <span class="font-bold text-slate-500 block uppercase text-[9px]">Shipping Address:</span>
+              <span class="font-bold text-slate-800">Arjun Sharma</span>
+              <p class="text-slate-500">Door No 4B, Emerald Heights, Trivandrum - 695001</p>
+              <p class="text-slate-500">Place of Supply: Kerala (32)</p>
+            </div>
+          </div>
+
+          <!-- Items Table -->
+          <div class="py-3 border-b">
+            <div class="grid grid-cols-12 font-bold text-slate-400 uppercase text-[9px] pb-1">
+              <span class="col-span-5">Description</span>
+              <span class="col-span-2 text-center">HSN</span>
+              <span class="col-span-1 text-center">Qty</span>
+              <span class="col-span-2 text-right">Base Price</span>
+              <span class="col-span-2 text-right">Total</span>
+            </div>
+            <div class="grid grid-cols-12 py-1 text-slate-700">
+              <span class="col-span-5 font-semibold">Wireless Noise-Canceling Earbuds</span>
+              <span class="col-span-2 text-center font-mono text-[10px]">8518</span>
+              <span class="col-span-1 text-center font-semibold">1</span>
+              <span class="col-span-2 text-right font-mono">₹1,000.00</span>
+              <span class="col-span-2 text-right font-mono font-bold">₹1,000.00</span>
+            </div>
+          </div>
+
+          <!-- Calculation Totals -->
+          <div class="pt-3 flex justify-between items-start">
+            <div class="text-[10px] text-slate-400 max-w-xs">
+              *This is a computer generated invoice for educational seminar presentation.
+            </div>
+            <div class="w-64 space-y-1 text-right text-[11px]">
+              <div class="flex justify-between text-slate-600">
+                <span>Taxable Value:</span>
+                <span class="font-mono">₹1,000.00</span>
+              </div>
+              <div class="flex justify-between text-slate-600">
+                <span>CGST (9.0%):</span>
+                <span class="font-mono">₹90.00</span>
+              </div>
+              <div class="flex justify-between text-slate-600">
+                <span>SGST (9.0%):</span>
+                <span class="font-mono">₹90.00</span>
+              </div>
+              <div class="flex justify-between text-slate-600">
+                <span>Delivery Charge:</span>
+                <span class="font-mono text-emerald-600">FREE</span>
+              </div>
+              <div class="flex justify-between font-bold text-brand-navy border-t pt-1 text-sm">
+                <span>Grand Total:</span>
+                <span class="font-mono font-black text-brand-500">₹1,180.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-xs text-slate-500 text-center">
+          കസ്റ്റമർക്ക് ഓർഡർ പൂർത്തിയായ ഉടൻ തന്നെ ആപ്പിൽ നിന്ന് ഈ ഇൻവോയ്സ് PDF ആയി ഡൗൺലോഡ് ചെയ്യാം.
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 21: CANCELLATIONS, RETURNS & REFUNDS (MEMBER 3) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-white p-8 md:p-12 flex flex-col justify-between" data-speaker="3" data-speaker-name="MEMBER 03" data-speaker-title="COO / Finance & Operations" data-speaker-sub="Cancellations & Refunds">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100 text-red-700 text-xs font-bold uppercase tracking-wider mb-2">
+            Reverse Logistics & Trust
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-navy">
+            ഓർഡർ റദ്ദാക്കലും റീഫണ്ടും (Cancellations & Refunds)
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base mt-1">
+            "കേടുപാടുകളുള്ളതോ തെറ്റായതോ ആയ സാധനങ്ങൾ ലഭിച്ചാൽ ഉപഭോക്താവിനെ എങ്ങനെ സംരക്ഷിക്കുന്നു?"
+          </p>
+        </div>
+
+        <!-- 4 Step Refund Lifecycle -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 my-auto">
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="w-8 h-8 rounded-full bg-blue-100 text-brand-600 flex items-center justify-center font-bold text-xs mb-2">1</span>
+            <h4 class="font-bold text-xs text-slate-900">Return Request</h4>
+            <p class="text-[11px] text-slate-600 mt-1">ആപ്പിൽ നിന്ന് 'Return Item' സെലക്ട് ചെയ്ത് ഫോട്ടോ സഹിതം കാരണം വ്യക്തമാക്കുന്നു.</p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="w-8 h-8 rounded-full bg-blue-100 text-brand-600 flex items-center justify-center font-bold text-xs mb-2">2</span>
+            <h4 class="font-bold text-xs text-slate-900">Doorstep Verification</h4>
+            <p class="text-[11px] text-slate-600 mt-1">ഡെലിവറി പാർട്ണർ വീട്ടിലെത്തി ഉൽപ്പന്നത്തിന്റെ ടാഗും അവസ്ഥയും നേരിട്ട് പരിശോധിക്കുന്നു.</p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="w-8 h-8 rounded-full bg-blue-100 text-brand-600 flex items-center justify-center font-bold text-xs mb-2">3</span>
+            <h4 class="font-bold text-xs text-slate-900">Pickup & Restock</h4>
+            <p class="text-[11px] text-slate-600 mt-1">സാധനം റിവേഴ്സ് ലോജിസ്റ്റിക്സ് വഴി സെല്ലറുടെ വെയർഹൗസിലേക്ക് തിരികെ എത്തിക്കുന്നു.</p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-300">
+            <span class="w-8 h-8 rounded-full bg-emerald-200 text-emerald-800 flex items-center justify-center font-bold text-xs mb-2">4</span>
+            <h4 class="font-bold text-xs text-emerald-900">Instant Refund</h4>
+            <p class="text-[11px] text-emerald-800 mt-1">പണം ഉപഭോക്താവിന്റെ ഒറിജിനൽ ബാങ്ക് അക്കൗണ്ടിലേക്കോ UPI-ലേക്കോ തിരികെ ക്രെഡിറ്റ് ചെയ്യുന്നു.</p>
+          </div>
+        </div>
+
+        <!-- Protection Policies -->
+        <div class="bg-blue-50 border border-blue-200 p-3.5 rounded-2xl flex items-center justify-between text-xs text-slate-700">
+          <div>
+            <strong>പ്രധാന നയങ്ങൾ:</strong> 7-Day Replacement • Wrong Item Protection • Damaged in Transit Insurance
+          </div>
+          <span class="text-brand-600 font-bold">100% Buyer Protection</span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 22: MEMBER 3 TO MEMBER 4 TRANSITION -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-gradient-to-br from-brand-navy via-slate-900 to-[#071329] p-8 md:p-14 flex flex-col justify-between text-white" data-speaker="3" data-speaker-name="MEMBER 03" data-speaker-title="COO / Finance & Operations" data-speaker-sub="Passing the Mic">
+        <div class="flex items-center justify-between">
+          <span class="px-3.5 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-bold border border-cyan-400/30">
+            Presenter Transition
+          </span>
+          <span class="text-xs font-mono text-slate-400">Time check: ~15:00</span>
+        </div>
+
+        <!-- Spoken Transition Quote -->
+        <div class="max-w-3xl mx-auto text-center space-y-6 my-auto">
+          <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-tr from-cyan-500 to-emerald-500 flex items-center justify-center shadow-xl shadow-emerald-500/30 text-2xl">
+            🛵
+          </div>
+          <h3 class="text-xl md:text-3xl font-bold leading-relaxed text-blue-100">
+            “Order process, payment, invoice എല്ലാം ready ആയി. ഇനി product customer-ന്റെ വീട്ടിൽ എത്തണം. അതിനായി delivery network എങ്ങനെ പ്രവർത്തിക്കുന്നു, delivery partners എങ്ങനെ earn ചെയ്യുന്നു, customer support എങ്ങനെ നടക്കുന്നു എന്ന് നമ്മുടെ <span class="text-emerald-400 font-extrabold underline decoration-emerald-300">Delivery & Customer Experience Head</span> വിശദീകരിക്കും.”
+          </h3>
+          <p class="text-xs text-slate-400">
+            Handing over the session to Member 4
+          </p>
+        </div>
+
+        <!-- Next Speaker Card -->
+        <div class="bg-white/10 backdrop-blur border border-white/10 rounded-2xl p-4 max-w-xl mx-auto w-full flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white font-black flex items-center justify-center">M4</div>
+            <div>
+              <div class="text-xs font-bold text-emerald-300 uppercase">Coming Up Next</div>
+              <div class="font-bold text-white text-sm">Logistics & Customer Experience Head</div>
+            </div>
+          </div>
+          <span class="text-xs font-semibold text-slate-300 bg-white/10 px-3 py-1 rounded-lg">Hub Delivery + Gig Economy + Support</span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 23: MEMBER 4 INTRO - LOGISTICS & CUSTOMER EXPERIENCE (MEMBER 4) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-gradient-to-br from-[#063326] via-slate-900 to-brand-navy p-8 md:p-14 flex flex-col justify-between text-white" data-speaker="4" data-speaker-name="MEMBER 04" data-speaker-title="Logistics & Customer Experience" data-speaker-sub="Delivery & Customer Experience">
+        <div class="flex items-center justify-between">
+          <span class="px-3.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-400/30">
+            Speaker 04 Introduction
+          </span>
+          <span class="text-xs font-mono text-emerald-200">Segment: 15:00 - 20:00</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center my-auto">
+          <div class="md:col-span-8 space-y-4">
+            <div class="text-emerald-400 font-extrabold text-sm uppercase tracking-wider">Presenting: Member 04</div>
+            <h2 class="text-4xl md:text-5xl font-black tracking-tight text-white">
+              Logistics & Customer Experience Head
+            </h2>
+            <p class="text-emerald-100 text-lg leading-relaxed">
+              "ഇ-കൊമേഴ്‌സിന്റെ യഥാർത്ഥ വിജയം നിർണ്ണയിക്കുന്നത് സ്ക്രീനിലെ ഭംഗിയല്ല, മറിച്ച് സാധനം കൃത്യസമയത്ത് സുരക്ഷിതമായി കസ്റ്റമറുടെ കയ്യിൽ എത്തുമ്പോഴുള്ള പുഞ്ചിരിയാണ്."
+            </p>
+            <div class="flex flex-wrap gap-3 pt-2">
+              <span class="px-3 py-1.5 rounded-xl bg-emerald-900/60 border border-emerald-500/30 text-xs font-medium">🗺️ Hub-and-Spoke Logistics</span>
+              <span class="px-3 py-1.5 rounded-xl bg-emerald-900/60 border border-emerald-500/30 text-xs font-medium">🛵 Gig Economy Rider App</span>
+              <span class="px-3 py-1.5 rounded-xl bg-emerald-900/60 border border-emerald-500/30 text-xs font-medium">🎧 24/7 Resolution Engine</span>
+            </div>
+          </div>
+
+          <div class="md:col-span-4 bg-white/5 border border-emerald-500/30 rounded-3xl p-6 text-center space-y-3 backdrop-blur">
+            <div class="w-20 h-20 mx-auto rounded-2xl bg-emerald-600 flex items-center justify-center text-3xl font-black text-white shadow-lg shadow-emerald-600/40">
+              M4
+            </div>
+            <h4 class="font-bold text-white text-lg">Last-Mile & Happiness</h4>
+            <p class="text-xs text-emerald-200">ലോജിസ്റ്റിക്സ് ശൃംഖലയും ഡെലിവറി പാർട്ണർമാരുടെ പ്രവർത്തനവും അവസാന 5 മിനിറ്റിൽ വിശദീകരിക്കുന്നു.</p>
+          </div>
+        </div>
+
+        <div class="text-xs text-emerald-300/80 border-t border-emerald-800/50 pt-3 flex justify-between">
+          <span>VEYRA Supply Chain Excellence</span>
+          <span>Slide 23 / 31</span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 24: DELIVERY & HUB NETWORK (MEMBER 4) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-brand-surface p-8 md:p-12 flex flex-col justify-between" data-speaker="4" data-speaker-name="MEMBER 04" data-speaker-title="Logistics & Customer Experience" data-speaker-sub="Delivery Hub Network">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-2">
+            Supply Chain Network
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-navy">
+            ലോജിസ്റ്റിക്സ് ശൃംഖല എങ്ങനെയാണ് പ്രവർത്തിക്കുന്നത്?
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base mt-1">
+            "ഹബ്ബ്-ആൻഡ്-സ്പോക്ക് (Hub-and-Spoke) മോഡലിലൂടെ സാധനങ്ങൾ അതിവേഗം എത്തിക്കുന്നു:"
+          </p>
+        </div>
+
+        <!-- Map Flowchart -->
+        <div class="my-auto py-2">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm text-center">
+              <div class="w-12 h-12 mx-auto rounded-xl bg-blue-50 text-brand-600 flex items-center justify-center text-xl mb-3">
+                🏭
+              </div>
+              <h4 class="font-bold text-sm text-slate-900">1. Seller / Warehouse</h4>
+              <p class="text-xs text-slate-500 mt-1">സെല്ലർ സാധനം പാക്ക് ചെയ്ത് ഷിപ്പ്മെന്റ് റെഡിയാക്കുന്നു.</p>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm text-center">
+              <div class="w-12 h-12 mx-auto rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl mb-3">
+                🏢
+              </div>
+              <h4 class="font-bold text-sm text-slate-900">2. Central Sorting Hub</h4>
+              <p class="text-xs text-slate-500 mt-1">സാധനങ്ങൾ പിൻകോഡ് അടിസ്ഥാനത്തിൽ ബാർകോഡ് സ്കാൻ ചെയ്തു തരംതിരിക്കുന്നു.</p>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm text-center">
+              <div class="w-12 h-12 mx-auto rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl mb-3">
+                🏪
+              </div>
+              <h4 class="font-bold text-sm text-slate-900">3. Local Delivery Hub</h4>
+              <p class="text-xs text-slate-500 mt-1">നിങ്ങളുടെ പ്രദേശത്തെ ലോക്കൽ ഡെലിവറി സെന്ററിലേക്ക് സാധനം എത്തുന്നു.</p>
+            </div>
+
+            <div class="bg-emerald-50 p-5 rounded-2xl border-2 border-emerald-500 shadow-sm text-center">
+              <div class="w-12 h-12 mx-auto rounded-xl bg-emerald-500 text-white flex items-center justify-center text-xl mb-3">
+                🏡
+              </div>
+              <h4 class="font-bold text-sm text-emerald-950">4. Last-Mile Delivery</h4>
+              <p class="text-xs text-emerald-800 mt-1">റൈഡർ സാധനം നേരിട്ട് കസ്റ്റമറുടെ വീട്ടിൽ എത്തിച്ച് OTP വഴി സ്ഥിരീകരിക്കുന്നു.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white p-3.5 rounded-2xl border border-slate-200 flex items-center justify-between text-xs text-slate-600">
+          <span>🚀 <strong>സാങ്കേതിക മികവ്:</strong> റൈഡർമാർക്ക് ഏറ്റവും എളുപ്പമുള്ള വഴി നിർദ്ദേശിക്കുന്ന AI Route Optimization.</span>
+          <span class="text-emerald-600 font-bold">Smart Logistics</span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 25: GIG ECONOMY & DELIVERY PARTNER APP (MEMBER 4) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-white p-8 md:p-12 flex flex-col justify-between" data-speaker="4" data-speaker-name="MEMBER 04" data-speaker-title="Logistics & Customer Experience" data-speaker-sub="Gig Economy & Rider App">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-brand-700 text-xs font-bold uppercase tracking-wider mb-2">
+            Workforce & Operations
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-navy">
+            ഗിഗ് ഇക്കോണമി മോഡൽ (Gig Economy Model)
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base mt-1">
+            "ഡെലിവറി പാർട്ണർമാർ സ്ഥിരം ശമ്പളക്കാരല്ല; അവർ ഓരോ ഡെലിവറി ടാസ്കിനും വരുമാനം നേടുന്ന സ്വതന്ത്ര പങ്കാളികളാണ്."
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center my-auto">
+          <!-- Left: Explanation -->
+          <div class="md:col-span-7 space-y-3">
+            <h4 class="font-bold text-sm text-slate-900">ഡെലിവറി പാർട്ണർമാർ എങ്ങനെ പ്രവർത്തിക്കുന്നു?</h4>
+            <div class="space-y-2 text-xs text-slate-600">
+              <div class="p-2.5 rounded-xl bg-slate-50 border">
+                <strong>ഫ്ലെക്സിബിൾ ജോലി സമയം:</strong> തങ്ങൾക്ക് സൗകര്യപ്രദമായ സമയത്ത് മാത്രം ആപ്പ് ഓൺ ചെയ്തു ലോഗിൻ ചെയ്യാം.
+              </div>
+              <div class="p-2.5 rounded-xl bg-slate-50 border">
+                <strong>ഓർഡർ അടിസ്ഥാനത്തിലുള്ള വരുമാനം:</strong> പൂർത്തിയാക്കുന്ന ഓരോ ഓർഡറിനും ദൂരത്തിനനുസരിച്ച് വേതനവും ഇൻസെന്റീവും.
+              </div>
+              <div class="p-2.5 rounded-xl bg-slate-50 border">
+                <strong>സുതാര്യമായ പേഔട്ടുകൾ:</strong> ദിവസേനയോ ആഴ്ചയിലോ നേരിട്ട് ബാങ്ക് അക്കൗണ്ടിലേക്ക് പണം ലഭിക്കുന്നു.
+              </div>
+            </div>
+            <p class="text-[11px] text-slate-400">
+              *ശ്രദ്ധിക്കുക: ഇൻഷുറൻസ്, ആക്സിഡന്റ് കവർ, സുരക്ഷാ ഉപകരണങ്ങൾ എന്നിവ നൽകേണ്ടത് പ്ലാറ്റ്‌ഫോമിന്റെ ഉത്തരവാദിത്തമാണ്.
+            </p>
+          </div>
+
+          <!-- Right: Rider App Mobile Mockup -->
+          <div class="md:col-span-5 bg-slate-950 text-white rounded-3xl p-5 border-4 border-slate-800 shadow-2xl max-w-xs mx-auto w-full">
+            <div class="flex justify-between items-center text-[10px] text-slate-400 border-b border-slate-800 pb-2 mb-3">
+              <span>VEYRA Partner App</span>
+              <span class="text-emerald-400 font-bold">🟢 Online</span>
+            </div>
+
+            <div class="space-y-3">
+              <div class="bg-slate-900 p-3 rounded-2xl border border-slate-800">
+                <div class="flex justify-between items-center text-xs">
+                  <span class="text-slate-400">New Order Alert</span>
+                  <span class="text-emerald-400 font-bold">Earn ₹65</span>
+                </div>
+                <div class="text-sm font-bold text-white mt-1">Apex Gadgets ➔ Panampilly Nagar</div>
+                <div class="text-[10px] text-slate-400 mt-0.5">Distance: 3.2 km • Time: 18 mins</div>
+              </div>
+
+              <div class="flex gap-2 text-xs font-bold">
+                <button class="flex-1 py-2 rounded-xl bg-slate-800 text-slate-300">Reject</button>
+                <button class="flex-1 py-2 rounded-xl bg-emerald-600 text-white shadow-md shadow-emerald-600/30">Accept (15s)</button>
+              </div>
+
+              <div class="text-[10px] text-center text-slate-500 pt-1">
+                ഇന്നത്തെ ആകെ വരുമാനം: <span class="text-white font-bold">₹840 (12 Orders)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-xs text-slate-500 text-center">
+          ഡെലിവറി പാർട്ണർമാർക്ക് അന്തസ്സും സുരക്ഷിതത്വവും ന്യായമായ വരുമാനവും ഉറപ്പുവരുത്തുന്നു.
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 26: CUSTOMER SUPPORT & RESOLUTION (MEMBER 4) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-brand-surface p-8 md:p-12 flex flex-col justify-between" data-speaker="4" data-speaker-name="MEMBER 04" data-speaker-title="Logistics & Customer Experience" data-speaker-sub="Customer Support">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 text-purple-800 text-xs font-bold uppercase tracking-wider mb-2">
+            Support & Resolution
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-navy">
+            ഉപഭോക്തൃ സേവനവും പരിഹാരങ്ങളും (Customer Support)
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base mt-1">
+            "ഓർഡറിന് ശേഷവും ഒരു ഉപഭോക്താവ് ഒറ്റയ്ക്കല്ല — പരാതികൾ പരിഹരിക്കാനുള്ള സംവിധാനം:"
+          </p>
+        </div>
+
+        <!-- Issue to Resolution Flow -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 my-auto">
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <span class="text-2xl block mb-2">❓</span>
+            <h4 class="font-bold text-xs text-slate-900">1. Problem Occurs</h4>
+            <p class="text-[11px] text-slate-500 mt-1">ഡെലിവറി വൈകൽ, പൊട്ടിയ സാധനം, അല്ലെങ്കിൽ തെറ്റായ ഉൽപ്പന്നം ലഭിക്കൽ.</p>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <span class="text-2xl block mb-2">💬</span>
+            <h4 class="font-bold text-xs text-slate-900">2. Help Centre & Bot</h4>
+            <p class="text-[11px] text-slate-500 mt-1">ആപ്പിലെ 24/7 AI ചാറ്റ് വഴി 80% സാധാരണ സംശയങ്ങൾക്കും തൽക്ഷണ മറുപടി.</p>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <span class="text-2xl block mb-2">🎫</span>
+            <h4 class="font-bold text-xs text-slate-900">3. Live Ticket Created</h4>
+            <p class="text-[11px] text-slate-500 mt-1">സങ്കീർണ്ണമായ പ്രശ്നങ്ങൾക്ക് സപ്പോർട്ട് ഏജന്റ് നേരിട്ട് അന്വേഷണം ആരംഭിക്കുന്നു.</p>
+          </div>
+
+          <div class="bg-white p-5 rounded-2xl border border-emerald-300 bg-emerald-50/40 shadow-sm">
+            <span class="text-2xl block mb-2">🤝</span>
+            <h4 class="font-bold text-xs text-emerald-950">4. Fast Resolution</h4>
+            <p class="text-[11px] text-emerald-800 mt-1">റീപ്ലേസ്‌മെന്റ് അല്ലെങ്കിൽ 24 മണിക്കൂറിനകം ബാങ്കിലേക്ക് പൂർണ്ണ റീഫണ്ട് നൽകുന്നു.</p>
+          </div>
+        </div>
+
+        <!-- Customer Trust Metrix -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 flex items-center justify-between text-xs text-slate-600">
+          <div>
+            <strong>പ്രതികരണ സമയം (SLA):</strong> ചാറ്റ് ബോട്ട് &lt; 1 മിനിറ്റ് • ഹ്യൂമൻ സപ്പോർട്ട് &lt; 10 മിനിറ്റ്
+          </div>
+          <span class="text-brand-600 font-bold bg-brand-50 px-3 py-1 rounded-lg">High CSAT Score</span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 27: REVIEWS & RATINGS SOCIAL PROOF (MEMBER 4) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-white p-8 md:p-12 flex flex-col justify-between" data-speaker="4" data-speaker-name="MEMBER 04" data-speaker-title="Logistics & Customer Experience" data-speaker-sub="Reviews & Ratings">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold uppercase tracking-wider mb-2">
+            Social Proof & Quality Loop
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-navy">
+            റിവ്യൂകളും റേറ്റിംഗുകളും (Reviews & Feedback)
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base mt-1">
+            "ഒരു വെർച്വൽ മാർക്കറ്റിന്റെ നിലവാരം ഉയർത്തുന്നത് ഉപഭോക്താക്കളുടെ സത്യസന്ധമായ അഭിപ്രായങ്ങളാണ്."
+          </p>
+        </div>
+
+        <!-- 3 Pillars of Reviews -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 my-auto">
+          <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 text-center">
+            <div class="w-12 h-12 mx-auto rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl mb-3">
+              ⭐
+            </div>
+            <h4 class="font-bold text-sm text-slate-900">ഉപഭോക്താക്കൾക്ക്</h4>
+            <p class="text-xs text-slate-600 mt-2">
+              മറ്റുള്ളവരുടെ അനുഭവങ്ങൾ വായിച്ചു ഏറ്റവും മികച്ച ഗുണനിലവാരമുള്ള സാധനങ്ങൾ ധൈര്യമായി തിരഞ്ഞെടുക്കാം.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 text-center">
+            <div class="w-12 h-12 mx-auto rounded-xl bg-blue-100 text-brand-600 flex items-center justify-center text-2xl mb-3">
+              📈
+            </div>
+            <h4 class="font-bold text-sm text-slate-900">നല്ല വ്യാപാരികൾക്ക്</h4>
+            <p class="text-xs text-slate-600 mt-2">
+              നല്ല ഉൽപ്പന്നങ്ങൾ വിൽക്കുന്ന വ്യാപാരികൾക്ക് കൂടുതൽ റേറ്റിംഗും അതുവഴി ഓർഡറുകളുടെ എണ്ണത്തിൽ വലിയ വർദ്ധനവും ലഭിക്കുന്നു.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 text-center">
+            <div class="w-12 h-12 mx-auto rounded-xl bg-red-100 text-red-600 flex items-center justify-center text-2xl mb-3">
+              🚫
+            </div>
+            <h4 class="font-bold text-sm text-slate-900">മോശം ഉൽപ്പന്നങ്ങളെ തടയാൻ</h4>
+            <p class="text-xs text-slate-600 mt-2">
+              തുടർച്ചയായി മോശം റേറ്റിംഗ് ലഭിക്കുന്ന ഉൽപ്പന്നങ്ങളെയും വ്യാപാരികളെയും പ്ലാറ്റ്‌ഫോമിൽ നിന്ന് സിസ്റ്റം സ്വയം നീക്കം ചെയ്യുന്നു.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-center text-xs text-amber-900 font-medium">
+          "റേറ്റിംഗുകൾ വെറുമൊരു അക്കമല്ല; അത് പ്ലാറ്റ്‌ഫോമിന്റെ ഗുണനിലവാര നിയന്ത്രണ കവചമാണ് (Quality Gate)."
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 28: THE COMPLETE VEYRA MASTER JOURNEY (ALL MEMBERS) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-slate-950 p-6 md:p-10 flex flex-col justify-between text-white" data-speaker="all" data-speaker-name="FOUNDING TEAM" data-speaker-title="All 4 Presenters Together" data-speaker-sub="The Master Flowchart">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="px-3 py-0.5 rounded-full bg-brand-500/20 text-blue-300 text-xs font-bold uppercase tracking-wider border border-brand-400/30">
+              The Grand Unified Lifecycle
+            </span>
+            <h2 class="text-2xl md:text-3xl font-black text-white mt-1">
+              The Complete VEYRA Journey (മാസ്റ്റർ ഫ്ലോചാർട്ട്)
+            </h2>
+          </div>
+          <span class="text-xs font-mono text-emerald-400 font-bold bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-500/40">
+            End-to-End Synergy
+          </span>
+        </div>
+
+        <!-- Master Interactive Grid Flowchart -->
+        <div class="my-auto py-2">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 text-center text-xs">
+            <!-- Phase 1 -->
+            <div class="bg-slate-900 border border-blue-500/40 p-3 rounded-xl">
+              <span class="text-blue-400 font-bold text-[10px] uppercase block">Member 1: Strategy</span>
+              <div class="text-white font-bold text-xs mt-1">1. Business Idea</div>
+              <div class="text-slate-400 text-[10px] mt-0.5">Pvt Ltd & DPIIT Setup</div>
+            </div>
+
+            <div class="bg-slate-900 border border-blue-500/40 p-3 rounded-xl">
+              <span class="text-blue-400 font-bold text-[10px] uppercase block">Member 1: Onboarding</span>
+              <div class="text-white font-bold text-xs mt-1">2. Sellers Enrolled</div>
+              <div class="text-slate-400 text-[10px] mt-0.5">Product Catalogues Ready</div>
+            </div>
+
+            <!-- Phase 2 -->
+            <div class="bg-slate-900 border border-indigo-500/40 p-3 rounded-xl">
+              <span class="text-indigo-400 font-bold text-[10px] uppercase block">Member 2: Platform</span>
+              <div class="text-white font-bold text-xs mt-1">3. App & Cloud Live</div>
+              <div class="text-slate-400 text-[10px] mt-0.5">DPDP Privacy Protected</div>
+            </div>
+
+            <div class="bg-slate-900 border border-indigo-500/40 p-3 rounded-xl">
+              <span class="text-indigo-400 font-bold text-[10px] uppercase block">Member 2: Ads</span>
+              <div class="text-white font-bold text-xs mt-1">4. Targeted Campaign</div>
+              <div class="text-slate-400 text-[10px] mt-0.5">Optimized CPC & CAC</div>
+            </div>
+
+            <!-- Phase 3 -->
+            <div class="bg-slate-900 border border-cyan-500/40 p-3 rounded-xl">
+              <span class="text-cyan-400 font-bold text-[10px] uppercase block">Member 3: Orders</span>
+              <div class="text-white font-bold text-xs mt-1">5. Customer Order</div>
+              <div class="text-slate-400 text-[10px] mt-0.5">UPI Payment Gateway</div>
+            </div>
+
+            <div class="bg-slate-900 border border-cyan-500/40 p-3 rounded-xl">
+              <span class="text-cyan-400 font-bold text-[10px] uppercase block">Member 3: Taxes</span>
+              <div class="text-white font-bold text-xs mt-1">6. GST Tax Invoice</div>
+              <div class="text-slate-400 text-[10px] mt-0.5">Escrow & Seller Settlement</div>
+            </div>
+
+            <!-- Phase 4 -->
+            <div class="bg-slate-900 border border-emerald-500/40 p-3 rounded-xl">
+              <span class="text-emerald-400 font-bold text-[10px] uppercase block">Member 4: Logistics</span>
+              <div class="text-white font-bold text-xs mt-1">7. Hub & Gig Delivery</div>
+              <div class="text-slate-400 text-[10px] mt-0.5">Doorstep OTP Handover</div>
+            </div>
+
+            <div class="bg-slate-900 border border-emerald-500/40 p-3 rounded-xl">
+              <span class="text-emerald-400 font-bold text-[10px] uppercase block">Member 4: Loyalty</span>
+              <div class="text-white font-bold text-xs mt-1">8. 5-Star Review</div>
+              <div class="text-slate-400 text-[10px] mt-0.5">Repeat Customer Growth</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-blue-950/60 border border-blue-500/30 p-3 rounded-xl text-center text-xs text-blue-200">
+          ഈ 8 ഘട്ടങ്ങളും കൃത്യതയോടെ ഒന്നിച്ചു പ്രവർത്തിക്കുമ്പോൾ മാത്രമേ ഒരു വിർച്വൽ മാർക്കറ്റ് പ്ലേസ് വിജയകരമാകുന്നത്!
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 29: THE CIRCULAR BUSINESS ECOSYSTEM (ALL MEMBERS) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-white p-8 md:p-12 flex flex-col justify-between" data-speaker="all" data-speaker-name="FOUNDING TEAM" data-speaker-title="All 4 Presenters Together" data-speaker-sub="The Flywheel Ecosystem">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-brand-700 text-xs font-bold uppercase tracking-wider mb-2">
+            The Virtuous Flywheel
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-navy">
+            ഒരു ഇ-കൊമേഴ്‌സ് വെറുമൊരു വെബ്‌സൈറ്റല്ല; അതൊരു ഇക്കോസിസ്റ്റമാണ്!
+          </h2>
+          <p class="text-slate-600 text-sm md:text-base mt-1">
+            "പ്ലാറ്റ്‌ഫോമിലെ ഓരോ ഘടകവും പരസ്പരം വളർത്തുന്ന ചാക്രിക മാതൃക (Circular Flywheel):"
+          </p>
+        </div>
+
+        <!-- Ecosystem Circle / Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-auto items-center">
+          <div class="space-y-3">
+            <div class="p-4 rounded-2xl bg-blue-50 border border-blue-200">
+              <h4 class="font-bold text-xs text-brand-navy">കൂടുതൽ ഉപഭോക്താക്കൾ (Customers)</h4>
+              <p class="text-[11px] text-slate-600 mt-1">നല്ല സർവീസും ന്യായവിലയും കൂടുതൽ കസ്റ്റമേഴ്സിനെ ആകർഷിക്കുന്നു.</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-indigo-50 border border-indigo-200">
+              <h4 class="font-bold text-xs text-indigo-900">കൂടുതൽ ഓർഡറുകൾ (Orders)</h4>
+              <p class="text-[11px] text-slate-600 mt-1">കസ്റ്റമർ കൂടുന്നതോടെ പ്ലാറ്റ്‌ഫോമിൽ ഓർഡറുകൾ കുതിച്ചുയരുന്നു.</p>
+            </div>
+          </div>
+
+          <!-- Central Hub Badge -->
+          <div class="text-center p-6 rounded-3xl bg-gradient-to-b from-brand-navy to-slate-900 text-white shadow-xl shadow-brand-500/20">
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-brand-500 flex items-center justify-center text-3xl font-black mb-3 shadow-lg">
+              V
+            </div>
+            <h3 class="text-lg font-black tracking-wide">VEYRA FLYWHEEL</h3>
+            <p class="text-xs text-blue-200 mt-1">വരുമാനം സാങ്കേതികവിദ്യയിലേക്കും കസ്റ്റമർ എക്സ്പീരിയൻസിലേക്കും പുനർനിക്ഷേപിക്കുന്നു.</p>
+            <span class="inline-block mt-3 px-3 py-1 rounded-full bg-white/10 text-[10px] text-emerald-300 font-mono">Self-Sustaining Growth</span>
+          </div>
+
+          <div class="space-y-3">
+            <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200">
+              <h4 class="font-bold text-xs text-emerald-950">കൂടുതൽ വ്യാപാരികൾ (Sellers)</h4>
+              <p class="text-[11px] text-slate-600 mt-1">ഓർഡറുകൾ കണ്ട് മികച്ച വ്യാപാരികൾ പ്ലാറ്റ്‌ഫോമിലേക്ക് സ്വയം കടന്നുവരുന്നു.</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200">
+              <h4 class="font-bold text-xs text-amber-950">വേഗത്തിലുള്ള ഡെലിവറി (Delivery)</h4>
+              <p class="text-[11px] text-slate-600 mt-1">കൂടുതൽ ഓർഡറുകൾ റൈഡർമാർക്ക് സ്ഥിരമായ വരുമാനവും വേഗത്തിലുള്ള സർവീസും നൽകുന്നു.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-xs text-slate-500 text-center font-medium">
+          ഇതാണ് ആമസോണും ഫ്ലിപ്കാർട്ടുമെല്ലാം ലോകത്തെ ഏറ്റവും വലിയ കമ്പനികളായി വളർന്നതിന്റെ ബിസിനസ്സ് രഹസ്യം!
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 30: FINAL CONCLUSION & THE 8 PILLARS (ALL MEMBERS) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-gradient-to-br from-brand-navy via-slate-900 to-[#050C1A] p-8 md:p-14 flex flex-col justify-between text-white" data-speaker="all" data-speaker-name="FOUNDING TEAM" data-speaker-title="All 4 Presenters Together" data-speaker-sub="The Final Formula">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center font-bold text-sm">V</div>
+            <span class="font-bold text-sm tracking-wider">VEYRA</span>
+          </div>
+          <span class="text-xs font-mono text-emerald-400 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-500/30">
+            20-Minute Seminar Conclusion
+          </span>
+        </div>
+
+        <div class="max-w-4xl mx-auto text-center space-y-6 my-auto">
+          <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white">
+            “A Virtual Market is more than an online shop.”
+          </h2>
+          <p class="text-blue-200 text-base md:text-lg">
+            ഇതൊരു കേവല വെബ്‌സൈറ്റല്ല; എട്ട് വ്യത്യസ്ത ശാഖകളുടെ അപൂർവ്വ കൂട്ടായ്മയാണ്:
+          </p>
+
+          <!-- 8 Formula Badges -->
+          <div class="flex flex-wrap items-center justify-center gap-2.5 text-xs md:text-sm font-bold pt-2">
+            <span class="px-3.5 py-1.5 rounded-xl bg-blue-500/20 text-blue-300 border border-blue-400/30">Business Strategy</span>
+            <span class="text-slate-500">+</span>
+            <span class="px-3.5 py-1.5 rounded-xl bg-blue-500/20 text-blue-300 border border-blue-400/30">Technology Architecture</span>
+            <span class="text-slate-500">+</span>
+            <span class="px-3.5 py-1.5 rounded-xl bg-blue-500/20 text-blue-300 border border-blue-400/30">Digital Marketing</span>
+            <span class="text-slate-500">+</span>
+            <span class="px-3.5 py-1.5 rounded-xl bg-blue-500/20 text-blue-300 border border-blue-400/30">Payments</span>
+            <span class="text-slate-500">+</span>
+            <span class="px-3.5 py-1.5 rounded-xl bg-blue-500/20 text-blue-300 border border-blue-400/30">GST & Taxation</span>
+            <span class="text-slate-500">+</span>
+            <span class="px-3.5 py-1.5 rounded-xl bg-blue-500/20 text-blue-300 border border-blue-400/30">Logistics & Hubs</span>
+            <span class="text-slate-500">+</span>
+            <span class="px-3.5 py-1.5 rounded-xl bg-blue-500/20 text-blue-300 border border-blue-400/30">Data Protection</span>
+            <span class="text-slate-500">+</span>
+            <span class="px-3.5 py-1.5 rounded-xl bg-blue-500/20 text-blue-300 border border-blue-400/30">Customer Experience</span>
+          </div>
+
+          <div class="pt-4">
+            <div class="text-4xl md:text-6xl font-black text-brand-500 tracking-wider">
+              = VEYRA
+            </div>
+            <p class="text-blue-200 font-semibold tracking-widest text-sm uppercase mt-1">
+              Everything. One Place.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between border-t border-slate-800 pt-4 text-xs text-slate-400">
+          <span>Thank You for Listening!</span>
+          <button onclick="goToSlide(30)" class="px-4 py-2 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center gap-2">
+            <span>Proceed to Audience Q&A</span>
+            <span>➔</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 31: INTERACTIVE AUDIENCE Q&A (10 ESSENTIAL QUESTIONS) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-brand-surface p-6 md:p-10 flex flex-col justify-between overflow-y-auto" data-speaker="all" data-speaker-name="ALL PRESENTERS" data-speaker-title="Interactive Q&A Session" data-speaker-sub="10 Seminar Questions">
+        <div>
+          <div class="flex items-center justify-between">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-brand-700 text-xs font-bold uppercase tracking-wider mb-1">
+              Audience Interaction
+            </div>
+            <span class="text-xs text-slate-500">Click any question to toggle the answer</span>
+          </div>
+          <h2 class="text-2xl md:text-3xl font-black text-brand-navy">
+            ചോദ്യോത്തരങ്ങൾ (Frequently Asked Questions)
+          </h2>
+        </div>
+
+        <!-- 10 Interactive Q&A Accordion Items -->
+        <div class="my-3 space-y-2 max-w-5xl mx-auto w-full pr-1">
+          
+          <!-- Q1 -->
+          <div class="bg-white rounded-xl border border-slate-200 overflow-hidden transition shadow-xs">
+            <button onclick="toggleFaq(this)" class="w-full text-left p-3 flex justify-between items-center hover:bg-slate-50 font-bold text-xs text-slate-800">
+              <span>1. What is the difference between a Virtual Market and a normal online shop?</span>
+              <span class="faq-icon text-brand-500 font-mono text-sm">+</span>
+            </button>
+            <div class="faq-answer hidden px-3 pb-3 text-xs text-slate-600 border-t border-slate-100 pt-2 bg-slate-50/50">
+              ഒരു നോർമൽ ഓൺലൈൻ ഷോപ്പ് ഒരൊറ്റ കമ്പനിയുടെ സാധനങ്ങൾ മാത്രമേ വിൽക്കൂ (ഉദാഹരണത്തിന് Nike വെബ്‌സൈറ്റ്). എന്നാൽ ഒരു <strong>Virtual Market</strong> എന്നത് പല വ്യാപാരികൾക്ക് തങ്ങളുടെ വിവിധ ഉൽപ്പന്നങ്ങൾ ഒന്നിച്ചു വിൽക്കാൻ സാധിക്കുന്ന ഒരു പൊതു പ്ലാറ്റ്‌ഫോം ആണ് (Marketplace).
+            </div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="bg-white rounded-xl border border-slate-200 overflow-hidden transition shadow-xs">
+            <button onclick="toggleFaq(this)" class="w-full text-left p-3 flex justify-between items-center hover:bg-slate-50 font-bold text-xs text-slate-800">
+              <span>2. How does VEYRA earn money?</span>
+              <span class="faq-icon text-brand-500 font-mono text-sm">+</span>
+            </button>
+            <div class="faq-answer hidden px-3 pb-3 text-xs text-slate-600 border-t border-slate-100 pt-2 bg-slate-50/50">
+              ഓരോ സെല്ലർ വിൽപനയിൽ നിന്നുമുള്ള കമ്മീഷൻ, ഡെലിവറി ഫീസ്, സെല്ലർമാർ തങ്ങളുടെ ഉൽപ്പന്നം പരസ്യം ചെയ്യാൻ നൽകുന്ന ആഡ്സ് ഫീസ്, കൂടാതെ VEYRA Plus പോലുള്ള ഉപഭോക്തൃ സബ്‌സ്‌ക്രിപ്ഷനുകൾ എന്നിവ വഴിയാണ് വരുമാനം നേടുന്നത്.
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="bg-white rounded-xl border border-slate-200 overflow-hidden transition shadow-xs">
+            <button onclick="toggleFaq(this)" class="w-full text-left p-3 flex justify-between items-center hover:bg-slate-50 font-bold text-xs text-slate-800">
+              <span>3. Does VEYRA need to own all the products?</span>
+              <span class="faq-icon text-brand-500 font-mono text-sm">+</span>
+            </button>
+            <div class="faq-answer hidden px-3 pb-3 text-xs text-slate-600 border-t border-slate-100 pt-2 bg-slate-50/50">
+              ഇല്ല. ഒരു പ്യുവർ മാർക്കറ്റ് പ്ലേസിൽ ഉൽപ്പന്നങ്ങൾ സ്വന്തമായി വാങ്ങിവെക്കേണ്ടതില്ല. വിവിധ ഇൻഡിപെൻഡന്റ് വ്യാപാരികളാണ് സാധനങ്ങളുടെ ഉടമസ്ഥർ. പ്ലാറ്റ്‌ഫോം അവരെ കസ്റ്റമറുമായി ബന്ധിപ്പിക്കുക മാത്രമാണ് ചെയ്യുന്നത്.
+            </div>
+          </div>
+
+          <!-- Q4 -->
+          <div class="bg-white rounded-xl border border-slate-200 overflow-hidden transition shadow-xs">
+            <button onclick="toggleFaq(this)" class="w-full text-left p-3 flex justify-between items-center hover:bg-slate-50 font-bold text-xs text-slate-800">
+              <span>4. What is a Payment Gateway?</span>
+              <span class="faq-icon text-brand-500 font-mono text-sm">+</span>
+            </button>
+            <div class="faq-answer hidden px-3 pb-3 text-xs text-slate-600 border-t border-slate-100 pt-2 bg-slate-50/50">
+              കസ്റ്റമറുടെ ബാങ്ക് അക്കൗണ്ടിൽ നിന്ന് പ്ലാറ്റ്‌ഫോമിലേക്ക് സുരക്ഷിതമായി പണം കൈമാറാൻ സഹായിക്കുന്ന എൻക്രിപ്റ്റഡ് ഇടനില സാങ്കേതികവിദ്യയാണ് പേയ്‌മെന്റ് ഗേറ്റ്‌വേ (ഉദാഹരണത്തിന് Razorpay, Cashfree, PayU).
+            </div>
+          </div>
+
+          <!-- Q5 -->
+          <div class="bg-white rounded-xl border border-slate-200 overflow-hidden transition shadow-xs">
+            <button onclick="toggleFaq(this)" class="w-full text-left p-3 flex justify-between items-center hover:bg-slate-50 font-bold text-xs text-slate-800">
+              <span>5. What is the difference between CPC and CAC?</span>
+              <span class="faq-icon text-brand-500 font-mono text-sm">+</span>
+            </button>
+            <div class="faq-answer hidden px-3 pb-3 text-xs text-slate-600 border-t border-slate-100 pt-2 bg-slate-50/50">
+              <strong>CPC (Cost Per Click):</strong> പരസ്യത്തിൽ ഒരാൾ ക്ലിക്ക് ചെയ്യാൻ ചെലവായ തുക.<br>
+              <strong>CAC (Customer Acquisition Cost):</strong> യഥാർത്ഥത്തിൽ ഓർഡർ ചെയ്ത ഒരു പുതിയ ഉപഭോക്താവിനെ ലഭിക്കാൻ ചിലവായ ആകെ ശരാശരി തുക.
+            </div>
+          </div>
+
+          <!-- Q6 -->
+          <div class="bg-white rounded-xl border border-slate-200 overflow-hidden transition shadow-xs">
+            <button onclick="toggleFaq(this)" class="w-full text-left p-3 flex justify-between items-center hover:bg-slate-50 font-bold text-xs text-slate-800">
+              <span>6. What is GST?</span>
+              <span class="faq-icon text-brand-500 font-mono text-sm">+</span>
+            </button>
+            <div class="faq-answer hidden px-3 pb-3 text-xs text-slate-600 border-t border-slate-100 pt-2 bg-slate-50/50">
+              ഇന്ത്യയിൽ നിലവിലുള്ള ഏകീകൃത പരോക്ഷ നികുതിയാണ് GST (Goods and Services Tax). പഴയ പലതരം നികുതികൾക്ക് (VAT, Service Tax, Excise) പകരമായി കൊണ്ടുവന്ന ഒറ്റ നികുതി സംവിധാനമാണിത്.
+            </div>
+          </div>
+
+          <!-- Q7 -->
+          <div class="bg-white rounded-xl border border-slate-200 overflow-hidden transition shadow-xs">
+            <button onclick="toggleFaq(this)" class="w-full text-left p-3 flex justify-between items-center hover:bg-slate-50 font-bold text-xs text-slate-800">
+              <span>7. What is the difference between CGST, SGST, and IGST?</span>
+              <span class="faq-icon text-brand-500 font-mono text-sm">+</span>
+            </button>
+            <div class="faq-answer hidden px-3 pb-3 text-xs text-slate-600 border-t border-slate-100 pt-2 bg-slate-50/50">
+              ഒരേ സംസ്ഥാനത്തിനുള്ളിൽ വിൽക്കുമ്പോൾ നികുതി തുല്യമായി കേന്ദ്രത്തിനും (CGST) സംസ്ഥാനത്തിനും (SGST) വീതിക്കുന്നു. എന്നാൽ മറ്റ് സംസ്ഥാനങ്ങളിൽ നിന്നാണ് സാധനം വരുന്നതെങ്കിൽ ഒറ്റത്തവണയായി IGST ഈടാക്കുന്നു.
+            </div>
+          </div>
+
+          <!-- Q8 -->
+          <div class="bg-white rounded-xl border border-slate-200 overflow-hidden transition shadow-xs">
+            <button onclick="toggleFaq(this)" class="w-full text-left p-3 flex justify-between items-center hover:bg-slate-50 font-bold text-xs text-slate-800">
+              <span>8. What happens if a customer receives a damaged product?</span>
+              <span class="faq-icon text-brand-500 font-mono text-sm">+</span>
+            </button>
+            <div class="faq-answer hidden px-3 pb-3 text-xs text-slate-600 border-t border-slate-100 pt-2 bg-slate-50/50">
+              കസ്റ്റമർക്ക് ആപ്പിൽ നിന്ന് റിട്ടേൺ റിക്വസ്റ്റ് നൽകാം. ഡെലിവറി പാർട്ണർ സാധനം നേരിട്ടെത്തി പരിശോധിച്ചു തിരികെ എടുക്കുകയും, ഉപഭോക്താവിന് പുതിയ സാധനമോ അല്ലെങ്കിൽ പൂർണ്ണ റീഫണ്ടോ നൽകുകയും ചെയ്യുന്നു.
+            </div>
+          </div>
+
+          <!-- Q9 -->
+          <div class="bg-white rounded-xl border border-slate-200 overflow-hidden transition shadow-xs">
+            <button onclick="toggleFaq(this)" class="w-full text-left p-3 flex justify-between items-center hover:bg-slate-50 font-bold text-xs text-slate-800">
+              <span>9. How does a delivery partner earn?</span>
+              <span class="faq-icon text-brand-500 font-mono text-sm">+</span>
+            </button>
+            <div class="faq-answer hidden px-3 pb-3 text-xs text-slate-600 border-t border-slate-100 pt-2 bg-slate-50/50">
+              ഗിഗ് ഇക്കോണമി മോഡലിൽ ഓരോ ഡെലിവറിക്കും അടിസ്ഥാന നിരക്ക്, സഞ്ചരിച്ച ദൂരം (Per km rate), കൂടാതെ മഴ/തിരക്കുള്ള സമയങ്ങളിലെ സർജ്ജ് ഇൻസെന്റീവുകൾ എന്നിവ വഴിയാണ് റൈഡർ സമ്പാദിക്കുന്നത്.
+            </div>
+          </div>
+
+          <!-- Q10 -->
+          <div class="bg-white rounded-xl border border-slate-200 overflow-hidden transition shadow-xs">
+            <button onclick="toggleFaq(this)" class="w-full text-left p-3 flex justify-between items-center hover:bg-slate-50 font-bold text-xs text-slate-800">
+              <span>10. How does VEYRA protect customer data?</span>
+              <span class="faq-icon text-brand-500 font-mono text-sm">+</span>
+            </button>
+            <div class="faq-answer hidden px-3 pb-3 text-xs text-slate-600 border-t border-slate-100 pt-2 bg-slate-50/50">
+              ഇന്ത്യയിലെ DPDP Act 2023 മാനദണ്ഡങ്ങൾ പാലിച്ച് എൻക്രിപ്ഷൻ, റോൾ-ബേസ്ഡ് ആക്സസ്, കാർഡ് ടോക്കണൈസേഷൻ എന്നിവ വഴിയാണ് വിവരങ്ങൾ സൂക്ഷിക്കുന്നത്. ഉപഭോക്താവിന്റെ സമ്മതമില്ലാതെ ഡാറ്റ മൂന്നാം കക്ഷിക്ക് വിൽക്കില്ല.
+            </div>
+          </div>
+
+        </div>
+
+        <div class="flex items-center justify-between pt-2 border-t text-xs text-slate-500">
+          <span>VEYRA Educational Marketplace Seminar Complete</span>
+          <button onclick="goToSlide(0)" class="text-brand-600 hover:underline font-bold">
+            ↺ Restart Presentation
+          </button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="h-16 px-4 md:px-8 bg-[#0B1F44] border-t border-blue-900/60 flex items-center justify-between text-white z-50 shrink-0">
+    <!-- Left: Slide Counter -->
+    <div class="flex items-center space-x-3">
+      <div class="text-xs font-mono font-bold text-blue-200">
+        <span id="currentSlideNum" class="text-lg text-white font-black">01</span>
+        <span class="text-blue-400">/</span>
+        <span id="totalSlidesNum">31</span>
+      </div>
+      <div class="w-24 md:w-36 bg-slate-800 h-1.5 rounded-full overflow-hidden">
+        <div id="slideProgressBar" class="h-full bg-brand-500 transition-all duration-300" style="width: 3.2%;"></div>
+      </div>
+    </div>
+
+    <!-- Center: Quick Segment Section Jump Buttons -->
+    <div class="hidden lg:flex items-center space-x-1.5 bg-slate-900/80 p-1 rounded-xl border border-blue-900/50 text-xs">
+      <button onclick="goToSlide(0)" class="px-2.5 py-1 rounded-lg hover:bg-brand-500 hover:text-white text-slate-300 transition">Start</button>
+      <button onclick="goToSlide(1)" class="px-2.5 py-1 rounded-lg hover:bg-brand-500 hover:text-white text-slate-300 transition">M1: Strategy</button>
+      <button onclick="goToSlide(7)" class="px-2.5 py-1 rounded-lg hover:bg-brand-500 hover:text-white text-slate-300 transition">M2: Tech & Ads</button>
+      <button onclick="goToSlide(15)" class="px-2.5 py-1 rounded-lg hover:bg-brand-500 hover:text-white text-slate-300 transition">M3: Orders & Tax</button>
+      <button onclick="goToSlide(22)" class="px-2.5 py-1 rounded-lg hover:bg-brand-500 hover:text-white text-slate-300 transition">M4: Logistics</button>
+      <button onclick="goToSlide(27)" class="px-2.5 py-1 rounded-lg hover:bg-brand-500 hover:text-white text-slate-300 transition">Journey</button>
+      <button onclick="goToSlide(30)" class="px-2.5 py-1 rounded-lg hover:bg-brand-500 hover:text-white text-slate-300 transition">Q&A</button>
+    </div>
+
+    <!-- Right: Next / Previous Interactive Buttons -->
+    <div class="flex items-center space-x-2">
+      <button id="prevBtn" onclick="prevSlide()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 disabled:opacity-30 disabled:pointer-events-none text-xs font-bold transition flex items-center gap-1">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+        <span class="hidden sm:inline">Prev</span>
+      </button>
+
+      <button id="nextBtn" onclick="nextSlide()" class="px-4 py-2 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold shadow-lg shadow-brand-500/30 transition flex items-center gap-1">
+        <span>Next</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: MALAYALAM PRESENTER SPEECH SCRIPT DRAWER (HIGH VALUE FOR STUDENTS) -->
+  <!-- ========================================================================= -->
+  <aside id="speakerNotesDrawer" class="fixed inset-y-0 right-0 w-full max-w-md bg-slate-900/98 backdrop-blur-xl border-l border-blue-500/30 shadow-2xl z-[100] transform translate-x-full transition-transform duration-300 flex flex-col text-white">
+    <div class="p-4 border-b border-slate-800 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center font-bold text-xs">🎙️</div>
+        <div>
+          <h3 class="font-bold text-sm text-white">പ്രസന്റർ സ്ക്രിപ്റ്റ് (Speaking Script)</h3>
+          <span id="notesSpeakerName" class="text-[11px] text-blue-300">Member Speaking Cues</span>
+        </div>
+      </div>
+      <button onclick="toggleSpeakerNotes()" class="p-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- Script Content in simple conversational Malayalam -->
+    <div class="p-5 overflow-y-auto flex-1 text-sm leading-relaxed space-y-4">
+      <div class="bg-blue-950/60 p-3.5 rounded-xl border border-blue-500/30">
+        <span class="text-[10px] uppercase font-bold text-blue-300 block mb-1">Speaker Tip</span>
+        <p class="text-xs text-slate-300">
+          ഈ സ്ലൈഡ് കാണുമ്പോൾ സദസ്സിനോട് പറയേണ്ട പ്രധാന ആശയങ്ങൾ താഴെ നൽകിയിരിക്കുന്നു. ലളിതമായ മലയാളത്തിൽ സംസാരിക്കുക.
+        </p>
+      </div>
+
+      <div id="notesTextContainer" class="space-y-3 font-sans text-slate-200 text-sm">
+        <!-- Dynamically filled by JS -->
+      </div>
+    </div>
+
+    <div class="p-4 border-t border-slate-800 text-center text-xs text-slate-400">
+      Press <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">N</kbd> or click Script to close
+    </div>
+  </aside>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: ALL SLIDES OVERVIEW GRID -->
+  <!-- ========================================================================= -->
+  <div id="slideGridModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-[110] hidden flex flex-col p-6 overflow-hidden">
+    <div class="flex items-center justify-between pb-4 border-b border-slate-800 max-w-7xl mx-auto w-full">
+      <div>
+        <h3 class="text-lg font-bold text-white">All 31 Slides Overview</h3>
+        <p class="text-xs text-slate-400">Click any card to jump immediately</p>
+      </div>
+      <button onclick="toggleSlideGrid()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold">Close (Esc)</button>
+    </div>
+
+    <div id="slideGridContent" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3 py-6 overflow-y-auto max-w-7xl mx-auto w-full">
+      <!-- Generated dynamically by script -->
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT: ENGINE & STATE MANAGEMENT -->
+  <!-- ========================================================================= -->
+  <script>
+    // Presenter Speaking scripts in natural, friendly Malayalam for all 31 slides
+    const presenterNotes = [
+      // Slide 1
+      "നമസ്കാരം! 'VEYRA - Virtual Market' എന്ന ഞങ്ങളുടെ പ്രോജക്റ്റിലേക്ക് എല്ലാവർക്കും സ്വാഗതം. ഇന്ന് ഞങ്ങൾ നാലുപേരും വെറുമൊരു കമ്പനി പ്രസന്റേഷൻ നടത്തുകയല്ല, മറിച്ച് യഥാർത്ഥത്തിൽ ഒരു പുതിയ ഇ-കൊമേഴ്‌സ് സ്റ്റാർട്ടപ്പ് എങ്ങനെ രൂപകൽപ്പന ചെയ്തു നടപ്പിലാക്കാം എന്നാണ് നിങ്ങളുമായി പങ്കുവെക്കുന്നത്.",
+      // Slide 2
+      "നമ്മൾ സാധാരണ കടകളിൽ പോകുമ്പോൾ പല കടകൾ കയറിയിറങ്ങണം, വില കൃത്യമായി താരതമ്യം ചെയ്യാൻ സാധിക്കില്ല, ഉദ്ദേശിച്ച സാധനം പലപ്പോഴും സ്റ്റോക്കിലുണ്ടാകില്ല. ഇതിനൊരു ഡിജിറ്റൽ പരിഹാരമാണ് ഞങ്ങൾ മുന്നോട്ട് വെക്കുന്നത്.",
+      // Slide 3
+      "എന്താണ് ഒരു വിർച്വൽ മാർക്കറ്റ്? ഇത് വെറുമൊരു കടയല്ല. VEYRA സ്വന്തമായി എല്ലാ സാധനങ്ങളും ഉണ്ടാക്കുന്നില്ല. പകരം യഥാർത്ഥ വ്യാപാരികളെയും ഉപഭോക്താക്കളെയും ഡിജിറ്റൽ സാങ്കേതികവിദ്യയിലൂടെ സുരക്ഷിതമായി പരസ്പരം ബന്ധിപ്പിക്കുന്ന ഒരു പ്ലാറ്റ്‌ഫോം ആണിത്.",
+      // Slide 4
+      "പരമ്പരാഗത മാർക്കറ്റിൽ കടയിൽ പോയി പണം നൽകി കയ്യിൽ വാങ്ങുന്നു. വിർച്വൽ മാർക്കറ്റിൽ മൊബൈൽ വഴി സെർച്ച് ചെയ്യുന്നു, റേറ്റിംഗ് നോക്കുന്നു, ഡിജിറ്റലായി പണം നൽകുന്നു, സാധനം വീട്ടുപടിക്കൽ എത്തുന്നു. സൗകര്യവും ചോയ്സും വളരെ കൂടുതലാണ്.",
+      // Slide 5
+      "ഇനി VEYRA എങ്ങനെ വരുമാനം ഉണ്ടാക്കുന്നു? ഓരോ ഓർഡറിലും സെല്ലറിൽ നിന്നുള്ള ചെറിയൊരു കമ്മീഷൻ, ഡെലിവറി ഫീസ്, സെല്ലർമാർ നൽകുന്ന പ്രൊമോഷൻ ചാർജ് എന്നിവയാണ് വരുമാനം. ശ്രദ്ധിക്കുക: വരുന്ന പണം മുഴുവൻ ലാഭമല്ല (Revenue ≠ Profit). സർവർ, പാക്കിംഗ്, ജീവനക്കാർ എന്നിവയ്ക്കുള്ള ചിലവ് കഴിഞ്ഞുള്ളതാണ് കമ്പനിയുടെ ലാഭം.",
+      // Slide 6
+      "കമ്പനി എങ്ങനെ തുടങ്ങും? Sole Proprietorship, Partnership, LLP, Private Limited എന്നിവയാണ് പ്രധാന രൂപങ്ങൾ. നിക്ഷേപം സ്വീകരിക്കാനും വളരാനും ഏറ്റവും നല്ലത് Private Limited ആണ്. കേന്ദ്ര സർക്കാരിന്റെ DPIIT അംഗീകാരം വഴി സ്റ്റാർട്ടപ്പുകൾക്ക് ടാക്സ് ഇളവുകളും ലഭിക്കും.",
+      // Slide 7
+      "ഇപ്പോൾ ബിസിനസ്സ് ആശയവും കമ്പനി ഘടനയും തയ്യാറായിക്കഴിഞ്ഞു. ഇനി ഇത് കസ്റ്റമറുടെ ഫോണിലേക്ക് എങ്ങനെ എത്തും? ഇതിന്റെ സാങ്കേതികവിദ്യയും മാർക്കറ്റിംഗും എങ്ങനെ എന്ന് നമ്മുടെ CTO & Marketing Head വിശദീകരിക്കും.",
+      // Slide 8
+      "നന്ദി CEO. ഞാൻ Member 2. VEYRA-യുടെ സാങ്കേതിക അടിത്തറയും പുതിയ ആളുകളിലേക്ക് എത്തിച്ചേരാനുള്ള ഡിജിറ്റൽ മാർക്കറ്റിംഗ് തന്ത്രങ്ങളും ഞാനാണ് ഇവിടെ വിശദീകരിക്കുന്നത്.",
+      // Slide 9
+      "ടെക്നോളജി ആർക്കിടെക്ചർ: കസ്റ്റമർ കാണുന്ന മനോഹരമായ ആപ്പും (Frontend), വിവരങ്ങൾ വിശകലനം ചെയ്യുന്ന സെർവറും (Backend), ഡാറ്റ സൂക്ഷിക്കുന്ന ഡാറ്റാബേസും (Database) ബാങ്കിംഗ് API-കളും പരസ്പരം തടസ്സമില്ലാതെ സംസാരിക്കുന്നു.",
+      // Slide 10
+      "കസ്റ്റമറുടെ അനുഭവം (User Journey): ഹോം പേജ് തുറക്കുന്നത് മുതൽ സെർച്ച്, പ്രൊഡക്റ്റ് സെലക്ഷൻ, കാർട്ട്, പേയ്‌മെന്റ്, ഓർഡർ ട്രാക്കിംഗ്, റിവ്യൂ നൽകുന്നത് വരെയുള്ള എല്ലാ ഘട്ടങ്ങളും തടസ്സമില്ലാതെ പ്രവർത്തിക്കാൻ ഞങ്ങൾ ശ്രദ്ധിക്കുന്നു.",
+      // Slide 11
+      "വ്യാപാരികൾക്കായി പ്രത്യേകം Seller Dashboard ഉണ്ട്. അതിൽ പുതിയ സാധനങ്ങൾ ആഡ് ചെയ്യാനും സ്റ്റോക്ക് അറിയാനും സാധിക്കും. മാനേജ്‌മെന്റിനായി ബിസിനസ്സ് തത്സമയം നിരീക്ഷിക്കാൻ Admin Dashboard നൽകിയിരിക്കുന്നു.",
+      // Slide 12
+      "ഉപഭോക്താവിന്റെ സ്വകാര്യത (Privacy): പേര്, ഫോൺ നമ്പർ, അഡ്രസ് എന്നിവ ഓർഡർ ഡെലിവറിക്ക് വേണ്ടി മാത്രമാണ് ശേഖരിക്കുന്നത്. ഇന്ത്യയിലെ DPDP Act 2023 പ്രകാരം ഉപഭോക്താവിന്റെ സമ്മതത്തോടെ മാത്രമേ ഡാറ്റ ഉപയോഗിക്കാവൂ; ഡാറ്റ ചോരാതെ സംരക്ഷിക്കുകയും വേണം.",
+      // Slide 13
+      "സൈബർ സുരക്ഷ: HTTPS എൻക്രിപ്ഷൻ, കാർഡ് ടോക്കണൈസേഷൻ, വ്യാജ വ്യാപാരികളെ തടയാൻ കർശനമായ KYC വെരിഫിക്കേഷൻ എന്നിവയിലൂടെ പ്ലാറ്റ്‌ഫോം 100% സുരക്ഷിതമാക്കുന്നു.",
+      // Slide 14
+      "മാർക്കറ്റിംഗ് മെട്രിക്സ്: പരസ്യ ചിലവ് എങ്ങനെ കണക്കാക്കാം? CPC എന്നാൽ ഒരു ക്ലിക്കിന് ചെലവായ തുക (ഉദാ: ₹1,000 / 200 = ₹5). എന്നാൽ CAC എന്നാൽ യഥാർത്ഥത്തിൽ ഓർഡർ ചെയ്ത ഒരു കസ്റ്റമറെ കിട്ടാൻ ചെലവായ തുകയാണ് (ഉദാ: ₹10,000 / 200 = ₹50).",
+      // Slide 15
+      "ഇൻസ്റ്റാഗ്രാം, ഗൂഗിൾ ആഡ്സ്, യൂട്യൂബ് എന്നിവയിലൂടെ കസ്റ്റമർ നമ്മുടെ ആപ്പിൽ എത്തി ഓർഡർ ചെയ്യാൻ തയ്യാറായി. ഇനി അതിനു പിന്നിലെ പേയ്‌മെന്റ്, ജിഎസ്ടി ഇൻവോയ്സ് എന്നിവ നമ്മുടെ Finance Head വ്യക്തമാക്കും.",
+      // Slide 16
+      "നന്ദി CTO. ഞാൻ Member 3. ഉപഭോക്താവ് 'Buy Now' ബട്ടൺ അമർത്തുമ്പോൾ പണമിടപാടുകളും നികുതിയും എങ്ങനെ സുതാര്യമായി കൈകാര്യം ചെയ്യുന്നു എന്ന് ഞാൻ വിശദീകരിക്കാം.",
+      // Slide 17
+      "ഓർഡർ ടൈംലൈൻ: 00:00-ൽ ഓർഡർ ക്ലിക്ക് ചെയ്യുമ്പോൾ തന്നെ സിസ്റ്റം ഓർഡർ ഐഡി ഉണ്ടാക്കുന്നു. പേയ്‌മെന്റ് ബാങ്ക് സ്ഥിരീകരിച്ചാലുടൻ സെല്ലർക്ക് അലർട്ട് പോകുകയും സാധനം പാക്ക് ചെയ്യുകയും ചെയ്യുന്നു.",
+      // Slide 18
+      "പേയ്‌മെന്റ് ഗേറ്റ്‌വേ: UPI, ഡെബിറ്റ്/ക്രെഡിറ്റ് കാർഡുകൾ എന്നിവ വഴി പണം സ്വീകരിക്കുന്നു. ഇതിൽ പ്രധാനമായും 3 അവസ്ഥകളുണ്ട്: Success (വിജയം), Pending (തീരുമാനമാകാത്തത്), Failed (പരാജയം). പണം കട്ടായാൽ 3-5 ദിവസത്തിനകം ഓട്ടോമാറ്റിക് റീഫണ്ട് ലഭിക്കും.",
+      // Slide 19
+      "GST (Goods and Services Tax): സംസ്ഥാനത്തിനുള്ളിൽ വിൽക്കുമ്പോൾ CGST + SGST തുല്യമായി കേന്ദ്രത്തിനും സംസ്ഥാനത്തിനും ലഭിക്കുന്നു. മറ്റ് സംസ്ഥാനങ്ങളിൽ നിന്നാണെങ്കിൽ IGST ആണ് വരുന്നത്. ഉദാഹരണത്തിന് ₹1,000 രൂപയുടെ സാധനത്തിന് 18% GST ബാധകമായാൽ മൊത്തം ₹1,180 ആകും.",
+      // Slide 20
+      "ഇതാണ് ഞങ്ങളുടെ സിസ്റ്റം സ്വയം തയ്യാറാക്കുന്ന ടാക്സ് ഇൻവോയ്സ്. ഇതിൽ സെല്ലറുടെ GSTIN, കസ്റ്റമർ അഡ്രസ്, HSN കോഡ്, നികുതി വിഹിതം എന്നിവ കൃത്യമായി രേഖപ്പെടുത്തിയിരിക്കും.",
+      // Slide 21
+      "റദ്ദാക്കലും റീഫണ്ടും: സാധനത്തിന് എന്തെങ്കിലും കേടുപാടുകൾ സംഭവിച്ചാൽ ഉപഭോക്താവിന് ആപ്പ് വഴി 7 ദിവസത്തിനകം റീപ്ലേസ്‌മെന്റോ അല്ലെങ്കിൽ ബാങ്കിലേക്ക് പൂർണ്ണ റീഫണ്ടോ ഉറപ്പുവരുത്തുന്നു.",
+      // Slide 22
+      "ഓർഡറും പേയ്‌മെന്റും കൃത്യമായി നടന്നു. ഇനി ഈ സാധനം കസ്റ്റമറുടെ വീട്ടിൽ എങ്ങനെ എത്തും എന്ന് നമ്മുടെ Logistics & Customer Experience Head വിശദീകരിക്കും.",
+      // Slide 23
+      "നന്ദി ഫിനാൻസ് ഹെഡ്. ഞാൻ Member 4. സാധനം യഥാർത്ഥത്തിൽ ഉപഭോക്താവിന്റെ കയ്യിൽ എത്തിക്കുന്ന സപ്ലൈ ചെയിൻ ശൃംഖലയെക്കുറിച്ചാണ് ഞാൻ സംസാരിക്കുന്നത്.",
+      // Slide 24
+      "ലോജിസ്റ്റിക്സ് നെറ്റ്‌വർക്ക്: സെല്ലറുടെ കയ്യിൽ നിന്ന് കളക്ട് ചെയ്യുന്ന സാധനങ്ങൾ മെയിൻ സോർട്ടിംഗ് ഹബ്ബിൽ എത്തുന്നു. അവിടെനിന്ന് ഓരോ പിൻകോഡിലേക്കുമുള്ള ലോക്കൽ ഹബ്ബുകളിലേക്കും തുടർന്ന് റൈഡർമാർ വഴിയും വേഗത്തിൽ എത്തിക്കുന്നു.",
+      // Slide 25
+      "ഗിഗ് ഇക്കോണമി (Gig Economy): ഡെലിവറി പാർട്ണർമാർ തങ്ങളുടെ സൗകര്യത്തിനനുസരിച്ച് ജോലി ചെയ്യുന്നവരാണ്. അവർക്കായി പ്രത്യേക Partner App ഉണ്ട്. ഓരോ ഡെലിവറിക്കും ദൂരത്തിനനുസരിച്ച് കൃത്യമായ വേതനവും ഇൻഷുറൻസ് പരിരക്ഷയും കമ്പനി നൽകുന്നു.",
+      // Slide 26
+      "കസ്റ്റമർ സപ്പോർട്ട്: ഡെലിവറി വൈകുകയോ സാധനത്തിന് തകരാറുണ്ടെങ്കിലോ ആപ്പിലെ 24/7 AI ചാറ്റ് ബോട്ടും കസ്റ്റമർ കെയറും വളരെ വേഗത്തിൽ പ്രശ്നം പരിഹരിക്കുന്നു.",
+      // Slide 27
+      "റിവ്യൂകളും റേറ്റിംഗുകളും: ഉപഭോക്താക്കളുടെ സത്യസന്ധമായ റിവ്യൂകൾ മറ്റുള്ളവർക്ക് നല്ല ഉൽപ്പന്നം തിരഞ്ഞെടുക്കാൻ സഹായിക്കുന്നു. മോശം സാധനങ്ങൾ നൽകുന്ന സെല്ലർമാരെ ഒഴിവാക്കാനും ഇത് ഉപകരിക്കുന്നു.",
+      // Slide 28
+      "ഇതാണ് VEYRA-യുടെ സമ്പൂർണ്ണ മാസ്റ്റർ ജേർണി: ബിസിനസ്സ് ഐഡിയ ➔ സെല്ലർമാർ ➔ ആപ്പ് ടെക്നോളജി ➔ മാർക്കറ്റിംഗ് ➔ ഓർഡർ ➔ പേയ്‌മെന്റ് & GST ➔ ഹബ്ബ് ഡെലിവറി ➔ 5-സ്റ്റാർ റിവ്യൂ. ഞങ്ങൾ നാലുപേരുടെയും പ്രവർത്തനങ്ങൾ ഒന്നിക്കുമ്പോഴാണ് ഇത് സാധ്യമാകുന്നത്!",
+      // Slide 29
+      "വിർച്വൽ മാർക്കറ്റ് ഒരു ഇക്കോസിസ്റ്റമാണ്: കൂടുതൽ കസ്റ്റമേഴ്സ് വരുമ്പോൾ കൂടുതൽ ഓർഡറുകൾ ഉണ്ടാകുന്നു. അതുകണ്ട് കൂടുതൽ വ്യാപാരികൾ വരുന്നു. വേഗത്തിലുള്ള ഡെലിവറി സാധ്യമാകുന്നു. ഈ ഫ്ലൈവീൽ ബിസിനസ്സിനെ അതിവേഗം വളർത്തുന്നു.",
+      // Slide 30
+      "ഉപസംഹാരം: വിർച്വൽ മാർക്കറ്റ് എന്നത് വെറുമൊരു ഓൺലൈൻ കടയല്ല. ബിസിനസ്സ്, ടെക്നോളജി, മാർക്കറ്റിംഗ്, ബാങ്കിംഗ്, ടാക്സ്, ലോജിസ്റ്റിക്സ്, ഡാറ്റ പ്രൊട്ടക്ഷൻ, കസ്റ്റമർ കെയർ എന്നിവ ഒത്തുചേരുമ്പോഴാണ് VEYRA ഉണ്ടാകുന്നത്. 'Everything. One Place.' നന്ദി!",
+      // Slide 31
+      "ഇനി നിങ്ങളുടെ സംശയങ്ങൾ ചോദിക്കാം. സാധാരണയായി ആളുകൾ ചോദിക്കുന്ന 10 പ്രധാന ചോദ്യങ്ങൾ സ്ക്രീനിൽ നൽകിയിട്ടുണ്ട്. ഏത് ചോദ്യത്തിലും ക്ലിക്ക് ചെയ്തു ലളിതമായ ഉത്തരം കാണാം."
+    ];
+
+    // Presentation Global State
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide-card');
+    const totalSlides = slides.length;
+    let timerSeconds = 0;
+    let timerRunning = false;
+    let timerInterval = null;
+
+    function updateSlide() {
+      slides.forEach((slide, index) => {
+        slide.classList.remove('active', 'prev', 'next');
+        if (index === currentSlide) {
+          slide.classList.add('active');
+        } else if (index < currentSlide) {
+          slide.classList.add('prev');
+        } else {
+          slide.classList.add('next');
+        }
+      });
+
+      // Update counters & progress bar
+      const slideNumPadded = (currentSlide + 1).toString().padStart(2, '0');
+      const totalNumPadded = totalSlides.toString().padStart(2, '0');
+      document.getElementById('currentSlideNum').innerText = slideNumPadded;
+      document.getElementById('totalSlidesNum').innerText = totalNumPadded;
+      const progressPercent = ((currentSlide + 1) / totalSlides) * 100;
+      document.getElementById('slideProgressBar').style.width = `${progressPercent}%`;
+
+      // Update button state
+      document.getElementById('prevBtn').disabled = (currentSlide === 0);
+      document.getElementById('nextBtn').innerText = (currentSlide === totalSlides - 1) ? 'Finish' : 'Next';
+
+      // Update Presenter Badge
+      const activeSlideEl = slides[currentSlide];
+      const speakerRole = activeSlideEl.dataset.speakerTitle || "Founder & Management";
+      const speakerName = activeSlideEl.dataset.speakerName || "MEMBER 01";
+      const speakerSub = activeSlideEl.dataset.speakerSub || "General";
+      const speakerId = activeSlideEl.dataset.speaker || "1";
+
+      const badgeEl = document.getElementById('speakerBadge');
+      if (badgeEl) {
+        document.getElementById('speakerRole').innerText = `${speakerName} • ${speakerRole}`;
+        document.getElementById('speakerTopic').innerText = speakerSub;
+        document.getElementById('speakerAvatar').innerText = (speakerId === "all") ? "★" : speakerId;
+      }
+
+      // Update Presenter Notes Drawer content
+      updateSpeakerNotesContent();
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    function goToSlide(index) {
+      if (index >= 0 && index < totalSlides) {
+        currentSlide = index;
+        updateSlide();
+        closeModals();
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      // Avoid keyboard conflict if user is focusing an input
+      if (['input', 'textarea'].includes(document.activeElement.tagName.toLowerCase())) return;
+
+      switch(e.key) {
+        case 'ArrowRight':
+        case ' ': // Spacebar
+        case 'PageDown':
+          e.preventDefault();
+          nextSlide();
+          break;
+        case 'ArrowLeft':
+        case 'PageUp':
+          e.preventDefault();
+          prevSlide();
+          break;
+        case 'Home':
+          e.preventDefault();
+          goToSlide(0);
+          break;
+        case 'End':
+          e.preventDefault();
+          goToSlide(totalSlides - 1);
+          break;
+        case 'f':
+        case 'F':
+          e.preventDefault();
+          toggleFullscreen();
+          break;
+        case 'n':
+        case 'N':
+          e.preventDefault();
+          toggleSpeakerNotes();
+          break;
+        case 'Escape':
+          closeModals();
+          break;
+      }
+    });
+
+    // Touch navigation swipe gestures
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const stage = document.getElementById('presentationStage');
+    stage.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, {passive: true});
+
+    stage.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchEndX < touchStartX - 50) {
+        nextSlide(); // Swiped left
+      } else if (touchEndX > touchStartX + 50) {
+        prevSlide(); // Swiped right
+      }
+    }, {passive: true});
+
+    function toggleTimer() {
+      if (timerRunning) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        document.getElementById('timerIcon').innerHTML = '<path d="M6 4l10 6-10 6V4z"/>';
+      } else {
+        timerInterval = setInterval(() => {
+          timerSeconds++;
+          const mins = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+          const secs = (timerSeconds % 60).toString().padStart(2, '0');
+          const timerEl = document.getElementById('seminarTimer');
+          timerEl.innerText = `${mins}:${secs}`;
+          // Over 20 min color warning
+          if (timerSeconds >= 1200) {
+            timerEl.classList.add('text-red-400', 'animate-pulse');
+          }
+        }, 1000);
+        timerRunning = true;
+        document.getElementById('timerIcon').innerHTML = '<path d="M5 4h3v12H5V4zm7 0h3v12h-3V4z"/>';
+      }
+    }
+
+    // Fullscreen support
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        }
+      }
+    }
+
+    // Speaker Notes Drawer toggle and update
+    function toggleSpeakerNotes() {
+      const drawer = document.getElementById('speakerNotesDrawer');
+      drawer.classList.toggle('translate-x-full');
+      updateSpeakerNotesContent();
+    }
+
+    function updateSpeakerNotesContent() {
+      const activeSlideEl = slides[currentSlide];
+      const speakerName = activeSlideEl.dataset.speakerName || "Member";
+      const speakerTitle = activeSlideEl.dataset.speakerTitle || "Role";
+      document.getElementById('notesSpeakerName').innerText = `${speakerName} (${speakerTitle}) • Slide ${currentSlide + 1}`;
+
+      const text = presenterNotes[currentSlide] || "ഈ സ്ലൈഡിലെ വിവരങ്ങൾ സ്വാഭാവികമായ മലയാളത്തിൽ വിശദീകരിക്കുക.";
+      document.getElementById('notesTextContainer').innerHTML = `
+        <div class="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700">
+          <p class="leading-relaxed font-malayalam text-slate-100 text-sm">"${text}"</p>
+        </div>
+      `;
+    }
+
+    // Slide Grid Overview Modal
+    function toggleSlideGrid() {
+      const modal = document.getElementById('slideGridModal');
+      modal.classList.toggle('hidden');
+      if (!modal.classList.contains('hidden')) {
+        renderSlideGrid();
+      }
+    }
+
+    function renderSlideGrid() {
+      const container = document.getElementById('slideGridContent');
+      container.innerHTML = '';
+      slides.forEach((slide, idx) => {
+        const titleEl = slide.querySelector('h2');
+        const titleText = titleEl ? titleEl.innerText.slice(0, 32) + '...' : `Slide ${idx + 1}`;
+        const speaker = slide.dataset.speakerName || `M${slide.dataset.speaker || 1}`;
+        const isCurrent = idx === currentSlide;
+
+        const card = document.createElement('div');
+        card.className = `p-3 rounded-xl cursor-pointer border text-left transition ${
+          isCurrent 
+            ? 'bg-brand-500 text-white border-brand-300 ring-2 ring-white/50' 
+            : 'bg-slate-900 text-slate-300 border-slate-800 hover:bg-slate-800 hover:border-blue-500/40'
+        }`;
+        card.onclick = () => goToSlide(idx);
+        card.innerHTML = `
+          <div class="flex justify-between items-center text-[10px] font-mono text-slate-400 mb-1">
+            <span>#${(idx + 1).toString().padStart(2, '0')}</span>
+            <span class="px-1.5 py-0.5 rounded bg-white/10 text-white font-sans">${speaker}</span>
+          </div>
+          <div class="font-bold text-xs line-clamp-2">${titleText}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function closeModals() {
+      document.getElementById('slideGridModal').classList.add('hidden');
+      document.getElementById('speakerNotesDrawer').classList.add('translate-x-full');
+    }
+
+    // FAQ Accordion toggle function
+    function toggleFaq(button) {
+      const card = button.parentElement;
+      const answer = card.querySelector('.faq-answer');
+      const icon = button.querySelector('.faq-icon');
+      
+      const isOpen = !answer.classList.contains('hidden');
+      if (isOpen) {
+        answer.classList.add('hidden');
+        icon.innerText = '+';
+      } else {
+        answer.classList.remove('hidden');
+        icon.innerText = '−';
+      }
+    }
+
+    // Auto-start seminar stopwatch when user begins
+    window.addEventListener('load', () => {
+      updateSlide();
+      // Start stopwatch automatically on load for college timer accuracy
+      toggleTimer();
+    });
+  </script>
+</body>
+</html>
