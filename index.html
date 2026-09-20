@@ -174,9 +174,156 @@
     <div id="presentationStage" class="relative w-full max-w-7xl h-full max-h-[860px] aspect-[16/9] bg-white rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden border border-slate-800/20 flex flex-col slide-viewport">
 
       <!-- ========================================================================= -->
+      <!-- INTRO VIDEO 01: TEASER 1 (10 SECONDS) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card active absolute inset-0 w-full h-full bg-slate-950 p-6 md:p-10 flex flex-col justify-between text-white" data-speaker="all" data-speaker-name="INTRO TEASER 1" data-speaker-title="Video Hook (10s)" data-speaker-sub="firstVideo.mp4">
+        <!-- Top status bar -->
+        <div class="flex items-center justify-between z-10">
+          <div class="flex items-center gap-2 text-blue-400 font-semibold text-xs tracking-wider uppercase bg-blue-950/80 px-3.5 py-1.5 rounded-full border border-blue-500/40">
+            <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+            Video Teaser 01 • 10s Hook
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="vidStatus1" class="text-xs font-mono text-slate-400 bg-slate-900 px-3 py-1 rounded-full border border-slate-800">
+              firstVideo.mp4
+            </span>
+            <button onclick="toggleMute('introVid1', this)" class="px-3 py-1 rounded-full bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 border border-slate-700 flex items-center gap-1.5 transition">
+              <span class="mute-icon">🔊</span> <span class="mute-label hidden sm:inline">Sound</span>
+            </button>
+            <button onclick="nextSlide()" class="px-3.5 py-1 rounded-full bg-brand-500 hover:bg-brand-600 text-xs font-bold text-white shadow-lg transition flex items-center gap-1">
+              <span>Skip</span> ➔
+            </button>
+          </div>
+        </div>
+
+        <!-- Video Player Display Container -->
+        <div class="relative my-auto w-full max-w-4xl mx-auto aspect-video bg-black rounded-2xl overflow-hidden border-2 border-blue-500/30 shadow-2xl shadow-blue-500/10 flex items-center justify-center group">
+          <video id="introVid1" src="firstVideo.mp4" class="w-full h-full object-cover" playsinline preload="auto" controls></video>
+          
+          <!-- Bottom Overlay Caption Banner -->
+          <div class="absolute bottom-3 left-4 right-4 bg-slate-900/80 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 flex items-center justify-between text-xs text-slate-300 pointer-events-none">
+            <div class="flex items-center gap-2">
+              <span class="text-brand-400 font-bold">REEL 01:</span>
+              <span>പരമ്പരാഗത ഷോപ്പിംഗിലെ തിരക്കും അസൗകര്യങ്ങളും (The Problem Hook)</span>
+            </div>
+            <span class="font-mono text-[11px] text-blue-300">~10s Clip</span>
+          </div>
+        </div>
+
+        <!-- Footer Control & Auto-Advance Notice -->
+        <div class="flex items-center justify-between text-xs text-slate-500 pt-2 border-t border-slate-800/80">
+          <div class="flex items-center gap-2">
+            <button onclick="replayVideo('introVid1')" class="hover:text-blue-400 flex items-center gap-1 font-mono transition">
+              <span>↺</span> Replay 10s
+            </button>
+            <span>• Auto-advances when finished</span>
+          </div>
+          <span class="font-medium text-brand-400">Slide 01 / 34 • Intro Video 1 of 3</span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- INTRO VIDEO 02: TEASER 2 (10 SECONDS) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-slate-950 p-6 md:p-10 flex flex-col justify-between text-white" data-speaker="all" data-speaker-name="INTRO TEASER 2" data-speaker-title="Video Hook (10s)" data-speaker-sub="secondVideo.mp4">
+        <!-- Top status bar -->
+        <div class="flex items-center justify-between z-10">
+          <div class="flex items-center gap-2 text-indigo-400 font-semibold text-xs tracking-wider uppercase bg-indigo-950/80 px-3.5 py-1.5 rounded-full border border-indigo-500/40">
+            <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+            Video Teaser 02 • 10s Concept
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="vidStatus2" class="text-xs font-mono text-slate-400 bg-slate-900 px-3 py-1 rounded-full border border-slate-800">
+              secondVideo.mp4
+            </span>
+            <button onclick="toggleMute('introVid2', this)" class="px-3 py-1 rounded-full bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 border border-slate-700 flex items-center gap-1.5 transition">
+              <span class="mute-icon">🔊</span> <span class="mute-label hidden sm:inline">Sound</span>
+            </button>
+            <button onclick="nextSlide()" class="px-3.5 py-1 rounded-full bg-brand-500 hover:bg-brand-600 text-xs font-bold text-white shadow-lg transition flex items-center gap-1">
+              <span>Skip</span> ➔
+            </button>
+          </div>
+        </div>
+
+        <!-- Video Player Display Container -->
+        <div class="relative my-auto w-full max-w-4xl mx-auto aspect-video bg-black rounded-2xl overflow-hidden border-2 border-indigo-500/30 shadow-2xl shadow-indigo-500/10 flex items-center justify-center group">
+          <video id="introVid2" src="secondVideo.mp4" class="w-full h-full object-cover" playsinline preload="auto" controls></video>
+          
+          <!-- Bottom Overlay Caption Banner -->
+          <div class="absolute bottom-3 left-4 right-4 bg-slate-900/80 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 flex items-center justify-between text-xs text-slate-300 pointer-events-none">
+            <div class="flex items-center gap-2">
+              <span class="text-indigo-400 font-bold">REEL 02:</span>
+              <span>ഡിജിറ്റൽ യുഗത്തിലെ പുതിയ തുടക്കം — വിർച്വൽ മാർക്കറ്റ് (The Digital Shift)</span>
+            </div>
+            <span class="font-mono text-[11px] text-indigo-300">~10s Clip</span>
+          </div>
+        </div>
+
+        <!-- Footer Control & Auto-Advance Notice -->
+        <div class="flex items-center justify-between text-xs text-slate-500 pt-2 border-t border-slate-800/80">
+          <div class="flex items-center gap-2">
+            <button onclick="replayVideo('introVid2')" class="hover:text-indigo-400 flex items-center gap-1 font-mono transition">
+              <span>↺</span> Replay 10s
+            </button>
+            <span>• Auto-advances when finished</span>
+          </div>
+          <span class="font-medium text-brand-400">Slide 02 / 34 • Intro Video 2 of 3</span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
+      <!-- INTRO VIDEO 03: TEASER 3 (10 SECONDS) -->
+      <!-- ========================================================================= -->
+      <section class="slide-card next absolute inset-0 w-full h-full bg-slate-950 p-6 md:p-10 flex flex-col justify-between text-white" data-speaker="all" data-speaker-name="INTRO TEASER 3" data-speaker-title="Brand Reveal (10s)" data-speaker-sub="thirdVideo.mp4">
+        <!-- Top status bar -->
+        <div class="flex items-center justify-between z-10">
+          <div class="flex items-center gap-2 text-cyan-400 font-semibold text-xs tracking-wider uppercase bg-cyan-950/80 px-3.5 py-1.5 rounded-full border border-cyan-500/40">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+            Video Teaser 03 • 10s Brand Reveal
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="vidStatus3" class="text-xs font-mono text-slate-400 bg-slate-900 px-3 py-1 rounded-full border border-slate-800">
+              thirdVideo.mp4
+            </span>
+            <button onclick="toggleMute('introVid3', this)" class="px-3 py-1 rounded-full bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 border border-slate-700 flex items-center gap-1.5 transition">
+              <span class="mute-icon">🔊</span> <span class="mute-label hidden sm:inline">Sound</span>
+            </button>
+            <button onclick="nextSlide()" class="px-3.5 py-1 rounded-full bg-brand-500 hover:bg-brand-600 text-xs font-bold text-white shadow-lg transition flex items-center gap-1">
+              <span>Start Presentation</span> ➔
+            </button>
+          </div>
+        </div>
+
+        <!-- Video Player Display Container -->
+        <div class="relative my-auto w-full max-w-4xl mx-auto aspect-video bg-black rounded-2xl overflow-hidden border-2 border-cyan-500/30 shadow-2xl shadow-cyan-500/10 flex items-center justify-center group">
+          <video id="introVid3" src="thirdVideo.mp4" class="w-full h-full object-cover" playsinline preload="auto" controls></video>
+          
+          <!-- Bottom Overlay Caption Banner -->
+          <div class="absolute bottom-3 left-4 right-4 bg-slate-900/80 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 flex items-center justify-between text-xs text-slate-300 pointer-events-none">
+            <div class="flex items-center gap-2">
+              <span class="text-cyan-400 font-bold">REEL 03:</span>
+              <span>VEYRA — Everything. One Place. (Brand Reveal)</span>
+            </div>
+            <span class="font-mono text-[11px] text-cyan-300">~10s Clip</span>
+          </div>
+        </div>
+
+        <!-- Footer Control & Auto-Advance Notice -->
+        <div class="flex items-center justify-between text-xs text-slate-500 pt-2 border-t border-slate-800/80">
+          <div class="flex items-center gap-2">
+            <button onclick="replayVideo('introVid3')" class="hover:text-cyan-400 flex items-center gap-1 font-mono transition">
+              <span>↺</span> Replay 10s
+            </button>
+            <span>• Next: Presenter 1 official start</span>
+          </div>
+          <span class="font-medium text-brand-400">Slide 03 / 34 • Final Intro Video</span>
+        </div>
+      </section>
+
+      <!-- ========================================================================= -->
       <!-- SLIDE 01: WELCOME & THE FICTIONAL STARTUP STORY (MEMBER 1) -->
       <!-- ========================================================================= -->
-      <section class="slide-card active absolute inset-0 w-full h-full bg-gradient-to-br from-white via-brand-50 to-blue-100 p-8 md:p-14 flex flex-col justify-between" data-speaker="1" data-speaker-name="MEMBER 01" data-speaker-title="Founder & CEO" data-speaker-sub="Business Strategy">
+      <section class="slide-card next absolute inset-0 w-full h-full bg-gradient-to-br from-white via-brand-50 to-blue-100 p-8 md:p-14 flex flex-col justify-between" data-speaker="1" data-speaker-name="MEMBER 01" data-speaker-title="Founder & CEO" data-speaker-sub="Business Strategy">
         <!-- Top status bar -->
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2 text-brand-600 font-semibold text-xs tracking-wider uppercase bg-white/80 px-3.5 py-1.5 rounded-full shadow-sm border border-brand-200">
@@ -277,7 +424,7 @@
         <!-- Footer tagline -->
         <div class="flex items-center justify-between text-xs text-slate-500 pt-3 border-t border-slate-200/80">
           <span>College Seminar Presentation 2026</span>
-          <span class="font-medium text-brand-600">Slide 01 / 31 • Press Space or → to advance</span>
+          <span class="font-medium text-brand-600">Slide 04 / 34 • Press Space or → to advance</span>
         </div>
       </section>
 
@@ -2161,7 +2308,7 @@
 
         <div class="flex items-center justify-between border-t border-slate-800 pt-4 text-xs text-slate-400">
           <span>Thank You for Listening!</span>
-          <button onclick="goToSlide(30)" class="px-4 py-2 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center gap-2">
+          <button onclick="goToSlide(33)" class="px-4 py-2 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-xl transition shadow-lg shadow-brand-500/30 flex items-center gap-2">
             <span>Proceed to Audience Q&A</span>
             <span>➔</span>
           </button>
@@ -2317,22 +2464,22 @@
       <div class="text-xs font-mono font-bold text-blue-200">
         <span id="currentSlideNum" class="text-lg text-white font-black">01</span>
         <span class="text-blue-400">/</span>
-        <span id="totalSlidesNum">31</span>
+        <span id="totalSlidesNum">34</span>
       </div>
       <div class="w-24 md:w-36 bg-slate-800 h-1.5 rounded-full overflow-hidden">
-        <div id="slideProgressBar" class="h-full bg-brand-500 transition-all duration-300" style="width: 3.2%;"></div>
+        <div id="slideProgressBar" class="h-full bg-brand-500 transition-all duration-300" style="width: 2.9%;"></div>
       </div>
     </div>
 
     <!-- Center: Quick Segment Section Jump Buttons -->
     <div class="hidden lg:flex items-center space-x-1.5 bg-slate-900/80 p-1 rounded-xl border border-blue-900/50 text-xs">
-      <button onclick="goToSlide(0)" class="px-2.5 py-1 rounded-lg hover:bg-brand-500 hover:text-white text-slate-300 transition">Start</button>
-      <button onclick="goToSlide(1)" class="px-2.5 py-1 rounded-lg hover:bg-brand-500 hover:text-white text-slate-300 transition">M1: Strategy</button>
-      <button onclick="goToSlide(7)" class="px-2.5 py-1 rounded-lg hover:bg-brand-500 hover:text-white text-slate-300 transition">M2: Tech & Ads</button>
-      <button onclick="goToSlide(15)" class="px-2.5 py-1 rounded-lg hover:bg-brand-500 hover:text-white text-slate-300 transition">M3: Orders & Tax</button>
-      <button onclick="goToSlide(22)" class="px-2.5 py-1 rounded-lg hover:bg-brand-500 hover:text-white text-slate-300 transition">M4: Logistics</button>
-      <button onclick="goToSlide(27)" class="px-2.5 py-1 rounded-lg hover:bg-brand-500 hover:text-white text-slate-300 transition">Journey</button>
-      <button onclick="goToSlide(30)" class="px-2.5 py-1 rounded-lg hover:bg-brand-500 hover:text-white text-slate-300 transition">Q&A</button>
+      <button onclick="goToSlide(0)" class="px-2.5 py-1 rounded-lg hover:bg-brand-500 hover:text-white text-slate-300 transition">🎬 Videos</button>
+      <button onclick="goToSlide(3)" class="px-2.5 py-1 rounded-lg hover:bg-brand-500 hover:text-white text-slate-300 transition">M1: Strategy</button>
+      <button onclick="goToSlide(10)" class="px-2.5 py-1 rounded-lg hover:bg-brand-500 hover:text-white text-slate-300 transition">M2: Tech & Ads</button>
+      <button onclick="goToSlide(18)" class="px-2.5 py-1 rounded-lg hover:bg-brand-500 hover:text-white text-slate-300 transition">M3: Orders & Tax</button>
+      <button onclick="goToSlide(25)" class="px-2.5 py-1 rounded-lg hover:bg-brand-500 hover:text-white text-slate-300 transition">M4: Logistics</button>
+      <button onclick="goToSlide(30)" class="px-2.5 py-1 rounded-lg hover:bg-brand-500 hover:text-white text-slate-300 transition">Journey</button>
+      <button onclick="goToSlide(33)" class="px-2.5 py-1 rounded-lg hover:bg-brand-500 hover:text-white text-slate-300 transition">Q&A</button>
     </div>
 
     <!-- Right: Next / Previous Interactive Buttons -->
@@ -2406,69 +2553,21 @@
   <!-- JAVASCRIPT: ENGINE & STATE MANAGEMENT -->
   <!-- ========================================================================= -->
   <script>
-    // Presenter Speaking scripts in natural, friendly Malayalam for all 31 slides
+    // Presenter Speaking scripts in natural, friendly Malayalam for all 34 slides
     const presenterNotes = [
-      // Slide 1
+      // Slide 1: Video 1
+      "ആദ്യത്തെ 10 സെക്കൻഡ് ഇൻട്രോ വീഡിയോ: സദസ്സിനെ ആകർഷിക്കാനും ശ്രദ്ധ പിടിച്ചുപറ്റാനും പരമ്പരാഗത ഷോപ്പിംഗിലെ തിരക്കും അസൗകര്യങ്ങളും കാണിക്കുന്ന ആമുഖ ദൃശ്യം. (firstVideo.mp4)",
+      // Slide 2: Video 2
+      "രണ്ടാമത്തെ 10 സെക്കൻഡ് ഇൻട്രോ വീഡിയോ: സ്മാർട്ട്ഫോണുകളിലൂടെ സാധനങ്ങൾ തെരഞ്ഞെടുക്കുന്ന പുതിയ ഡിജിറ്റൽ ലോകവും ഒരു വിർച്വൽ മാർക്കറ്റ് പ്ലേസിന്റെ ആവശ്യകതയും. (secondVideo.mp4)",
+      // Slide 3: Video 3
+      "മൂന്നാമത്തെ 10 സെക്കൻഡ് ഇൻട്രോ വീഡിയോ: VEYRA - 'Everything. One Place.' ബ്രാൻഡ് റിവീൽ. ഇതിനുശേഷം പ്രസന്റർ 1 തന്റെ പ്രസന്റേഷൻ ഔദ്യോഗികമായി സദസ്സിന് മുന്നിൽ ആരംഭിക്കുന്നു. (thirdVideo.mp4)",
+      // Slide 4 (Previously Slide 1): Welcome & Startup Story
       "നമസ്കാരം! 'VEYRA - Virtual Market' എന്ന ഞങ്ങളുടെ പ്രോജക്റ്റിലേക്ക് എല്ലാവർക്കും സ്വാഗതം. ഇന്ന് ഞങ്ങൾ നാലുപേരും വെറുമൊരു കമ്പനി പ്രസന്റേഷൻ നടത്തുകയല്ല, മറിച്ച് യഥാർത്ഥത്തിൽ ഒരു പുതിയ ഇ-കൊമേഴ്‌സ് സ്റ്റാർട്ടപ്പ് എങ്ങനെ രൂപകൽപ്പന ചെയ്തു നടപ്പിലാക്കാം എന്നാണ് നിങ്ങളുമായി പങ്കുവെക്കുന്നത്.",
-      // Slide 2
-      "നമ്മൾ സാധാരണ കടകളിൽ പോകുമ്പോൾ പല കടകൾ കയറിയിറങ്ങണം, വില കൃത്യമായി താരതമ്യം ചെയ്യാൻ സാധിക്കില്ല, ഉദ്ദേശിച്ച സാധനം പലപ്പോഴും സ്റ്റോക്കിലുണ്ടാകില്ല. ഇതിനൊരു ഡിജിറ്റൽ പരിഹാരമാണ് ഞങ്ങൾ മുന്നോട്ട് വെക്കുന്നത്.",
-      // Slide 3
-      "എന്താണ് ഒരു വിർച്വൽ മാർക്കറ്റ്? ഇത് വെറുമൊരു കടയല്ല. VEYRA സ്വന്തമായി എല്ലാ സാധനങ്ങളും ഉണ്ടാക്കുന്നില്ല. പകരം യഥാർത്ഥ വ്യാപാരികളെയും ഉപഭോക്താക്കളെയും ഡിജിറ്റൽ സാങ്കേതികവിദ്യയിലൂടെ സുരക്ഷിതമായി പരസ്പരം ബന്ധിപ്പിക്കുന്ന ഒരു പ്ലാറ്റ്‌ഫോം ആണിത്.",
-      // Slide 4
-      "പരമ്പരാഗത മാർക്കറ്റിൽ കടയിൽ പോയി പണം നൽകി കയ്യിൽ വാങ്ങുന്നു. വിർച്വൽ മാർക്കറ്റിൽ മൊബൈൽ വഴി സെർച്ച് ചെയ്യുന്നു, റേറ്റിംഗ് നോക്കുന്നു, ഡിജിറ്റലായി പണം നൽകുന്നു, സാധനം വീട്ടുപടിക്കൽ എത്തുന്നു. സൗകര്യവും ചോയ്സും വളരെ കൂടുതലാണ്.",
       // Slide 5
-      "ഇനി VEYRA എങ്ങനെ വരുമാനം ഉണ്ടാക്കുന്നു? ഓരോ ഓർഡറിലും സെല്ലറിൽ നിന്നുള്ള ചെറിയൊരു കമ്മീഷൻ, ഡെലിവറി ഫീസ്, സെല്ലർമാർ നൽകുന്ന പ്രൊമോഷൻ ചാർജ് എന്നിവയാണ് വരുമാനം. ശ്രദ്ധിക്കുക: വരുന്ന പണം മുഴുവൻ ലാഭമല്ല (Revenue ≠ Profit). സർവർ, പാക്കിംഗ്, ജീവനക്കാർ എന്നിവയ്ക്കുള്ള ചിലവ് കഴിഞ്ഞുള്ളതാണ് കമ്പനിയുടെ ലാഭം.",
-      // Slide 6
-      "കമ്പനി എങ്ങനെ തുടങ്ങും? Sole Proprietorship, Partnership, LLP, Private Limited എന്നിവയാണ് പ്രധാന രൂപങ്ങൾ. നിക്ഷേപം സ്വീകരിക്കാനും വളരാനും ഏറ്റവും നല്ലത് Private Limited ആണ്. കേന്ദ്ര സർക്കാരിന്റെ DPIIT അംഗീകാരം വഴി സ്റ്റാർട്ടപ്പുകൾക്ക് ടാക്സ് ഇളവുകളും ലഭിക്കും.",
-      // Slide 7
-      "ഇപ്പോൾ ബിസിനസ്സ് ആശയവും കമ്പനി ഘടനയും തയ്യാറായിക്കഴിഞ്ഞു. ഇനി ഇത് കസ്റ്റമറുടെ ഫോണിലേക്ക് എങ്ങനെ എത്തും? ഇതിന്റെ സാങ്കേതികവിദ്യയും മാർക്കറ്റിംഗും എങ്ങനെ എന്ന് നമ്മുടെ CTO & Marketing Head വിശദീകരിക്കും.",
-      // Slide 8
-      "നന്ദി CEO. ഞാൻ Member 2. VEYRA-യുടെ സാങ്കേതിക അടിത്തറയും പുതിയ ആളുകളിലേക്ക് എത്തിച്ചേരാനുള്ള ഡിജിറ്റൽ മാർക്കറ്റിംഗ് തന്ത്രങ്ങളും ഞാനാണ് ഇവിടെ വിശദീകരിക്കുന്നത്.",
-      // Slide 9
-      "ടെക്നോളജി ആർക്കിടെക്ചർ: കസ്റ്റമർ കാണുന്ന മനോഹരമായ ആപ്പും (Frontend), വിവരങ്ങൾ വിശകലനം ചെയ്യുന്ന സെർവറും (Backend), ഡാറ്റ സൂക്ഷിക്കുന്ന ഡാറ്റാബേസും (Database) ബാങ്കിംഗ് API-കളും പരസ്പരം തടസ്സമില്ലാതെ സംസാരിക്കുന്നു.",
-      // Slide 10
-      "കസ്റ്റമറുടെ അനുഭവം (User Journey): ഹോം പേജ് തുറക്കുന്നത് മുതൽ സെർച്ച്, പ്രൊഡക്റ്റ് സെലക്ഷൻ, കാർട്ട്, പേയ്‌മെന്റ്, ഓർഡർ ട്രാക്കിംഗ്, റിവ്യൂ നൽകുന്നത് വരെയുള്ള എല്ലാ ഘട്ടങ്ങളും തടസ്സമില്ലാതെ പ്രവർത്തിക്കാൻ ഞങ്ങൾ ശ്രദ്ധിക്കുന്നു.",
-      // Slide 11
-      "വ്യാപാരികൾക്കായി പ്രത്യേകം Seller Dashboard ഉണ്ട്. അതിൽ പുതിയ സാധനങ്ങൾ ആഡ് ചെയ്യാനും സ്റ്റോക്ക് അറിയാനും സാധിക്കും. മാനേജ്‌മെന്റിനായി ബിസിനസ്സ് തത്സമയം നിരീക്ഷിക്കാൻ Admin Dashboard നൽകിയിരിക്കുന്നു.",
-      // Slide 12
-      "ഉപഭോക്താവിന്റെ സ്വകാര്യത (Privacy): പേര്, ഫോൺ നമ്പർ, അഡ്രസ് എന്നിവ ഓർഡർ ഡെലിവറിക്ക് വേണ്ടി മാത്രമാണ് ശേഖരിക്കുന്നത്. ഇന്ത്യയിലെ DPDP Act 2023 പ്രകാരം ഉപഭോക്താവിന്റെ സമ്മതത്തോടെ മാത്രമേ ഡാറ്റ ഉപയോഗിക്കാവൂ; ഡാറ്റ ചോരാതെ സംരക്ഷിക്കുകയും വേണം.",
-      // Slide 13
-      "സൈബർ സുരക്ഷ: HTTPS എൻക്രിപ്ഷൻ, കാർഡ് ടോക്കണൈസേഷൻ, വ്യാജ വ്യാപാരികളെ തടയാൻ കർശനമായ KYC വെരിഫിക്കേഷൻ എന്നിവയിലൂടെ പ്ലാറ്റ്‌ഫോം 100% സുരക്ഷിതമാക്കുന്നു.",
-      // Slide 14
-      "മാർക്കറ്റിംഗ് മെട്രിക്സ്: പരസ്യ ചിലവ് എങ്ങനെ കണക്കാക്കാം? CPC എന്നാൽ ഒരു ക്ലിക്കിന് ചെലവായ തുക (ഉദാ: ₹1,000 / 200 = ₹5). എന്നാൽ CAC എന്നാൽ യഥാർത്ഥത്തിൽ ഓർഡർ ചെയ്ത ഒരു കസ്റ്റമറെ കിട്ടാൻ ചെലവായ തുകയാണ് (ഉദാ: ₹10,000 / 200 = ₹50).",
-      // Slide 15
-      "ഇൻസ്റ്റാഗ്രാം, ഗൂഗിൾ ആഡ്സ്, യൂട്യൂബ് എന്നിവയിലൂടെ കസ്റ്റമർ നമ്മുടെ ആപ്പിൽ എത്തി ഓർഡർ ചെയ്യാൻ തയ്യാറായി. ഇനി അതിനു പിന്നിലെ പേയ്‌മെന്റ്, ജിഎസ്ടി ഇൻവോയ്സ് എന്നിവ നമ്മുടെ Finance Head വ്യക്തമാക്കും.",
-      // Slide 16
-      "നന്ദി CTO. ഞാൻ Member 3. ഉപഭോക്താവ് 'Buy Now' ബട്ടൺ അമർത്തുമ്പോൾ പണമിടപാടുകളും നികുതിയും എങ്ങനെ സുതാര്യമായി കൈകാര്യം ചെയ്യുന്നു എന്ന് ഞാൻ വിശദീകരിക്കാം.",
-      // Slide 17
-      "ഓർഡർ ടൈംലൈൻ: 00:00-ൽ ഓർഡർ ക്ലിക്ക് ചെയ്യുമ്പോൾ തന്നെ സിസ്റ്റം ഓർഡർ ഐഡി ഉണ്ടാക്കുന്നു. പേയ്‌മെന്റ് ബാങ്ക് സ്ഥിരീകരിച്ചാലുടൻ സെല്ലർക്ക് അലർട്ട് പോകുകയും സാധനം പാക്ക് ചെയ്യുകയും ചെയ്യുന്നു.",
-      // Slide 18
-      "പേയ്‌മെന്റ് ഗേറ്റ്‌വേ: UPI, ഡെബിറ്റ്/ക്രെഡിറ്റ് കാർഡുകൾ എന്നിവ വഴി പണം സ്വീകരിക്കുന്നു. ഇതിൽ പ്രധാനമായും 3 അവസ്ഥകളുണ്ട്: Success (വിജയം), Pending (തീരുമാനമാകാത്തത്), Failed (പരാജയം). പണം കട്ടായാൽ 3-5 ദിവസത്തിനകം ഓട്ടോമാറ്റിക് റീഫണ്ട് ലഭിക്കും.",
-      // Slide 19
-      "GST (Goods and Services Tax): സംസ്ഥാനത്തിനുള്ളിൽ വിൽക്കുമ്പോൾ CGST + SGST തുല്യമായി കേന്ദ്രത്തിനും സംസ്ഥാനത്തിനും ലഭിക്കുന്നു. മറ്റ് സംസ്ഥാനങ്ങളിൽ നിന്നാണെങ്കിൽ IGST ആണ് വരുന്നത്. ഉദാഹരണത്തിന് ₹1,000 രൂപയുടെ സാധനത്തിന് 18% GST ബാധകമായാൽ മൊത്തം ₹1,180 ആകും.",
-      // Slide 20
-      "ഇതാണ് ഞങ്ങളുടെ സിസ്റ്റം സ്വയം തയ്യാറാക്കുന്ന ടാക്സ് ഇൻവോയ്സ്. ഇതിൽ സെല്ലറുടെ GSTIN, കസ്റ്റമർ അഡ്രസ്, HSN കോഡ്, നികുതി വിഹിതം എന്നിവ കൃത്യമായി രേഖപ്പെടുത്തിയിരിക്കും.",
-      // Slide 21
-      "റദ്ദാക്കലും റീഫണ്ടും: സാധനത്തിന് എന്തെങ്കിലും കേടുപാടുകൾ സംഭവിച്ചാൽ ഉപഭോക്താവിന് ആപ്പ് വഴി 7 ദിവസത്തിനകം റീപ്ലേസ്‌മെന്റോ അല്ലെങ്കിൽ ബാങ്കിലേക്ക് പൂർണ്ണ റീഫണ്ടോ ഉറപ്പുവരുത്തുന്നു.",
-      // Slide 22
-      "ഓർഡറും പേയ്‌മെന്റും കൃത്യമായി നടന്നു. ഇനി ഈ സാധനം കസ്റ്റമറുടെ വീട്ടിൽ എങ്ങനെ എത്തും എന്ന് നമ്മുടെ Logistics & Customer Experience Head വിശദീകരിക്കും.",
-      // Slide 23
-      "നന്ദി ഫിനാൻസ് ഹെഡ്. ഞാൻ Member 4. സാധനം യഥാർത്ഥത്തിൽ ഉപഭോക്താവിന്റെ കയ്യിൽ എത്തിക്കുന്ന സപ്ലൈ ചെയിൻ ശൃംഖലയെക്കുറിച്ചാണ് ഞാൻ സംസാരിക്കുന്നത്.",
-      // Slide 24
-      "ലോജിസ്റ്റിക്സ് നെറ്റ്‌വർക്ക്: സെല്ലറുടെ കയ്യിൽ നിന്ന് കളക്ട് ചെയ്യുന്ന സാധനങ്ങൾ മെയിൻ സോർട്ടിംഗ് ഹബ്ബിൽ എത്തുന്നു. അവിടെനിന്ന് ഓരോ പിൻകോഡിലേക്കുമുള്ള ലോക്കൽ ഹബ്ബുകളിലേക്കും തുടർന്ന് റൈഡർമാർ വഴിയും വേഗത്തിൽ എത്തിക്കുന്നു.",
-      // Slide 25
-      "ഗിഗ് ഇക്കോണമി (Gig Economy): ഡെലിവറി പാർട്ണർമാർ തങ്ങളുടെ സൗകര്യത്തിനനുസരിച്ച് ജോലി ചെയ്യുന്നവരാണ്. അവർക്കായി പ്രത്യേക Partner App ഉണ്ട്. ഓരോ ഡെലിവറിക്കും ദൂരത്തിനനുസരിച്ച് കൃത്യമായ വേതനവും ഇൻഷുറൻസ് പരിരക്ഷയും കമ്പനി നൽകുന്നു.",
-      // Slide 26
-      "കസ്റ്റമർ സപ്പോർട്ട്: ഡെലിവറി വൈകുകയോ സാധനത്തിന് തകരാറുണ്ടെങ്കിലോ ആപ്പിലെ 24/7 AI ചാറ്റ് ബോട്ടും കസ്റ്റമർ കെയറും വളരെ വേഗത്തിൽ പ്രശ്നം പരിഹരിക്കുന്നു.",
-      // Slide 27
-      "റിവ്യൂകളും റേറ്റിംഗുകളും: ഉപഭോക്താക്കളുടെ സത്യസന്ധമായ റിവ്യൂകൾ മറ്റുള്ളവർക്ക് നല്ല ഉൽപ്പന്നം തിരഞ്ഞെടുക്കാൻ സഹായിക്കുന്നു. മോശം സാധനങ്ങൾ നൽകുന്ന സെല്ലർമാരെ ഒഴിവാക്കാനും ഇത് ഉപകരിക്കുന്നു.",
-      // Slide 28
-      "ഇതാണ് VEYRA-യുടെ സമ്പൂർണ്ണ മാസ്റ്റർ ജേർണി: ബിസിനസ്സ് ഐഡിയ ➔ സെല്ലർമാർ ➔ ആപ്പ് ടെക്നോളജി ➔ മാർക്കറ്റിംഗ് ➔ ഓർഡർ ➔ പേയ്‌മെന്റ് & GST ➔ ഹബ്ബ് ഡെലിവറി ➔ 5-സ്റ്റാർ റിവ്യൂ. ഞങ്ങൾ നാലുപേരുടെയും പ്രവർത്തനങ്ങൾ ഒന്നിക്കുമ്പോഴാണ് ഇത് സാധ്യമാകുന്നത്!",
-      // Slide 29
-      "വിർച്വൽ മാർക്കറ്റ് ഒരു ഇക്കോസിസ്റ്റമാണ്: കൂടുതൽ കസ്റ്റമേഴ്സ് വരുമ്പോൾ കൂടുതൽ ഓർഡറുകൾ ഉണ്ടാകുന്നു. അതുകണ്ട് കൂടുതൽ വ്യാപാരികൾ വരുന്നു. വേഗത്തിലുള്ള ഡെലിവറി സാധ്യമാകുന്നു. ഈ ഫ്ലൈവീൽ ബിസിനസ്സിനെ അതിവേഗം വളർത്തുന്നു.",
-      // Slide 30
+      "നമ്മൾ സാധാരണ കടകളിൽ പോകുമ്പോൾ പല കടകൾ കയറിയിറങ്ങണം, വില കൃത്യമായി താരതമ്യം ചെയ്യാൻ സാധിക്കില്ല, ഉദ്ദേശിച്ച സാധനം പലപ്പോഴും സ്റ്റോക്കിലുണ്ടാകില്ല. ഇതിനൊരു ഡിജിറ്റൽ പരിഹാരമാണ് ഞങ്ങൾ മുന്നോട്ട് വെക്കുന്നത്.",
+      // Slide 33 (Former 30)
       "ഉപസംഹാരം: വിർച്വൽ മാർക്കറ്റ് എന്നത് വെറുമൊരു ഓൺലൈൻ കടയല്ല. ബിസിനസ്സ്, ടെക്നോളജി, മാർക്കറ്റിംഗ്, ബാങ്കിംഗ്, ടാക്സ്, ലോജിസ്റ്റിക്സ്, ഡാറ്റ പ്രൊട്ടക്ഷൻ, കസ്റ്റമർ കെയർ എന്നിവ ഒത്തുചേരുമ്പോഴാണ് VEYRA ഉണ്ടാകുന്നത്. 'Everything. One Place.' നന്ദി!",
-      // Slide 31
+      // Slide 34 (Former 31)
       "ഇനി നിങ്ങളുടെ സംശയങ്ങൾ ചോദിക്കാം. സാധാരണയായി ആളുകൾ ചോദിക്കുന്ന 10 പ്രധാന ചോദ്യങ്ങൾ സ്ക്രീനിൽ നൽകിയിട്ടുണ്ട്. ഏത് ചോദ്യത്തിലും ക്ലിക്ക് ചെയ്തു ലളിതമായ ഉത്തരം കാണാം."
     ];
 
@@ -2479,6 +2578,69 @@
     let timerSeconds = 0;
     let timerRunning = false;
     let timerInterval = null;
+
+    function handleVideoPlayback() {
+      // Pause all videos across all slides
+      document.querySelectorAll('video').forEach(vid => {
+        vid.pause();
+      });
+
+      // Play video if present on the active slide
+      const activeSlideEl = slides[currentSlide];
+      if (activeSlideEl) {
+        const activeVideo = activeSlideEl.querySelector('video');
+        if (activeVideo) {
+          activeVideo.currentTime = 0;
+          const playPromise = activeVideo.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(error => {
+              console.log("Autoplay was prevented by browser:", error);
+              // Video will still play if user clicks the controls
+            });
+          }
+        }
+      }
+    }
+
+    function toggleMute(videoId, btnEl) {
+      const vid = document.getElementById(videoId);
+      if (!vid) return;
+      vid.muted = !vid.muted;
+      const icon = btnEl.querySelector('.mute-icon');
+      const label = btnEl.querySelector('.mute-label');
+      if (vid.muted) {
+        if (icon) icon.innerText = '🔇';
+        if (label) label.innerText = 'Muted';
+      } else {
+        if (icon) icon.innerText = '🔊';
+        if (label) label.innerText = 'Sound';
+      }
+    }
+
+    function replayVideo(videoId) {
+      const vid = document.getElementById(videoId);
+      if (vid) {
+        vid.currentTime = 0;
+        vid.play().catch(() => {});
+      }
+    }
+
+    function initVideoEndListeners() {
+      ['introVid1', 'introVid2', 'introVid3'].forEach((id, idx) => {
+        const vid = document.getElementById(id);
+        if (vid) {
+          vid.addEventListener('ended', () => {
+            const status = document.getElementById(`vidStatus${idx + 1}`);
+            if (status) status.innerText = "Completed • Advancing ➔";
+            setTimeout(() => {
+              if (currentSlide === idx) {
+                nextSlide();
+              }
+            }, 800);
+          });
+        }
+      });
+    }
 
     function updateSlide() {
       slides.forEach((slide, index) => {
@@ -2517,6 +2679,9 @@
         document.getElementById('speakerTopic').innerText = speakerSub;
         document.getElementById('speakerAvatar').innerText = (speakerId === "all") ? "★" : speakerId;
       }
+
+      // Handle video playback
+      handleVideoPlayback();
 
       // Update Presenter Notes Drawer content
       updateSpeakerNotesContent();
@@ -2714,6 +2879,7 @@
 
     // Auto-start seminar stopwatch when user begins
     window.addEventListener('load', () => {
+      initVideoEndListeners();
       updateSlide();
       // Start stopwatch automatically on load for college timer accuracy
       toggleTimer();
